@@ -1,43 +1,290 @@
 package de.hdm.itprojekt.client;
 
 import de.hdm.itprojekt.shared.FieldVerifier;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.Window;
+//import com.google.gwt.event.dom.client.KeyCodes;
+//import com.google.gwt.event.dom.client.KeyUpEvent;
+//import com.google.gwt.event.dom.client.KeyUpHandler;
+//import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.SplitLayoutPanel;
+import com.google.gwt.user.client.ui.Tree;
+import com.google.gwt.user.client.ui.TreeItem;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.FlexTable;
+
+import de.hdm.itprojekt.client.gui.*;
+import de.hdm.itprojekt.client.gui.DozentForm;
+
+
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
- */
+ 
 public class ItProjekt implements EntryPoint {
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
-	 */
+	 
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
 
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
+	 
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
 
+	*/
+	/**
+	 * EntryPoint Klasse des Projekts <b>ItProjekt</b>
+	 * Diese Klasse implementiert das Interface <code>EntryPoint</code>
+	   * daher benötigen wir die Methode <code>public void onModuleLoad()</code>. 
+	   * Sie ist das GWT-Pendant der <code>main()</code>-Methode normaler Java-Applikationen.
+	 */
+
+	public class ItProjekt implements EntryPoint {
+		
+		protected String getHeadlineText() {
+			return this.getHeadlineText();
+		}
+		
+		public void onModuleLoad() {
+				
+			/*
+			 * Die Anwendung besteht aus zwei seperaten horizontalen Panels. Im rechten Panel wird ein Navigationsteil 
+			 * mit Baumstruktur der Stamm,- und Bewegunsdaten, sowie des Reports realisiert.
+			 * Im linken Panel wird der Inhalt, einem Datenteil mit Formularen realisiert. 
+		     * Daher bietet sich ein SplitLayoutPanel als Container an.
+		     *
+		     */
+			
+			/**RootLayoutPanel rlp = RootLayoutPanel.get();
+			SplitLayoutPanel mainPanel = new SplitLayoutPanel();
+			rlp.add(mainPanel);
+			
+			VerticalPanel detailsPanel = new VerticalPanel();	
+			
+			ScrollPanel navigation = new ScrollPanel(new Tree());
+			navigation.setHeight("300px");
+			
+			mainPanel.addWest(new HTML ("navigation"), 150);
+			mainPanel.addEast(new HTML ("detailsPanel"), 350);
+			
+			RootPanel.get("ItProjektFrame").add(rlp);
+			*/
+				 
+
+		  	SplitLayoutPanel s = new SplitLayoutPanel();
+		 	s.addWest (new HTML ("navigation"), 130);
+		 	//SplitLayoutPanel p = new SplitLayoutPanel();
+		 	s.addEast (new HTML("detailsPanel"), 350);
+		 	RootPanel.get("ItProjektFrame").add(s);
+		   // RootPanel.get("ItProjektFrame").add();
+			
+
+		    /*
+		     * Das SplitLayoutPanel wird einem DIV-Element namens "Details" in der
+		     * zugehörigen HTML-Datei zugewiesen und erhält so seinen Darstellungsort.
+		     */
+		    
+		    /*
+		     * Ab hier bauen wir sukzessive den Navigator mit seinen Buttons aus.
+		     */
+		    final Button dozentButton = new Button ("Dozent");
+		    final Button zeitslotButton = new Button ("Zeitslot");
+		    final Button raumButton = new Button ("Raum");
+		    final Button semesterverbandButton = new Button ("Semesterverband");
+		    final Button lehrveranstaltungButton = new Button ("Lehrveranstaltung");
+		    final Button studiengangButton = new Button ("Studiengang");
+		    final Button stundenplaneintragButton = new Button ("Stundenplaneintrag");
+		    final Button raumplanButton = new Button ("Raumplan");
+		    final Button stundenplanButton = new Button ("Stundenplan");
+		    	    
+		    /*
+		     * Unter welchem Namen können wir den Button durch die CSS-Datei des
+		     * Projekts formatieren?
+		     */
+		    dozentButton.setStylePrimaryName("BaumButton");
+		    zeitslotButton.setStylePrimaryName("BaumButton");
+		    raumButton.setStylePrimaryName("BaumButton");
+		    semesterverbandButton.setStylePrimaryName("BaumButton");
+		    lehrveranstaltungButton.setStylePrimaryName("BaumButton");
+		    studiengangButton.setStylePrimaryName("BaumButton");
+		    stundenplaneintragButton.setStylePrimaryName("BaumButton");
+		    stundenplanButton.setStylePrimaryName("BaumButton");
+		    raumplanButton.setStylePrimaryName("BaumButton");
+		    
+		    
+		    
+		    Tree uebersicht = new Tree();
+			
+			TreeItem report = new TreeItem();
+			report.setText("Report");
+			report.addItem(stundenplanButton);
+			report.addItem(raumplanButton);
+				
+			/**stundenplanButton.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					StundenplanForm spf = new StundenplanForm();
+					RootPanel.get("ItProjektFrame").clear();
+					//RootPanel.get("ItProjektFrame").add(spf);
+				}
+			});
+			
+			raumplanButton.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					RaumplanForm rpf = new RaumplanForm();
+					RootPanel.get("ItProjektFrame").clear();
+					//RootPanel.get("ItProjektFrame").add(rpf);
+				}
+			});*/
+					
+			TreeItem stammdaten = new TreeItem();
+			stammdaten.setText("Stammdaten");
+			stammdaten.addItem(dozentButton);
+			stammdaten.addItem(zeitslotButton);
+			stammdaten.addItem(raumButton);
+			stammdaten.addItem(studiengangButton);
+			stammdaten.addItem(semesterverbandButton);
+			stammdaten.addItem(lehrveranstaltungButton);
+			
+			
+
+			
+			dozentButton.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+
+					Window.alert("Hello");
+					//RootPanel.get("detailsPanel").clear();
+					//RootPanel.get("detailsPanel").add(df);
+				}
+			});
+			
+			/**zeitslotButton.addClickHandler(new ClickHandler(){
+				public void onClick(ClickEvent event) {
+					ZeitslotForm zf = new ZeitslotForm();
+					RootPanel.get("ItProjektFrame").clear();
+					//RootPanel.get("ItProjektFrame").add(zf);
+				}
+			});
+			
+			raumButton.addClickHandler(new ClickHandler(){
+				public void onClick(ClickEvent event) {
+					RaumForm rf = new RaumForm();
+					RootPanel.get("ItProjektFrame").clear();
+					//RootPanel.get("ItProjektFrame").add(rf);
+				}
+			});
+			
+			studiengangButton.addClickHandler(new ClickHandler(){
+				public void onClick(ClickEvent event) {
+					StudiengangForm sgf = new StudiengangForm();
+					RootPanel.get("ItProjektFrame").clear();
+					//RootPanel.get("ItProjektFrame").add(sgf);
+				}
+			});
+			
+			semesterverbandButton.addClickHandler(new ClickHandler(){
+				public void onClick(ClickEvent event) {
+					SemesterverbandForm svf = new SemesterverbandForm();
+					RootPanel.get("ItProjektFrame").clear();
+					//RootPanel.get("ItProjektFrame").add(svf);
+				}
+			});
+			
+			/*lehrveranstaltungButton.addClickHandler(new ClickHandler(){
+				public void onClick(ClickEvent event) {
+					LehrveranstaltungForm lf = new LehrveranstaltungForm();
+					RootPanel.get("ItProjektFrame").clear();
+					RootPanel.get("ItProjektFrame"),add(lf);
+				}
+			}); */
+			
+			
+			TreeItem bewegungsdaten = new TreeItem();
+			bewegungsdaten.setText("Bewegungsdaten");
+			bewegungsdaten.addItem(stundenplaneintragButton);
+			
+			/**stundenplaneintragButton.addClickHandler(new ClickHandler(){
+				public void onClick(ClickEvent event) {
+					StundenplaneintragForm sef = new StundenplaneintragForm();
+					RootPanel.get("ItProjektFrame").clear();
+					//RootPanel.get("ItProjektFrame").add(sef);
+				}
+			});*/
+			
+			uebersicht.addItem(report);
+			uebersicht.addItem(stammdaten);
+			uebersicht.addItem(bewegungsdaten);
+			
+			
+			
+			RootPanel.get("navigation").add(uebersicht);
+			
+		}
+	}
+
+
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    /*
+		     * Hinzufügen des Baums zum linken Panel.
+		     */
+
+		 
+		    
+		    
+		    /*
+		     * Um das Verhalten beim draufklicken des Buttons zu realisieren, 
+		     * haben wir einen ClickHandler verwendet, durch den durch klicken mit der Mouse auf den Button
+		     * die onClick()-Methode aufgerufen wird.
+	         * Es wurde ein separates DIV-Element namens "details" in die zugehörige HTML-Datei eingefügt.
+	         * Bevor der neue Showcase dort eingefügt wird, werden zunächst alle bisherigen
+	         * Elemente dieses DIV gelöscht.         */
+
+		
+		
+		
+		    
+		    
+		    
+		    /*
+			 * Auch dem Report-Generator weisen wir dieses Bank-Objekt zu. Es wird
+			 * dort für die Darstellung der Adressdaten des Kreditinstituts
+			 * benötigt.
+			 
+			ReportGeneratorAsync reportGenerator = ClientsideSettings
+					.getReportGenerator();
+			reportGenerator.setBank(bank, new SetBankCallback());
+			*/
+		    
+
+	
+	
+	
 	/**
 	 * This is the entry point method.
-	 */
+	 
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
@@ -89,14 +336,14 @@ public class ItProjekt implements EntryPoint {
 		class MyHandler implements ClickHandler, KeyUpHandler {
 			/**
 			 * Fired when the user clicks on the sendButton.
-			 */
+			 
 			public void onClick(ClickEvent event) {
 				sendNameToServer();
 			}
 
 			/**
 			 * Fired when the user types in the nameField.
-			 */
+			 
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					sendNameToServer();
@@ -105,7 +352,7 @@ public class ItProjekt implements EntryPoint {
 
 			/**
 			 * Send the name from the nameField to the server and wait for a response.
-			 */
+			 
 			private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
@@ -148,5 +395,6 @@ public class ItProjekt implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
-	}
-}
+		
+	}*/
+
