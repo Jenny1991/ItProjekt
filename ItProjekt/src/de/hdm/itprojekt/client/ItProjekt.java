@@ -1,9 +1,11 @@
 package de.hdm.itprojekt.client;
 
+import net.sourceforge.htmlunit.corejs.javascript.ast.FunctionNode.Form;
 import de.hdm.itprojekt.shared.FieldVerifier;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -26,7 +28,6 @@ import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.FlexTable;
 
-import de.hdm.itprojekt.client.gui.*;
 import de.hdm.itprojekt.client.gui.DozentForm;
 
 
@@ -95,7 +96,7 @@ public class ItProjekt implements EntryPoint {
 		 	s.addEast (new HTML("detailsPanel"), 350);
 		 	RootPanel.get("ItProjektFrame").add(s);
 		   // RootPanel.get("ItProjektFrame").add();
-			
+
 
 		    /*
 		     * Das SplitLayoutPanel wird einem DIV-Element namens "Details" in der
@@ -168,7 +169,7 @@ public class ItProjekt implements EntryPoint {
 			
 			dozentButton.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
-
+					//DozentForm  df = new DozentForm();
 					Window.alert("Hello");
 					//RootPanel.get("detailsPanel").clear();
 					//RootPanel.get("detailsPanel").add(df);
