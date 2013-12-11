@@ -22,6 +22,11 @@ implements Verwaltungsklasse {
 		
 	  }
 	
+	public void init() throws IllegalArgumentException {
+		
+		//hier fehlen noch die Mapper
+	}
+	
 	public Vector<Dozent> getStundenplaneintragOf(Dozent d)
 		      throws IllegalArgumentException {
 		 	//return this.DozentenMapper.findByKey(d.getId());
