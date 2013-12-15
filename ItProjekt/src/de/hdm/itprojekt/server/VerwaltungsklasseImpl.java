@@ -24,12 +24,31 @@ implements Verwaltungsklasse {
 	
 	public void init() throws IllegalArgumentException {
 		
-		//hier fehlen noch die Mapper
+		//hier fehlen noch die referenzen zu den jeweiligen Mappern
 	}
+	
+	/**
+	 * Hier werden alle Stundenplaneintraege des Dozenten d in einen Vector gepackt 
+	 */
 	
 	public Vector<Dozent> getStundenplaneintragOf(Dozent d)
 		      throws IllegalArgumentException {
-		 	//return this.DozentenMapper.findByKey(d.getId());
+		
+		Vector<Dozent> dVektor = null;
+		
+		 	//dVektor = this.DozentenMapper.findByKey(d.getId());
+		
+		return dVektor;
+	}
+	
+	public Vector<Raum> getStundenplaneintrag(Raum r)
+			throws IllegalArgumentException {
+		
+		Vector<Raum> rVektor = null;
+		
+	 	//rVektor = this.RaumMapper.findByKey(r.getId());
+	
+		return rVektor;
 	}
 
 	public Dozent createDozent(String vorname, String nachname)
@@ -137,7 +156,7 @@ implements Verwaltungsklasse {
 		Vector<Dozent> dozenten = this.getStundenplaneintragOf(d);
 
 		    if (dozenten != null) {
-		    	//Bildschirmmeldung: Dozent kann nicht geloescht werden, da noch Stundenplaneinträge
+		    	//Bildschirmmeldung: Dozent kann nicht geloescht werden, da noch Stundenplaneintr��ge
 		    } else {
 		 //   	this.DozentMapper.delete(d);
 		    }
