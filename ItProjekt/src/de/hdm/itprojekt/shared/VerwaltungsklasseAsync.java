@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
 import de.hdm.itprojekt.shared.bo.*;
 
 
@@ -62,4 +63,8 @@ public interface VerwaltungsklasseAsync {
 			AsyncCallback<Semesterverband> callback);
 
 	void changeZeitslot(Zeitslot z, AsyncCallback<Zeitslot> callback);
+
+	void setDozent(Dozent d, AsyncCallback<Void> callback);
+
+	void getDozent(AsyncCallback<Dozent> callback);
 }

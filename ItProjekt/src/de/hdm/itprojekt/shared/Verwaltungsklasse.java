@@ -9,6 +9,10 @@ public interface Verwaltungsklasse extends RemoteService {
 	
 	public void init() throws IllegalArgumentException;
 	
+	public void setDozent(Dozent d) throws IllegalArgumentException;
+	
+	public Dozent getDozent() throws IllegalArgumentException;
+	
 	public Studiengang createStudiengang(String bezeichnung)
 			throws IllegalArgumentException;
 	

@@ -17,6 +17,34 @@ implements Verwaltungsklasse {
 	 * Standard StundenplaneintragID
 	 */
 	private static final long serialVersionUID = 7027992284251455305L;
+	
+	private Dozent dozent = null;
+	private Raum raum = null;
+	private Semesterverband semesterverband = null;
+	
+	public Dozent getDozent() {
+		return dozent;
+	}
+
+	public void setDozent(Dozent dozent) throws IllegalArgumentException {
+		this.dozent = dozent;
+	}
+
+	public Raum getRaum() throws IllegalArgumentException {
+		return raum;
+	}
+
+	public void setRaum(Raum raum) throws IllegalArgumentException {
+		this.raum = raum;
+	}
+
+	public Semesterverband getSemesterverband() throws IllegalArgumentException {
+		return semesterverband;
+	}
+
+	public void setSemesterverband(Semesterverband semesterverband) throws IllegalArgumentException {
+		this.semesterverband = semesterverband;
+	}
 
 	public VerwaltungsklasseImpl() throws IllegalArgumentException {
 		
@@ -228,7 +256,6 @@ implements Verwaltungsklasse {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 	
 }

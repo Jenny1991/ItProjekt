@@ -1,6 +1,11 @@
 package de.hdm.itprojekt.server.report;
 
+import de.hdm.thies.bankProjekt.shared.report.StundenplanDozentReport;
+
+import java.util.Date;
 import java.util.Vector;
+
+
 
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -9,20 +14,20 @@ import de.hdm.itprojekt.client.*;
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.server.*;
 import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.thies.bankProjekt.shared.report.*;
 /**
-
- * @author hofmann & thies
+ * @author hofmann & thies & holz
  */
 @SuppressWarnings("serial")
 public class ReportGeneratorImpl extends RemoteServiceServlet
     implements ReportGenerator {
 
   /**
-   * Ein ReportGenerator benötigt Zugriff auf die BankAdministration, da diese die
-   * essentiellen Methoden für die Koexistenz von Datenobjekten (vgl.
+   * Ein ReportGenerator benï¿½tigt Zugriff auf die BankAdministration, da diese die
+   * essentiellen Methoden fï¿½r die Koexistenz von Datenobjekten (vgl.
    * bo-Package) bietet.
    */
-  private Verwaltungsklasse administration = null;
+  private Verwaltungsklasse verwaltung = null;
 
   /**
    * <p>
@@ -31,7 +36,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
    * ist ein solcher No-Argument-Konstruktor anzulegen. Ein Aufruf eines anderen
    * Konstruktors ist durch die Client-seitige Instantiierung durch
    * <code>GWT.create(Klassenname.class)</code> nach derzeitigem Stand nicht
-   * möglich.
+   * mï¿½glich.
    * </p>
    * <p>
    * Es bietet sich also an, eine separate Instanzenmethode zu erstellen, die
@@ -49,84 +54,83 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
    */
   public void init() throws IllegalArgumentException {
     /*
-     * Ein ReportGeneratorImpl-Objekt instantiiert für seinen Eigenbedarf eine
+     * Ein ReportGeneratorImpl-Objekt instantiiert fï¿½r seinen Eigenbedarf eine
      * VerwaltungklasseImpl-Instanz.
      */
     VerwaltungsklasseImpl a = new VerwaltungsklasseImpl();
     a.init();
-    this.administration = a;
+    this.verwaltung = a;
   }
 
   /**
-   * Auslesen der zugehörigen BankAdministration (interner Gebrauch).
+   * Auslesen der zugehï¿½rigen BankAdministration (interner Gebrauch).
    * 
    * @return das BankVerwaltungsobjekt
    */
-  protected Verwaltungsklasse getVerwaltungklasse() {
-    return this.administration;
+  protected Verwaltungsklasse getVerwaltungsklasse() {
+    return this.verwaltung;
   }
 
   /**
-   * Setzen des zugehörigen Dozenten-Objekts.
+   * Setzen des zugehï¿½rigen Dozenten-Objekts.
    */
   public void setDozent(Dozent d) {
-    this.administr.setDozent(d);
+    this.verwaltung.setDozent(d);
   }
 
   /**
-   * Hinzufügen des Report-Impressums. Diese Methode ist aus den
+   * Hinzufï¿½gen des Report-Impressums. Diese Methode ist aus den
    * <code>create...</code>-Methoden ausgegliedert, da jede dieser Methoden
-   * diese Tätigkeiten redundant auszuführen hätte. Stattdessen rufen die
+   * diese Tï¿½tigkeiten redundant auszufï¿½hren hï¿½tte. Stattdessen rufen die
    * <code>create...</code>-Methoden diese Methode auf.
    * 
    * @param r der um das Impressum zu erweiternde Report.
    */
   protected void addImprint(Report r) {
     /*
-     * Das Impressum soll wesentliche Informationen über die Bank enthalten.
+     * Das Impressum soll wesentliche Informationen ï¿½ber die Bank enthalten.
      */
-    Dozent dozent = this.administration.getDozent();
+    Dozent dozent = this.verwaltung.getDozent();
 
     /*
      * Das Imressum soll mehrzeilig sein.
      */
     CompositeParagraph imprint = new CompositeParagraph();
 
-    imprint.addSubParagraph(new SimpleParagraph(bank.getName()));
-    imprint.addSubParagraph(new SimpleParagraph(bank.getStreet()));
-    imprint.addSubParagraph(new SimpleParagraph(bank.getZip() + " "
-        + bank.getCity()));
+    imprint.addSubParagraph(new SimpleParagraph(dozent.getVorname()));
+    imprint.addSubParagraph(new SimpleParagraph(dozent.getNachname()));
+    imprint.addSubParagraph(new SimpleParagraph(dozent.getEmail()));
 
-    // Das eigentliche Hinzufügen des Impressums zum Report.
+    // Das eigentliche Hinzufï¿½gen des Impressums zum Report.
     r.setImprint(imprint);
 
   }
 
   /**
-   * Erstellen von <code>AllAccountsOfCustomerReport</code>-Objekten.
+   * Erstellen von <code>StundenplanDozentReport</code>-Objekten.
    * 
    * @param c das Kundenobjekt bzgl. dessen der Report erstellt werden soll.
    * @return der fertige Report
    */
-  public AllAccountsOfCustomerReport createAllAccountsOfCustomerReport(
-      Customer c) throws IllegalArgumentException {
+  public StundenplanDozentReport createStundenplanDozentReport(Dozent d) 
+		  throws IllegalArgumentException {
 
-    if (this.getBankVerwaltung() == null)
+    if (this.getVerwaltungsklasse() == null)
       return null;
 
     /*
-     * Zunächst legen wir uns einen leeren Report an.
+     * Zunï¿½chst legen wir uns einen leeren Report an.
      */
-    AllAccountsOfCustomerReport result = new AllAccountsOfCustomerReport();
+    StundenplanDozentReport result = new StundenplanDozentReport();
 
-    // Jeder Report hat einen Titel (Bezeichnung / Überschrift).
-    result.setTitle("Alle Konten des Kunden");
+    // Jeder Report hat einen Titel (Bezeichnung / ï¿½berschrift).
+    result.setTitle("Stundenplan des Dozenten");
 
-    // Imressum hinzufügen
+    // Imressum hinzufï¿½gen
     this.addImprint(result);
 
     /*
-     * Datum der Erstellung hinzufügen. new Date() erzeugt autom. einen
+     * Datum der Erstellung hinzufï¿½gen. new Date() erzeugt autom. einen
      * "Timestamp" des Zeitpunkts der Instantiierung des Date-Objekts.
      */
     result.setCreated(new Date());
@@ -139,21 +143,18 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
     CompositeParagraph header = new CompositeParagraph();
 
     // Name und Vorname des Kunden aufnehmen
-    header.addSubParagraph(new SimpleParagraph(c.getLastName() + ", "
-        + c.getFirstName()));
+    header.addSubParagraph(new SimpleParagraph(d.getNachname() + ", "
+        + d.getVorname()));
 
-    // Kundennummer aufnehmen
-    header.addSubParagraph(new SimpleParagraph("Kd.-Nr.: " + c.getId()));
-
-    // Hinzufügen der zusammengestellten Kopfdaten zu dem Report
+    // Hinzufï¿½gen der zusammengestellten Kopfdaten zu dem Report
     result.setHeaderData(header);
 
     /*
-     * Ab hier erfolgt ein zeilenweises Hinzufügen von Konto-Informationen.
+     * Ab hier erfolgt ein zeilenweises Hinzufï¿½gen von Konto-Informationen.
      */
     
     /*
-     * Zunächst legen wir eine Kopfzeile für die Konto-Tabelle an.
+     * Zunï¿½chst legen wir eine Kopfzeile fï¿½r die Konto-Tabelle an.
      */
     Row headline = new Row();
 
@@ -161,37 +162,37 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
      * Wir wollen Zeilen mit 2 Spalten in der Tabelle erzeugen. In die erste
      * Spalte schreiben wir die jeweilige Kontonummer und in die zweite den
      * aktuellen Kontostand. In der Kopfzeile legen wir also entsprechende
-     * Überschriften ab.
+     * ï¿½berschriften ab.
      */
     headline.addColumn(new Column("Kto.-Nr."));
     headline.addColumn(new Column("Kto.-Stand"));
 
-    // Hinzufügen der Kopfzeile
+    // Hinzufï¿½gen der Kopfzeile
     result.addRow(headline);
 
     /*
-     * Nun werden sämtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
+     * Nun werden sï¿½mtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
      * Kontostand sukzessive in die Tabelle eingetragen.
      */
-    Vector<Account> accounts = this.administration.getAccountsOf(c);
+    Vector<Stundenplan> stundenplans = this.verwaltung.get();
 
-    for (Account a : accounts) {
+    for (Stundenplan a : stundenplans) {
       // Eine leere Zeile anlegen.
       Row accountRow = new Row();
 
-      // Erste Spalte: Kontonummer hinzufügen
+      // Erste Spalte: Kontonummer hinzufï¿½gen
       accountRow.addColumn(new Column(String.valueOf(a.getId())));
 
-      // Zweite Spalte: Kontostand hinzufügen
-      accountRow.addColumn(new Column(String.valueOf(this.administration
+      // Zweite Spalte: Kontostand hinzufï¿½gen
+      accountRow.addColumn(new Column(String.valueOf(this.verwaltung
           .getBalanceOf(a))));
 
-      // und schließlich die Zeile dem Report hinzufügen.
+      // und schlieï¿½lich die Zeile dem Report hinzufï¿½gen.
       result.addRow(accountRow);
     }
 
     /*
-     * Zum Schluss müssen wir noch den fertigen Report zurückgeben.
+     * Zum Schluss mï¿½ssen wir noch den fertigen Report zurï¿½ckgeben.
      */
     return result;
   }
@@ -208,48 +209,48 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
       return null;
 
     /*
-     * Zunächst legen wir uns einen leeren Report an.
+     * Zunï¿½chst legen wir uns einen leeren Report an.
      */
     AllAccountsOfAllCustomersReport result = new AllAccountsOfAllCustomersReport();
 
-    // Jeder Report hat einen Titel (Bezeichnung / überschrift).
+    // Jeder Report hat einen Titel (Bezeichnung / ï¿½berschrift).
     result.setTitle("Alle Konten aller Kunden");
 
-    // Imressum hinzufügen
+    // Imressum hinzufï¿½gen
     this.addImprint(result);
 
     /*
-     * Datum der Erstellung hinzufügen. new Date() erzeugt autom. einen
+     * Datum der Erstellung hinzufï¿½gen. new Date() erzeugt autom. einen
      * "Timestamp" des Zeitpunkts der Instantiierung des Date-Objekts.
      */
     result.setCreated(new Date());
 
     /*
      * Da AllAccountsOfAllCustomersReport-Objekte aus einer Sammlung von
-     * AllAccountsOfCustomerReport-Objekten besteht, benötigen wir keine
-     * Kopfdaten für diesen Report-Typ. Wir geben einfach keine Kopfdaten an...
+     * AllAccountsOfCustomerReport-Objekten besteht, benï¿½tigen wir keine
+     * Kopfdaten fï¿½r diesen Report-Typ. Wir geben einfach keine Kopfdaten an...
      */
 
     /*
-     * Nun müssen sämtliche Kunden-Objekte ausgelesen werden. Anschließend wir
-     * für jedes Kundenobjekt c ein Aufruf von
-     * createAllAccountsOfCustomerReport(c) durchgeführt und somit jeweils ein
+     * Nun mï¿½ssen sï¿½mtliche Kunden-Objekte ausgelesen werden. Anschlieï¿½end wir
+     * fï¿½r jedes Kundenobjekt c ein Aufruf von
+     * createAllAccountsOfCustomerReport(c) durchgefï¿½hrt und somit jeweils ein
      * AllAccountsOfCustomerReport-Objekt erzeugt. Diese Objekte werden
-     * sukzessive der result-Variable hinzugefügt. Sie ist vom Typ
+     * sukzessive der result-Variable hinzugefï¿½gt. Sie ist vom Typ
      * AllAccountsOfAllCustomersReport, welches eine Subklasse von
      * CompositeReport ist.
      */
-    Vector<Customer> allCustomers = this.administration.getAllCustomers();
+    Vector<Customer> allCustomers = this.verwaltung.getAllCustomers();
 
     for (Customer c : allCustomers) {
       /*
-       * Anlegen des jew. Teil-Reports und Hinzufügen zum Gesamt-Report.
+       * Anlegen des jew. Teil-Reports und Hinzufï¿½gen zum Gesamt-Report.
        */
       result.addSubReport(this.createAllAccountsOfCustomerReport(c));
     }
 
     /*
-     * Zu guter Letzt müssen wir noch den fertigen Report zurückgeben.
+     * Zu guter Letzt mï¿½ssen wir noch den fertigen Report zurï¿½ckgeben.
      */
     return result;
   }
