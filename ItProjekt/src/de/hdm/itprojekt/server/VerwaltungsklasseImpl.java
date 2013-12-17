@@ -59,17 +59,21 @@ implements Verwaltungsklasse {
 	 * Hier werden alle Stundenplaneintraege des Dozenten d in einen Vector gepackt 
 	 */
 	
-	public Vector<Dozent> getStundenplaneintragOf(Dozent d)
+	public Vector<Stundenplaneintrag> getAllStundenplaneintragOf(Dozent d)
 		      throws IllegalArgumentException {
 		
-		Vector<Dozent> dVektor = null;
+		Vector<Stundenplaneintrag> dVektor = null;
 		
-		 	//dVektor = this.DozentenMapper.findByKey(d.getId());
+		/**
+		 * Hier müssen wir alle Stundeplaneintraege des Dozenten in den Vector reinspeichern.
+		 */
+			
+		 	//dVektor = this.StundeplaneintragMapper.findByKey(d.getId());
 		
 		return dVektor;
 	}
 	
-	public Vector<Raum> getStundenplaneintrag(Raum r)
+	public Vector<Raum> getAllStundenplaneintrag(Raum r)
 			throws IllegalArgumentException {
 		
 		Vector<Raum> rVektor = null;

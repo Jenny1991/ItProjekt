@@ -1,9 +1,11 @@
 package de.hdm.itprojekt.server.report;
 
 import de.hdm.thies.bankProjekt.shared.report.StundenplanDozentReport;
+import de.hdm.thies.bankProjekt.shared.report.SimpleReport;
 
 import java.util.Date;
 import java.util.Vector;
+
 
 
 
@@ -88,18 +90,12 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
    */
   protected void addImprint(Report r) {
     /*
-     * Das Impressum soll wesentliche Informationen �ber die Bank enthalten.
-     */
-    Dozent dozent = this.verwaltung.getDozent();
-
-    /*
      * Das Imressum soll mehrzeilig sein.
      */
     CompositeParagraph imprint = new CompositeParagraph();
 
-    imprint.addSubParagraph(new SimpleParagraph(dozent.getVorname()));
-    imprint.addSubParagraph(new SimpleParagraph(dozent.getNachname()));
-    imprint.addSubParagraph(new SimpleParagraph(dozent.getEmail()));
+    imprint.addSubParagraph(new SimpleParagraph("Hochschule der Medien"));
+    imprint.addSubParagraph(new SimpleParagraph("Stuttgart"));
 
     // Das eigentliche Hinzuf�gen des Impressums zum Report.
     r.setImprint(imprint);
@@ -142,7 +138,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
      */
     CompositeParagraph header = new CompositeParagraph();
 
-    // Name und Vorname des Kunden aufnehmen
+    // Name und Vorname des Dozenten aufnehmen
     header.addSubParagraph(new SimpleParagraph(d.getNachname() + ", "
         + d.getVorname()));
 
@@ -159,13 +155,13 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
     Row headline = new Row();
 
     /*
-     * Wir wollen Zeilen mit 2 Spalten in der Tabelle erzeugen. In die erste
-     * Spalte schreiben wir die jeweilige Kontonummer und in die zweite den
-     * aktuellen Kontostand. In der Kopfzeile legen wir also entsprechende
-     * �berschriften ab.
+     * Erzeugen einer StundenplanTabelle mit 6 Spalten für jeden Wochentag.
      */
-    headline.addColumn(new Column("Kto.-Nr."));
-    headline.addColumn(new Column("Kto.-Stand"));
+    headline.addColumn(new Column("Montag"));
+    headline.addColumn(new Column("Dienstag"));
+    headline.addColumn(new Column("Mittwoch"));
+    headline.addColumn(new Column("Donnerstag"));
+    headline.addColumn(new Column("Freitag"));
 
     // Hinzuf�gen der Kopfzeile
     result.addRow(headline);
@@ -174,9 +170,8 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
      * Nun werden s�mtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
      * Kontostand sukzessive in die Tabelle eingetragen.
      */
-    Vector<Stundenplan> stundenplans = this.verwaltung.get();
-
-    for (Stundenplan a : stundenplans) {
+    Vector<Stundenplaneintrag> stundenplaneintraege = this.verwaltung.getAllStundenplaneintragOf(d);
+    for (Stundenplaneintrag a : stundenplaneintraege) {
       // Eine leere Zeile anlegen.
       Row accountRow = new Row();
 

@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.shared;
 
+import java.util.Vector;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.shared.bo.*;
@@ -67,4 +69,9 @@ public interface VerwaltungsklasseAsync {
 	void setDozent(Dozent d, AsyncCallback<Void> callback);
 
 	void getDozent(AsyncCallback<Dozent> callback);
+
+	void getAllStundenplaneintrag(Raum r, AsyncCallback<Vector<Raum>> callback);
+
+	void getAllStundenplaneintragOf(Dozent d,
+			AsyncCallback<Vector<Stundenplaneintrag>> callback);
 }

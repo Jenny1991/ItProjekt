@@ -5,46 +5,46 @@ public class Stundenplaneintrag extends BusinessObjekt {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * Fremdschluessel fuer die jeweiligen Referenzen
+	 * jeweilige Businessobjekte der Stundenplaneintraege
 	 */
-	private int dozentId = 0;
-	private int lehrveranstaltungsId = 0;
-	private int raumId = 0;
-	private int zeitslotId = 0;
-	private int semesterverbandId = 0;
+	private Dozent dozent;
+	private Lehrveranstaltung lehrveranstaltung;
+	private Raum raum;
+	private Zeitslot zeitslot;
+	private Semesterverband semesterverband;
 	
 	public Stundenplaneintrag(){
 	}
 	
-	public int getDozentId() {
-		return dozentId;
+	public Dozent getDozent() {
+		return dozent;
 	}
-	public void setDozentId(int dozentId) {
-		this.dozentId = dozentId;
+	public void setDozentId(Dozent dozent) {
+		this.dozent = dozent;
 	}
-	public int getLehrveranstaltungsId() {
-		return lehrveranstaltungsId;
+	public Lehrveranstaltung getLehrveranstaltungs() {
+		return lehrveranstaltung;
 	}
-	public void setLehrveranstaltungsId(int lehrveranstaltungsId) {
-		this.lehrveranstaltungsId = lehrveranstaltungsId;
+	public void setLehrveranstaltungs(Lehrveranstaltung lehrveranstaltung) {
+		this.lehrveranstaltung = lehrveranstaltung;
 	}
-	public int getRaumId() {
-		return raumId;
+	public Raum getRaum() {
+		return raum;
 	}
-	public void setRaumId(int raumId) {
-		this.raumId = raumId;
+	public void setRaum(Raum raum) {
+		this.raum = raum;
 	}
-	public int getZeitslotId() {
-		return zeitslotId;
+	public Zeitslot getZeitslot() {
+		return zeitslot;
 	}
-	public void setZeitslotId(int zeitslotId) {
-		this.zeitslotId = zeitslotId;
+	public void setZeitslot(Zeitslot zeitslot) {
+		this.zeitslot = zeitslot;
 	}
-	public int getSemesterverbandId() {
-		return semesterverbandId;
+	public Semesterverband getSemesterverband() {
+		return semesterverband;
 	}
-	public void setSemesterverbandId(int semesterverbandId) {
-		this.semesterverbandId = semesterverbandId;
+	public void setSemesterverband(Semesterverband semesterverband) {
+		this.semesterverband = semesterverband;
 	}
 
 

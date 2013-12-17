@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.shared;
 
+import java.util.Vector;
+
 import de.hdm.itprojekt.shared.bo.*;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -15,6 +17,12 @@ public interface Verwaltungsklasse extends RemoteService {
 	
 	public Studiengang createStudiengang(String bezeichnung)
 			throws IllegalArgumentException;
+	
+	public Vector<Raum> getAllStundenplaneintrag(Raum r)
+			throws IllegalArgumentException;
+	
+	public Vector<Stundenplaneintrag> getAllStundenplaneintragOf(Dozent d)
+		      throws IllegalArgumentException;
 	
 	public Stundenplaneintrag createStundenplaneintrag(Dozent d, Lehrveranstaltung l, Raum r, 
 			Zeitslot z, Semesterverband sv)
