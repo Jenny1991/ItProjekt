@@ -58,11 +58,11 @@ public class LehrveranstaltungMapper {
   }
 
   /**
-   * Suchen eines Kontos mit vorgegebener Kontonummer. Da diese eindeutig ist,
-   * wird genau ein Objekt zur�ckgegeben.
+   * Suchen einer Lehrveranstaltung mit vorgegebener id. Da diese eindeutig ist,
+   * wird genau ein Objekt zurückgegeben.
    * 
    * @param id Primärschlüsselattribut (->DB)
-   * @return Konto-Objekt, das dem übergebenen Schlüssel entspricht, null bei
+   * @return Lehrveranstaltung-Objekt, das dem übergebenen Schlüssel entspricht, null bei
    *         nicht vorhandenem DB-Tupel.
    */
   public Lehrveranstaltung findByKey(int id) {
@@ -101,9 +101,9 @@ public class LehrveranstaltungMapper {
   }
 
   /**
-   * Auslesen aller Konten.
+   * Auslesen aller Lehrveranstaltungen.
    * 
-   * @return Ein Vektor mit Lehrveranstaltung-Objekten, die sämtliche Konten
+   * @return Ein Vektor mit Lehrveranstaltung-Objekten, die sämtliche Lehrveranstaltungen
    *         repräsentieren. Bei evtl. Exceptions wird ein partiell gefüllter
    *         oder ggf. auch leerer Vetor zurückgeliefert.
    */

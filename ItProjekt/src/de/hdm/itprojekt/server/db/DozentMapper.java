@@ -58,11 +58,11 @@ public class DozentMapper {
   }
 
   /**
-   * Suchen eines Kontos mit vorgegebener Kontonummer. Da diese eindeutig ist,
-   * wird genau ein Objekt zur�ckgegeben.
+   * Suchen eines Dozenten mit vorgegebener id. Da diese eindeutig ist,
+   * wird genau ein Objekt zurückgegeben.
    * 
    * @param id Primärschlüsselattribut (->DB)
-   * @return Konto-Objekt, das dem übergebenen Schlüssel entspricht, null bei
+   * @return Dozent-Objekt, das dem übergebenen Schlüssel entspricht, null bei
    *         nicht vorhandenem DB-Tupel.
    */
   public Dozent findByKey(int id) {
@@ -99,9 +99,9 @@ public class DozentMapper {
   }
 
   /**
-   * Auslesen aller Konten.
+   * Auslesen aller Dozenten.
    * 
-   * @return Ein Vektor mit Dozent-Objekten, die sämtliche Konten
+   * @return Ein Vektor mit Dozent-Objekten, die sämtliche Dozenten
    *         repräsentieren. Bei evtl. Exceptions wird ein partiell gefüllter
    *         oder ggf. auch leerer Vetor zurückgeliefert.
    */
