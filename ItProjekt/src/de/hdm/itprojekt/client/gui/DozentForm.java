@@ -50,15 +50,15 @@ public class DozentForm extends ItProjekt {
 	Dozent shownDozent = null;
 
 	
-	public DozentForm() {
+	public void onLoad() {
 		//FlexTable tabelleDozent = new FlexTable();
 		
 		Button deleteDozentButton = new Button("Dozent löschen");
 		deleteDozentButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				DeleteDozent dd = new DeleteDozent();
+				//DeleteDozent dd = new DeleteDozent();
 				//verwaltungsklasse.deleteDozent(shownDozent, new deleteDozentCallback(shownDozent));
-				RootPanel.get("ItProjektFrame").add(dd);
+				//RootPanel.get("ItProjektFrame").add(dd);
 				}
 			});
 		
@@ -74,7 +74,7 @@ public class DozentForm extends ItProjekt {
 			public void onClick(ClickEvent event) {
 				String vorname = vornameTextBox.getText();
 				String nachname = nachnameTextBox.getText();
-				verwaltungsklasse.createDozent(vorname, nachname, "", new CreateDozentCallback());
+				verwaltungsklasse.createDozent(vorname, nachname, new CreateDozentCallback());
 			}
 		});
 		
@@ -166,7 +166,7 @@ public class DozentForm extends ItProjekt {
 				}
 				@Override
 				public void onSuccess(Dozent result){		
-					Dozent.
+					//Dozent.
 				}
 			});
 		}
