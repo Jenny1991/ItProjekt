@@ -3,6 +3,7 @@ package de.hdm.itprojekt.client;
 import net.sourceforge.htmlunit.corejs.javascript.ast.FunctionNode.Form;
 import de.hdm.itprojekt.shared.FieldVerifier;
 
+import com.google.appengine.api.images.Image.Format;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Display;
@@ -15,6 +16,7 @@ import com.google.gwt.user.client.Window;
 //import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -166,10 +168,12 @@ public class ItProjekt implements EntryPoint {
 			
 			
 
-			
 			dozentButton.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					//DozentForm  df = new DozentForm();
+
+					//Widget sender = (Widget) event.getClass(df);
+				
 					Window.alert("Hello");
 					//RootPanel.get("detailsPanel").clear();
 					//RootPanel.get("detailsPanel").add(df);
