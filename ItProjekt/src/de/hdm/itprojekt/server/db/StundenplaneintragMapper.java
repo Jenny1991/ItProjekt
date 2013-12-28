@@ -123,7 +123,7 @@ public class StundenplaneintragMapper {
       Statement stmt = con.createStatement();
 
       ResultSet rs = stmt.executeQuery("SELECT id, dozentId, raumId, zeitslotId, studiengangId, "
-    	+ "semesterverbandId, stundenplanId, lehrveranstaltungId FROM Stundenplaneintrag "
+    	+ "semesterverbandId, stundenplanId, lehrveranstaltungId "
     	+ "FROM stundenplaneintrag "
         + " ORDER BY id");
 
