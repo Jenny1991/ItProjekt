@@ -1,5 +1,8 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.ArrayList;
+
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -14,6 +17,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Raum;
 import de.hdm.itprojekt.client.ItProjekt;
+import de.hdm.itprojekt.client.gui.RaumForm;
 
 
 	/**
@@ -28,6 +32,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 		private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();
 		private HorizontalPanel hoPanel = new HorizontalPanel ();
+		private ArrayList<Raum> raum = new ArrayList<Raum> ();
 		
 		  /**
 		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
@@ -41,12 +46,13 @@ import de.hdm.itprojekt.client.ItProjekt;
 		  /**
 		   * Unter der Überschrift tragt der User die Daten des neuen Raum ein. 
 		   */
-		  private final Label lbbezeichnung = new Label ("Bezeichnung"); 
-		  private final Label lbkapazität = new Label ("Kapazität");
-		  private final TextBox tbbezeichnung = new TextBox ();
-		  private final TextBox tbkapazität = new TextBox ();
-		  private final Button speichern = new Button ("speichern");
-		  
+		  final Label lbbezeichnung = new Label ("Bezeichnung"); 
+		  final Label lbkapazität = new Label ("Kapazität");
+		  final TextBox tbbezeichnung = new TextBox ();
+		  final TextBox tbkapazität = new TextBox ();
+		  final Button speichern = new Button ("speichern");
+		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+
 		  /**
 		  * Anordnen der Buttons und Labels auf den Panels
 		  */
@@ -61,51 +67,53 @@ import de.hdm.itprojekt.client.ItProjekt;
 				  vPanel.add(speichern);
 				  
 				  RootPanel.get("detailsPanel").add(vPanel); 
-				  
-				  tbbezeichnung.setFocus(true);
-				  tbkapazität.setFocus(true);	  
-				  
+					  
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
+						  addRaum();
+						  }
+					  
+					  public void addRaum(){
 						  boolean allFilled = true;
+						  
 						  if (tbbezeichnung.getText().isEmpty());
 						  if (tbkapazität.getText().isEmpty());
 						  {	allFilled = false;
 						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) { 
-						  Raum r = new Raum ();
-						  r.setBezeichnung(tbbezeichnung.getText());
-						  r.setKapazitaet(tbkapazität.getVisibleLength());
+							  final String bezeichnung = tbbezeichnung.getText().trim();
+							  final int kapazitaet = tbkapazität.getVisibleLength();
+							  tbbezeichnung.setFocus(true);
+							  tbkapazität.setFocus(true);	  
+							  
+							  if (raum.contains(bezeichnung))
+								  return;
+							  if (raum.contains(kapazitaet))
+								  return;
+							  
+							  if (verwaltungsSvc == null) {
+								  verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+							  }
+						
+							  AsyncCallback<Raum> callback = new  AsyncCallback<Raum> () {
+
+								  @Override
+								  public void onFailure (Throwable caught) {
+									  Window.alert("Der Raum konnte nicht angelegt werden.");
+								  }
+
+								  @Override
+								  public void onSuccess(Raum result) {
+									  
+									  tbbezeichnung.setText("");
+									  tbkapazität.setVisibleLength(kapazitaet);
+									  Window.alert ("Erfolgreich gespeichert.");
+								  } 	
+								};
+								verwaltungsSvc.addRaum(raum.toArray(new String [0]), callback);
 						  }
-						  }
-						  });
+					  }
+					  });
 		  }
-
-		  
-		  /** 
-		  * Wir nutzen eine Nested Class.
-		  */
-		 
-		  class CreateRaumCallback implements AsyncCallback<Raum> {
-			    private CreateRaum rd = null;
-
-			    public CreateRaumCallback(CreateRaum a) {
-			      this.rd = a;
-			    }
-
-			    @Override
-			    public void onFailure(Throwable caught) {
-				      Window.alert("Der Raum konnte nicht angelegt werden.");
-			    }
-
-				@Override
-				public void onSuccess(Raum result) {
-					tbbezeichnung.setText("");
-					tbkapazität.setText("");
-					Window.alert("Erfolgreich gespeichert."); 
-				}
-				}
-		  	  
-	}
-
+	}  
