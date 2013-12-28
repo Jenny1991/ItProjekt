@@ -1,8 +1,11 @@
 package de.hdm.itprojekt.client;
 
+
 import net.sourceforge.htmlunit.corejs.javascript.ast.FunctionNode.Form;
+
 import de.hdm.itprojekt.shared.FieldVerifier;
 
+//import com.google.appengine.api.images.Image.Format;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Display;
@@ -15,6 +18,7 @@ import com.google.gwt.user.client.Window;
 //import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -29,6 +33,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.FlexTable;
 
 import de.hdm.itprojekt.client.gui.DozentForm;
+import de.hdm.itprojekt.client.gui.*;
 
 
 
@@ -64,12 +69,30 @@ public class ItProjekt implements EntryPoint {
 			return this.getHeadlineText();
 		}
 		
+		/*
+	     * Ab hier bauen wir sukzessive den Navigator mit seinen Buttons aus.
+	     */
+	    final Button dozentButton = new Button ("Dozent");
+	    final Button zeitslotButton = new Button ("Zeitslot");
+	    final Button raumButton = new Button ("Raum");
+	    final Button semesterverbandButton = new Button ("Semesterverband");
+	    final Button lehrveranstaltungButton = new Button ("Lehrveranstaltung");
+	    final Button studiengangButton = new Button ("Studiengang");
+	    final Button stundenplaneintragButton = new Button ("Stundenplaneintrag");
+	    final Button raumplanButton = new Button ("Raumplan");
+	    final Button stundenplanButton = new Button ("Stundenplan");
+		
+		
+		@Override
+		/**
+		 * Initialisiert die Webseite, die beim Öffnen als erstes angezeigt wird
+		 */
 		public void onModuleLoad() {
 				
 			/*
 			 * Die Anwendung besteht aus zwei seperaten horizontalen Panels. Im rechten Panel wird ein Navigationsteil 
 			 * mit Baumstruktur der Stamm,- und Bewegunsdaten, sowie des Reports realisiert.
-			 * Im linken Panel wird der Inhalt, einem Datenteil mit Formularen realisiert. 
+			 * Im rechten Panel wird der Inhalt, einem Datenteil mit Formularen realisiert. 
 		     * Daher bietet sich ein SplitLayoutPanel als Container an.
 		     *
 		     */
@@ -103,18 +126,7 @@ public class ItProjekt implements EntryPoint {
 		     * zugehörigen HTML-Datei zugewiesen und erhält so seinen Darstellungsort.
 		     */
 		    
-		    /*
-		     * Ab hier bauen wir sukzessive den Navigator mit seinen Buttons aus.
-		     */
-		    final Button dozentButton = new Button ("Dozent");
-		    final Button zeitslotButton = new Button ("Zeitslot");
-		    final Button raumButton = new Button ("Raum");
-		    final Button semesterverbandButton = new Button ("Semesterverband");
-		    final Button lehrveranstaltungButton = new Button ("Lehrveranstaltung");
-		    final Button studiengangButton = new Button ("Studiengang");
-		    final Button stundenplaneintragButton = new Button ("Stundenplaneintrag");
-		    final Button raumplanButton = new Button ("Raumplan");
-		    final Button stundenplanButton = new Button ("Stundenplan");
+		    
 		    	    
 		    /*
 		     * Unter welchem Namen können wir den Button durch die CSS-Datei des
@@ -166,13 +178,13 @@ public class ItProjekt implements EntryPoint {
 			
 			
 
-			
 			dozentButton.addClickHandler(new ClickHandler() {
+				@Override
 				public void onClick(ClickEvent event) {
-					//DozentForm  df = new DozentForm();
-					Window.alert("Hello");
-					//RootPanel.get("detailsPanel").clear();
-					//RootPanel.get("detailsPanel").add(df);
+					DozentForm df = new DozentForm();
+					RootPanel.get("detailsPanel").clear();
+					RootPanel.get("detailsPanel").add(df);
+					
 				}
 			});
 			
