@@ -102,9 +102,9 @@ public class SemesterverbandMapper {
   }
 
   /**
-   * Auslesen aller Räume.
+   * Auslesen aller Semesterverbände.
    * 
-   * @return Ein Vektor mit Semesterverband-Objekten, die sämtliche Räume
+   * @return Ein Vektor mit Semesterverband-Objekten, die sämtliche Semesterverbände
    *         repräsentieren. Bei evtl. Exceptions wird ein partiell gefüllter
    *         oder ggf. auch leerer Vetor zurückgeliefert.
    */
@@ -188,7 +188,7 @@ public class SemesterverbandMapper {
      * HINWEIS: Da in Java nur Referenzen auf Objekte und keine physischen
      * Objekte übergeben werden, wäre die Anpassung des Semesterverband-Objekts auch
      * ohne diese explizite Rückgabe außerhalb dieser Methode sichtbar. Die
-     * explizite Rückgabe von r ist eher ein Stilmittel, um zu signalisieren,
+     * explizite Rückgabe von s ist eher ein Stilmittel, um zu signalisieren,
      * dass sich das Objekt evtl. im Laufe der Methode verändert hat.
      */
     return s;
