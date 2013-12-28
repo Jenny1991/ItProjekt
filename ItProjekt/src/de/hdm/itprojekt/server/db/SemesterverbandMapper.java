@@ -75,7 +75,7 @@ public class SemesterverbandMapper {
       Statement stmt = con.createStatement();
 
       // Statement ausfüllen und als Query an die DB schicken
-      ResultSet rs = stmt.executeQuery("SELECT id, kapazitaet, bezeichnung FROM Semesterverband "
+      ResultSet rs = stmt.executeQuery("SELECT id, semester, studierenderAnzahl, jahrgang FROM Semesterverband "
           + "WHERE id=" + id);
 
       /*
@@ -85,11 +85,12 @@ public class SemesterverbandMapper {
       if (rs.next()) {
         // Ergebnis-Tupel in Objekt umwandeln
         Semesterverband s = new Semesterverband();
-        r.setId(rs.getInt("id"));
-        r.setBezeichnung(rs.getString("bezeichnung"));
-        r.setKapazitaet(rs.getInt("kapazitaet"));
+        s.setId(rs.getInt("id"));
+        s.setSemester(rs.getInt("semester"));
+        s.setStudierendenAnzahl(rs.getInt("studierenderAnzahl"));
+        s.setJahrgang(rs.getString("jahrgang"));
         
-        return r;
+        return s;
       }
     }
     catch (SQLException e2) {
@@ -116,19 +117,19 @@ public class SemesterverbandMapper {
     try {
       Statement stmt = con.createStatement();
 
-      ResultSet rs = stmt.executeQuery("SELECT id, bezeichnung, kapazitaet FROM semesterverband "
+      ResultSet rs = stmt.executeQuery("SELECT id, semester, studierenderAnzahl, jahrgang FROM semesterverband "
           + " ORDER BY id");
 
       // Für jeden Eintrag im Suchergebnis wird nun ein Semesterverband-Objekt erstellt.
       while (rs.next()) {
         Semesterverband s = new Semesterverband();
-        r.setId(rs.getInt("id"));
-        r.setBezeichnung(rs.getString("bezeichnung"));
-        r.setKapazitaet(rs.getInt("kapazitaet"));
-        
+        s.setId(rs.getInt("id"));
+        s.setSemester(rs.getInt("semester"));
+        s.setStudierendenAnzahl(rs.getInt("studierenderAnzahl"));
+        s.setJahrgang(rs.getString("jahrgang"));
 
         // Hinzufügen des neuen Objekts zum Ergebnisvektor
-        result.addElement(r);
+        result.addElement(s);
       }
     }
     catch (SQLException e2) {
@@ -145,7 +146,7 @@ public class SemesterverbandMapper {
    * auch der Primärschlüssel des übergebenen Objekts geprüft und ggf.
    * berichtigt.
    * 
-   * @param r das zu speichernde Objekt
+   * @param s das zu speichernde Objekt
    * @return das bereits übergebene Objekt, jedoch mit ggf. korrigierter
    *         <code>id</code>.
    */
@@ -165,16 +166,16 @@ public class SemesterverbandMapper {
       // Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
       if (rs.next()) {
         /*
-         * r erhält den bisher maximalen, nun um 1 inkrementierten
+         * s erhält den bisher maximalen, nun um 1 inkrementierten
          * Primärschlüssel.
          */
-        r.setId(rs.getInt("maxid") + 1);
+        s.setId(rs.getInt("maxid") + 1);
 
         stmt = con.createStatement();
 
         // Jetzt erst erfolgt die tatsächliche Einfügeoperation
-        stmt.executeUpdate("INSERT INTO semesterverband (id, bezeichnung, kapazitaet) " + "VALUES ("
-            + r.getId() + "," + r.getBezeichnung() + "," + r.getKapazitaet() );
+        stmt.executeUpdate("INSERT INTO semesterverband (id, semester, studierenderAnzahl, jahrgang) " + "VALUES ("
+            + s.getId() + "," + s.getSemester() + "," + s.getStudierendenAnzahl() + s.getJahrgang() );
       }
     }
     catch (SQLException e2) {
@@ -190,13 +191,13 @@ public class SemesterverbandMapper {
      * explizite Rückgabe von r ist eher ein Stilmittel, um zu signalisieren,
      * dass sich das Objekt evtl. im Laufe der Methode verändert hat.
      */
-    return r;
+    return s;
   }
 
   /**
    * Wiederholtes Schreiben eines Objekts in die Datenbank.
    * 
-   * @param r das Objekt, das in die DB geschrieben werden soll
+   * @param s das Objekt, das in die DB geschrieben werden soll
    * @return das als Parameter übergebene Objekt
    */
   public Semesterverband update(Semesterverband s) {
@@ -205,21 +206,21 @@ public class SemesterverbandMapper {
     try {
       Statement stmt = con.createStatement();
 
-      stmt.executeUpdate("UPDATE semesterverband " + "\" " + "WHERE id=" + r.getId());
+      stmt.executeUpdate("UPDATE semesterverband " + "\" " + "WHERE id=" + s.getId());
 
     }
     catch (SQLException e2) {
       e2.printStackTrace();
     }
 
-    // Um Analogie zu insert(Semesterverband s) zu wahren, geben wir r zurück
-    return r;
+    // Um Analogie zu insert(Semesterverband s) zu wahren, geben wir s zurück
+    return s;
   }
 
   /**
    * Löschen der Daten eines <code>Semesterverband</code>-Objekts aus der Datenbank.
    * 
-   * @param r das aus der DB zu löschende "Objekt"
+   * @param s das aus der DB zu löschende "Objekt"
    */
   public void delete(Semesterverband s) {
     Connection con = DBConnection.connection();
@@ -227,7 +228,7 @@ public class SemesterverbandMapper {
     try {
       Statement stmt = con.createStatement();
 
-      stmt.executeUpdate("DELETE FROM semesterverband " + "WHERE id=" + r.getId());
+      stmt.executeUpdate("DELETE FROM semesterverband " + "WHERE id=" + s.getId());
 
     }
     catch (SQLException e2) {
