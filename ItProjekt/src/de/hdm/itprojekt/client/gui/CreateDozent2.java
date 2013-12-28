@@ -15,39 +15,42 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.*;
-import de.hdm.itprojekt.shared.bo.Studiengang;
+import de.hdm.itprojekt.shared.bo.Dozent;
 import de.hdm.itprojekt.client.ItProjekt;
-import de.hdm.itprojekt.client.gui.StudiengangForm;
-
+import de.hdm.itprojekt.client.gui.DozentForm;
 
 /**
- * Hier wird ein neuer Studiengang angelegt.
+ * Hier wird ein neuer Dozent angelegt.
  * 
  * @author Thies, Espich
  * 
  */
 
-public class CreateStudiengang extends ItProjekt {
-
+public class CreateDozent2 extends ItProjekt {
+	
 	private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
-	private ArrayList<Studiengang> sg = new ArrayList<Studiengang> ();
-
+	private HorizontalPanel hoPanel = new HorizontalPanel ();
+	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
+	
 	  /**
 	   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
-	   * Diese ist durch die Methode @see BasisKlasse#getHeadlineText() zu erstellen ist.
+	   * Diese ist durch die Methode @see ItProjekt#getHeadlineText() zu erstellen ist.
 	   */
+	
 	  @Override
 	  protected String getHeadlineText() {
-	    return "Studiengang anlegen";
+	    return "Dozent anlegen";
 	  }
 
 	  /**
 	   * Unter der Überschrift trägt der User die Daten des neuen Dozenten ein. 
 	   */
-	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
-	  final TextBox tbbezeichnung = new TextBox ();
-	  final Button speichern = new Button ("speichern");
+	  final Label lbvorname = new Label ("Vorname"); 
+	  final Label lbnachname = new Label ("Nachname");
+	  final TextBox tbvorname = new TextBox ();
+	  final TextBox tbnachname = new TextBox ();
+	  final Button speichern = new Button ("speichern"); 
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 
 	  /**
@@ -55,52 +58,67 @@ public class CreateStudiengang extends ItProjekt {
 	  */
 	  public void onLoad () {
 
-			  hPanel.add(lbbezeichnung);
-			  hPanel.add(tbbezeichnung);
+			  hPanel.add(lbnachname);
+			  hPanel.add(tbnachname);
+			  hoPanel.add(lbvorname);
+			  hoPanel.add(tbvorname);
 			  vPanel.add(hPanel);
+			  vPanel.add(hoPanel);
 			  vPanel.add(speichern);
 			  
 			  RootPanel.get("detailsPanel").add(vPanel); 
-			    
-			  speichern.addClickHandler(new ClickHandler() {
+			  
+				  speichern.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
-					  addStudiengang();
+					  addDozent();
 				  }
 				  
-				  public void addStudiengang() {
+				  private void addDozent () {	
 					  boolean allFilled = true;
-					  
-					  if (tbbezeichnung.getText().isEmpty());
-					  {	allFilled = false;
+				  
+					  if (tbnachname.getText().isEmpty());
+					  if (tbvorname.getText().isEmpty()); {	
+						  allFilled = false;
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 					  
-					  if (allFilled == true) { 
-						  final String bezeichnung = tbbezeichnung.getText().trim();
-						  tbbezeichnung.setFocus(true);
+					  if (allFilled == true) {
+
+						  final String nachname = tbnachname.getText().trim();
+						  final String vorname = tbvorname.getText().trim();
+						  tbnachname.setFocus(true);
+						  tbvorname.setFocus(true);
 						  
-						  if (sg.contains(bezeichnung))
+						  if (dozent.contains(vorname))
+							  return;
+						  if (dozent.contains(nachname))
 							  return;
 						  
 						  if (verwaltungsSvc == null) {
 							  verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 						  }
 					
-						  AsyncCallback<Studiengang> callback = new  AsyncCallback<Studiengang> () {
+						  AsyncCallback<Dozent> callback = new  AsyncCallback<Dozent> () {
 
 							  @Override
 							  public void onFailure (Throwable caught) {
-								  Window.alert("Der Studiengang konnte nicht angelegt werden.");
+								  Window.alert("Der Dozent konnte nicht angelegt werden.");
 							  }
 
 							  @Override
-							  public void onSuccess(Studiengang result) {
-								  tbbezeichnung.setText("");
+							  public void onSuccess(Dozent result) {
+								  
+								  tbnachname.setText("");
+								  tbvorname.setText("");
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							};
-							verwaltungsSvc.addStudiengang(sg.toArray(new String [0]), callback);
+							verwaltungsSvc.addDozent(dozent.toArray(new String [0]), callback);
 					  }
 				  }
 				  });
 	  }
 }  
+			  	
+		
+
+
