@@ -2,15 +2,17 @@ package de.hdm.itprojekt.client;
 
 
 import net.sourceforge.htmlunit.corejs.javascript.ast.FunctionNode.Form;
-
 import de.hdm.itprojekt.shared.FieldVerifier;
+
 
 //import com.google.appengine.api.images.Image.Format;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.client.Window;
 //import com.google.gwt.event.dom.client.KeyCodes;
 //import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -31,9 +33,10 @@ import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 
-import de.hdm.itprojekt.client.gui.DozentForm;
 import de.hdm.itprojekt.client.gui.*;
+import de.hdm.itprojekt.client.gui.CreateDozent;
 
 
 
@@ -66,7 +69,7 @@ public class ItProjekt implements EntryPoint {
 	public class ItProjekt implements EntryPoint {
 		
 		protected String getHeadlineText() {
-			return this.getHeadlineText();
+			return "Herzlich Willkommen im Stundenplansystem der HdM";
 		}
 		
 		/*
@@ -81,7 +84,7 @@ public class ItProjekt implements EntryPoint {
 	    final Button stundenplaneintragButton = new Button ("Stundenplaneintrag");
 	    final Button raumplanButton = new Button ("Raumplan");
 	    final Button stundenplanButton = new Button ("Stundenplan");
-		
+	   
 		
 		@Override
 		/**
@@ -93,9 +96,24 @@ public class ItProjekt implements EntryPoint {
 			 * Die Anwendung besteht aus zwei seperaten horizontalen Panels. Im rechten Panel wird ein Navigationsteil 
 			 * mit Baumstruktur der Stamm,- und Bewegunsdaten, sowie des Reports realisiert.
 			 * Im rechten Panel wird der Inhalt, einem Datenteil mit Formularen realisiert. 
-		     * Daher bietet sich ein SplitLayoutPanel als Container an.
+		     * Daher bietet sich ein DockLayoutPanel als Container an.
 		     *
 		     */
+			RootLayoutPanel rlp = RootLayoutPanel.get();
+			DockLayoutPanel mainPanel = new DockLayoutPanel(Unit.PX);
+			rlp.add(mainPanel);
+			
+			final VerticalPanel detailsPanel = new VerticalPanel();
+			final VerticalPanel navigation = new VerticalPanel();
+
+
+			
+			mainPanel.addNorth(new HTML("<h1>Stundenplansystem</h1>"), 100);
+			mainPanel.addWest(navigation, 400);
+			mainPanel.addSouth(detailsPanel, 520);
+
+			RootPanel.get("ItProjektFrame").add(rlp);
+			
 			
 			/**RootLayoutPanel rlp = RootLayoutPanel.get();
 			SplitLayoutPanel mainPanel = new SplitLayoutPanel();
@@ -112,17 +130,22 @@ public class ItProjekt implements EntryPoint {
 			RootPanel.get("ItProjektFrame").add(rlp);
 			*/
 				 
-
-		  	SplitLayoutPanel s = new SplitLayoutPanel();
-		 	s.addWest (new HTML ("navigation"), 130);
+			
+		  /**	SplitLayoutPanel s = new SplitLayoutPanel();
+		 	s.addWest(new Label ("navigation"), 130);
+		 	s.addEast(new Label ("details"), 300);
 		 	//SplitLayoutPanel p = new SplitLayoutPanel();
-		 	s.addEast (new HTML("detailsPanel"), 350);
-		 	RootPanel.get("ItProjektFrame").add(s);
-		   // RootPanel.get("ItProjektFrame").add();
+		 	//s.addWest(new HTML ("details"), 200);
+		 	//RootLayoutPanel rp = RootLayoutPanel.get();
+		 	//rp.add(s);
+		 	RootPanel.get().add(s);
+		    //RootPanel.get("ItProjektFrame").add();
+		     * 
+		     */
 
 
 		    /*
-		     * Das SplitLayoutPanel wird einem DIV-Element namens "Details" in der
+		     * Das DockLayoutPanel wird einem DIV-Element namens "Details" in der
 		     * zugehörigen HTML-Datei zugewiesen und erhält so seinen Darstellungsort.
 		     */
 		    
@@ -142,10 +165,15 @@ public class ItProjekt implements EntryPoint {
 		    stundenplanButton.setStylePrimaryName("BaumButton");
 		    raumplanButton.setStylePrimaryName("BaumButton");
 		    
-		    
+		    /*
+		     * Ab hier wird die Baumdarstellung mit den Zweigen Report, Stammdaten und Bewegungsdaten definiert
+		     */
 		    
 		    Tree uebersicht = new Tree();
 			
+		    /*
+		     * Zweig: Report mit Stundenplan und Raumplan
+		     */
 			TreeItem report = new TreeItem();
 			report.setText("Report");
 			report.addItem(stundenplanButton);
@@ -166,7 +194,11 @@ public class ItProjekt implements EntryPoint {
 					//RootPanel.get("ItProjektFrame").add(rpf);
 				}
 			});*/
-					
+			
+			/*
+			 * Zweig: Stammdaten mit Dozent, Zeitslot, Raum, Studiengang, Semesterverband, Lehrveranstaltung
+			 */
+			
 			TreeItem stammdaten = new TreeItem();
 			stammdaten.setText("Stammdaten");
 			stammdaten.addItem(dozentButton);
@@ -181,9 +213,46 @@ public class ItProjekt implements EntryPoint {
 			dozentButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
-					DozentForm df = new DozentForm();
-					RootPanel.get("detailsPanel").clear();
-					RootPanel.get("detailsPanel").add(df);
+					TextBox nachnameTextBox = new TextBox();
+					TextBox vornameTextBox = new TextBox();
+					FlexTable tabelleDozent = new FlexTable();
+					//int row = tabelleDozent.getRowCount();
+					//Label valueLabel = new Label();
+					
+					
+					
+					Button createDozentButton = new Button ("Dozent anlegen");
+					
+					/**createDozentButton.addClickHandler(new ClickHandler() {
+						public void onClick(ClickEvent event) {
+							CreateDozent cd = new CreateDozent();
+							detailsPanel.add(cd);
+						}
+					});
+					*
+					*/
+					
+					Button changeDozentButton = new Button("Dozent bearbeiten");
+					Button deleteDozentButton = new Button("Dozent löschen");
+
+					
+					tabelleDozent.setText(0, 0, "Nachname");
+					tabelleDozent.setCellPadding(10);
+					tabelleDozent.setText(0, 1, "Vorname");
+					tabelleDozent.setText(0, 3, "Funktionen");
+					tabelleDozent.setWidget(1, 3, deleteDozentButton);
+					tabelleDozent.setWidget(1, 4, changeDozentButton);
+					tabelleDozent.setText(1, 0, "Thies");
+					tabelleDozent.setText(1, 1, "Peter");
+					tabelleDozent.setText(2, 0, "Rathke");
+					tabelleDozent.setText(2, 1, "Christian");
+					//tabelleDozent.setWidget(1, 1, nachnameTextBox);
+					//tabelleDozent.setWidget(1, 2, vornameTextBox);
+					
+					
+					//RootPanel.get("detailsPanel").clear();
+					detailsPanel.add(tabelleDozent);
+					detailsPanel.add(createDozentButton);
 					
 				}
 			});
@@ -229,6 +298,10 @@ public class ItProjekt implements EntryPoint {
 			}); */
 			
 			
+			/*
+			 * Zweig: Bewegungsdaten mit Stundeplaneintrag
+			 */
+			
 			TreeItem bewegungsdaten = new TreeItem();
 			bewegungsdaten.setText("Bewegungsdaten");
 			bewegungsdaten.addItem(stundenplaneintragButton);
@@ -241,13 +314,16 @@ public class ItProjekt implements EntryPoint {
 				}
 			});*/
 			
+			
+			/*
+			 * Hier wird der Baum aus den drei Zweigen zusammengebaut und im Layout der Navigation zugeordnet
+			 */
 			uebersicht.addItem(report);
 			uebersicht.addItem(stammdaten);
 			uebersicht.addItem(bewegungsdaten);
 			
-			
-			
-			RootPanel.get("navigation").add(uebersicht);
+
+			navigation.add(uebersicht);
 			
 		}
 	}

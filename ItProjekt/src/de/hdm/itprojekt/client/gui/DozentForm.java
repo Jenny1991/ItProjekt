@@ -65,7 +65,11 @@ public class DozentForm extends ItProjekt {
 		Button changeDozentButton = new Button("Dozent bearbeiten");
 		changeDozentButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				changeSelectedDozent(); 
+				ChangeDozent cd = new ChangeDozent();
+				RootPanel.get("detailsPanel").clear();
+				RootPanel.get("detailsPanel").add(cd);
+				
+				//changeSelectedDozent(); 
 				}
 			});
 		
@@ -89,6 +93,13 @@ public class DozentForm extends ItProjekt {
 		
 		
 
+	}
+	
+	public Dozent updateFlexTable (Dozent result) {
+		for (int i = 0; i < getAllDozent.size(); i++) { //getAllDozent wird noch als Methode oder Klasse benötigt
+			tabelleDozent.addItem(getAllDozent.get(i).getVorname())
+			
+		}
 	}
 	
 	
