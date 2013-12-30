@@ -26,7 +26,7 @@ import de.hdm.itprojekt.client.gui.DozentForm;
  * 
  */
 
-public class CreateDozent2 extends ItProjekt {
+public class CreateDozent2 extends VerticalPanel {
 	
 	private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
@@ -82,7 +82,6 @@ public class CreateDozent2 extends ItProjekt {
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 					  
 					  if (allFilled == true) {
-
 						  final String nachname = tbnachname.getText().trim();
 						  final String vorname = tbvorname.getText().trim();
 						  tbnachname.setFocus(true);
@@ -106,7 +105,6 @@ public class CreateDozent2 extends ItProjekt {
 
 							  @Override
 							  public void onSuccess(Dozent result) {
-								  
 								  tbnachname.setText("");
 								  tbvorname.setText("");
 								  Window.alert ("Erfolgreich gespeichert.");

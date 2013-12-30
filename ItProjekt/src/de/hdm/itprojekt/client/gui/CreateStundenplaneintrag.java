@@ -24,7 +24,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 	 * 
 	 */
 
-public class CreateStundenplaneintrag extends ItProjekt {
+public class CreateStundenplaneintrag extends VerticalPanel {
 		
 		private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();

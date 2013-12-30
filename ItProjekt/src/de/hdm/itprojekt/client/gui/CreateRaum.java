@@ -27,7 +27,7 @@ import de.hdm.itprojekt.client.gui.RaumForm;
 	 * 
 	 */
 
-	public class CreateRaum extends ItProjekt {
+	public class CreateRaum extends VerticalPanel {
 		
 		private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();

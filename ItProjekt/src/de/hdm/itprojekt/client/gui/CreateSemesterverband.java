@@ -28,7 +28,7 @@ import de.hdm.itprojekt.client.gui.SemesterverbandForm;
 	 * 
 	 */
 
-	public class CreateSemesterverband extends ItProjekt {
+	public class CreateSemesterverband extends VerticalPanel {
 		
 		private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();

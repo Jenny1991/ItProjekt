@@ -28,7 +28,7 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 	 * 
 	 */
 
-	public class CreateZeitslot extends ItProjekt {
+	public class CreateZeitslot extends VerticalPanel {
 		
 		private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();

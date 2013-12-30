@@ -27,7 +27,7 @@ import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 	 * 
 	 */
 
-	public class CreateLehrveranstaltung extends ItProjekt {
+	public class CreateLehrveranstaltung extends VerticalPanel {
 		
 		private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();

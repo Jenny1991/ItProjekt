@@ -27,7 +27,7 @@ import de.hdm.itprojekt.client.gui.StudiengangForm;
  * 
  */
 
-public class CreateStudiengang extends ItProjekt {
+public class CreateStudiengang extends VerticalPanel {
 
 	private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
