@@ -37,9 +37,9 @@ import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 		
 		  /**
 		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode @see BasisKlasse#getHeadlineText() zu erstellen ist.
+		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.
 		   */
-		  @Override
+		
 		  protected String getHeadlineText() {
 		    return "Lehrveranstaltung anlegen";
 		  }

@@ -37,10 +37,9 @@ import de.hdm.itprojekt.client.ItProjekt;
 
 		  /**
 		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode @see ItProjekt#getHeadlineText() zu erstellen ist.
+		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.
 		   */
 		
-		  @Override
 		  protected String getHeadlineText() {
 		    return "Dozent bearbeiten";
 		  }
@@ -139,7 +138,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 
 								  @Override
 								  public void onFailure (Throwable caught) {
-									  Window.alert("Der Dozent konnte nicht angelegt werden.");
+									  Window.alert("Der Dozent konnte nicht bearbeitet werden.");
 								  }
 
 								  @Override

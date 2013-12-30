@@ -36,15 +36,14 @@ import de.hdm.itprojekt.client.gui.RaumForm;
 		
 		  /**
 		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode @see BasisKlasse#getHeadlineText() zu erstellen ist.
-		   */
-		  @Override
-		  protected String getHeadlineText() {
+		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.		   */
+		  
+		protected String getHeadlineText() {
 		    return "Raum anlegen";
 		  }
 
 		  /**
-		   * Unter der Überschrift tragt der User die Daten des neuen Raum ein. 
+		   * Unter der Überschrift tragt der User die Daten des neuen Raums ein. 
 		   */
 		  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 		  final Label lbkapazität = new Label ("Kapazität");
@@ -57,7 +56,6 @@ import de.hdm.itprojekt.client.gui.RaumForm;
 		  * Anordnen der Buttons und Labels auf den Panels
 		  */
 		  public void onLoad () {
-
 				  hPanel.add(lbbezeichnung);
 				  hPanel.add(tbbezeichnung);
 				  hoPanel.add(lbkapazität);

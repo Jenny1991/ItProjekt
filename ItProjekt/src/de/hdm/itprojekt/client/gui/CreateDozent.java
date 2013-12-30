@@ -32,10 +32,9 @@ public class CreateDozent extends VerticalPanel {
 	
 	  /**
 	   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
-	   * Diese ist durch die Methode @see ItProjekt#getHeadlineText() zu erstellen ist.
+	   * Diese ist durch die Methode #getHeadlineText() zu erstellen.
 	   */
 	
-	  @Override
 	  protected String getHeadlineText() {
 	    return "Dozent anlegen";
 	  }

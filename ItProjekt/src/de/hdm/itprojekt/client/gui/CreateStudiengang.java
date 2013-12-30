@@ -35,15 +35,14 @@ public class CreateStudiengang extends VerticalPanel {
 
 	  /**
 	   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
-	   * Diese ist durch die Methode @see BasisKlasse#getHeadlineText() zu erstellen ist.
-	   */
-	  @Override
-	  protected String getHeadlineText() {
+		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   */
+	  
+	protected String getHeadlineText() {
 	    return "Studiengang anlegen";
 	  }
 
 	  /**
-	   * Unter der Überschrift trägt der User die Daten des neuen Dozenten ein. 
+	   * Unter der Überschrift trägt der User die Daten des neuen Studiengangs ein. 
 	   */
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final TextBox tbbezeichnung = new TextBox ();

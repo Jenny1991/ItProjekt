@@ -38,9 +38,8 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 		
 		  /**
 		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode @see BasisKlasse#getHeadlineText() zu erstellen ist.
-		   */
-		  @Override
+		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.		   */
+		  
 		  protected String getHeadlineText() {
 		    return "Zeitslot anlegen";
 		  }

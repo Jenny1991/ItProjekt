@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -12,6 +13,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.Verwaltungsklasse;
 import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.bo.*;
 import de.hdm.itprojekt.client.ItProjekt;
@@ -36,46 +38,30 @@ public class CreateStundenplaneintrag extends VerticalPanel {
 		
 		  /**
 		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode @see BasisKlasse#getHeadlineText() zu erstellen ist.
-		   */
-		  @Override
-		  protected String getHeadlineText() {
+		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.		   */
+		
+		protected String getHeadlineText() {
 		    return "Stundenplaneintrag anlegen";
 		  }
 
 		  /**
 		   * Unter der Überschrift trägt der User die Daten des neuen Stundenplaneintrags ein. 
 		   */
-		  private final Label lbdozent = new Label ("Dozent"); 
-		  private final Label lbzeitslot = new Label ("Zeitslot");
-		  private final Label lbraum = new Label ("Raum");
-		  private final Label lbstudiengang = new Label ("Studiengang");
-		  private final Label lbsemesterverband = new Label ("Semesterverband");
-		  private final Label lblehrveranstaltung = new Label ("Lehrveranstaltung");
-		  private final ListBox tbdozent = new ListBox ();{
-			  
-		  }
-		  private final ListBox tbzeitslot = new ListBox (); {
-			  
-		  }
-		  private final ListBox tbraum = new ListBox (); {
-			  
-		  }
-		  private final ListBox tbstudiengang = new ListBox(); {
-				tbstudiengang.addItem("Wirtschaftsinformatik und digitale Medien");
-				tbstudiengang.addItem("Online-Medien Management");
-				tbstudiengang.addItem("Informationsdesign");
-				tbstudiengang.addItem("Bibliotheks- und Informationsmanagement");
-				tbstudiengang.setVisibleItemCount(4);
-			    RootPanel.get().add(tbstudiengang);
-		  		}
-		  private final ListBox tbsemesterverband = new ListBox (); {
-			  
-		  }
-		  private final ListBox tblehrveranstaltung = new ListBox ();{
-			  
-		  }
-		  private final Button speichern = new Button ("speichern");
+		  final Label lbdozent = new Label ("Dozent"); 
+		  final Label lbzeitslot = new Label ("Zeitslot");
+		  final Label lbraum = new Label ("Raum");
+		  final Label lbstudiengang = new Label ("Studiengang");
+		  final Label lbsemesterverband = new Label ("Semesterverband");
+		  final Label lblehrveranstaltung = new Label ("Lehrveranstaltung");
+		  final ListBox tbdozent = new ListBox (false);
+		  final ListBox tbzeitslot = new ListBox (false);
+		  final ListBox tbraum = new ListBox (false);
+		  final ListBox tbstudiengang = new ListBox(false); 
+		  final ListBox tbsemesterverband = new ListBox (false); 
+		  final ListBox tblehrveranstaltung = new ListBox (false);
+		  final Button speichern = new Button ("speichern");
+		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+
 		  
 		  /**
 		  * Anordnen der Buttons und Labels auf den Panels
@@ -106,34 +92,47 @@ public class CreateStundenplaneintrag extends VerticalPanel {
 				  
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
-						  Window.alert("Erfolgreich gespeichert");
+						  addStundenplaneintrag();
+					  }
+					  
+					  public void addStundenplaneintrag(){					  
+						  final String [] dozent;
+						  dozent = tbdozent.getItemText(tbdozent.getSelectedIndex()).split("");
+						  final String vorname = dozent [1];
+						  final String nachname = dozent [2];
+						  final String [] raum;
+						  raum = tbraum.getItemText(tbraum.getSelectedIndex()).split("");
+						  final String [] lehrveranstaltung;
+						  lehrveranstaltung = tblehrveranstaltung.getItemText(tblehrveranstaltung.getSelectedIndex()).split("");
+						  final String [] semesterverband;
+						  semesterverband = tbsemesterverband.getItemText(tbsemesterverband.getSelectedIndex()).split("");
+						  final String [] studiengang;
+						  studiengang = tbstudiengang.getItemText(tbstudiengang.getSelectedIndex()).split("");
+						  final String [] zeitslot;
+						  zeitslot = tbzeitslot.getItemText(tbzeitslot.getSelectedIndex()).split("");
+						  
+						  Stundenplaneintrag stdpe = new Stundenplaneintrag();
+						  
+						  verwaltungsSvc.getStundenplaneintrag(stdpe, new AsyncCallback<Stundenplaneintrag>() {
+								 @Override
+								  public void onFailure (Throwable caught) {
+								  }
+
+								  @Override
+								  public void onSuccess(Stundenplaneintrag result) {
+									  stdpe.setDozent(dozent[1] + " " + dozent[2]);
+									  stdpe.setLehrveranstaltungs(lehrveranstaltung[1]);
+									  stdpe.setRaum(raum[1]);
+									  stdpe.setSemesterverband(semesterverband[1]);
+									  stdpe.setStudiengang(studiengang[1]);
+									  stdpe.setZeitslot(zeitslot[1]);
+									  Window.alert("Erfolgreich gespeichert");
+								  }
+							  });
 					  		}
 						 });
 				  
 		  }
+}
 
-		  
-		  /** 
-		  * Wir nutzen eine Nested Class.
-		  */
-		 
-		  class CreateSemesterverbandCallback implements AsyncCallback<Semesterverband> {
-			    private CreateSemesterverband csvd = null;
-
-			    public CreateSemesterverbandCallback(CreateSemesterverband a) {
-			      this.csvd = a;
-			    }
-
-			    @Override
-			    public void onFailure(Throwable caught) {
-				      Window.alert("Der Semesterverband konnte nicht angelegt werden.");
-			    }
-
-				@Override
-				public void onSuccess(Semesterverband result) {
-					Window.alert ("Erfolgreich gespeichert."); 
-				}
-				}
-		  	  
-	}
 
