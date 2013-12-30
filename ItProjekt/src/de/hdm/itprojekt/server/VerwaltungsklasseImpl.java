@@ -65,7 +65,7 @@ implements Verwaltungsklasse {
 		Vector<Stundenplaneintrag> dVektor = null;
 		
 		/**
-		 * Hier müssen wir alle Stundeplaneintraege des Dozenten in den Vector reinspeichern.
+		 * Hier müssen wir alle Stundenplaneintraege des Dozenten in den Vector reinspeichern.
 		 */
 			
 		 	//dVektor = this.StundeplaneintragMapper.findByKey(d.getId());

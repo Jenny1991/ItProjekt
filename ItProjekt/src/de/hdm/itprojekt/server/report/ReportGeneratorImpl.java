@@ -139,18 +139,18 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
     CompositeParagraph header = new CompositeParagraph();
 
     // Name und Vorname des Dozenten aufnehmen
-    header.addSubParagraph(new SimpleParagraph(d.getNachname() + ", "
-        + d.getVorname()));
+    header.addSubParagraph(new SimpleParagraph(d.getVorname() + ", "
+        + d.getNachname()));
 
     // Hinzuf�gen der zusammengestellten Kopfdaten zu dem Report
     result.setHeaderData(header);
 
     /*
-     * Ab hier erfolgt ein zeilenweises Hinzuf�gen von Konto-Informationen.
+     * Ab hier erfolgt ein zeilenweises Hinzuf�gen von Stundenplaneintrag-Informationen.
      */
     
     /*
-     * Zun�chst legen wir eine Kopfzeile f�r die Konto-Tabelle an.
+     * Zun�chst legen wir eine Kopfzeile f�r die Stundenplaneintrag-Tabelle an.
      */
     Row headline = new Row();
 
@@ -167,16 +167,24 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
     result.addRow(headline);
 
     /*
-     * Nun werden s�mtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
+     * Nun werden s�mtliche Stundenplaneintraege des Dozenten ausgelesen und  und
      * Kontostand sukzessive in die Tabelle eingetragen.
      */
     Vector<Stundenplaneintrag> stundenplaneintraege = this.verwaltung.getAllStundenplaneintragOf(d);
     for (Stundenplaneintrag a : stundenplaneintraege) {
       // Eine leere Zeile anlegen.
       Row accountRow = new Row();
+      
+      //a.getZeitslotId()  (alles)
+      //a.getLehrveranstaltungId() 
+      //a.getRaumId()
+      
+      //Erstellen von 5 Spalten und hinzufügen des jeweiligen 
+      //Stundenplaneintrag durch selektierung in die
+      //jeweilige Spalte und folgend üBerprüfung der Reihenfolge.
 
       // Erste Spalte: Kontonummer hinzuf�gen
-      accountRow.addColumn(new Column(String.valueOf(a.getId())));
+      accountRow.addColumn(new Column(String.valueOf()));
 
       // Zweite Spalte: Kontostand hinzuf�gen
       accountRow.addColumn(new Column(String.valueOf(this.verwaltung

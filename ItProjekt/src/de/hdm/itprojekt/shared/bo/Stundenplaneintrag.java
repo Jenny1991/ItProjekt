@@ -7,45 +7,61 @@ public class Stundenplaneintrag extends BusinessObjekt {
 	/**
 	 * jeweilige Businessobjekte der Stundenplaneintraege
 	 */
-	private Dozent dozent;
-	private Lehrveranstaltung lehrveranstaltung;
-	private Raum raum;
-	private Zeitslot zeitslot;
-	private Semesterverband semesterverband;
+	private int dozentId;
+	private int lehrveranstaltungId;
+	private int raumId;
+	private int zeitslotId;
+	private int semesterverbandID;
 	
 	public Stundenplaneintrag(){
 	}
 	
-	public Dozent getDozent() {
-		return dozent;
+	public 
+
+	public int getDozentId() {
+		return dozentId;
 	}
-	public void setDozentId(Dozent dozent) {
-		this.dozent = dozent;
+
+	public void setDozentId(int dozentId) {
+		this.dozentId = dozentId;
 	}
-	public Lehrveranstaltung getLehrveranstaltungs() {
-		return lehrveranstaltung;
+
+	public int getLehrveranstaltungId() {
+		return lehrveranstaltungId;
 	}
-	public void setLehrveranstaltungs(Lehrveranstaltung lehrveranstaltung) {
-		this.lehrveranstaltung = lehrveranstaltung;
+
+	public void setLehrveranstaltungId(int lehrveranstaltungId) {
+		this.lehrveranstaltungId = lehrveranstaltungId;
 	}
-	public Raum getRaum() {
-		return raum;
+
+	public int getRaumId() {
+		return raumId;
 	}
-	public void setRaum(Raum raum) {
-		this.raum = raum;
+
+	public void setRaumId(int raumId) {
+		this.raumId = raumId;
 	}
-	public Zeitslot getZeitslot() {
-		return zeitslot;
+
+	public int getZeitslotId() {
+		return zeitslotId;
 	}
-	public void setZeitslot(Zeitslot zeitslot) {
-		this.zeitslot = zeitslot;
+
+	public void setZeitslotId(int zeitslotId) {
+		this.zeitslotId = zeitslotId;
 	}
-	public Semesterverband getSemesterverband() {
-		return semesterverband;
+
+	public int getSemesterverbandID() {
+		return semesterverbandID;
 	}
-	public void setSemesterverband(Semesterverband semesterverband) {
-		this.semesterverband = semesterverband;
+
+	public void setSemesterverbandID(int semesterverbandID) {
+		this.semesterverbandID = semesterverbandID;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 
 
 }
