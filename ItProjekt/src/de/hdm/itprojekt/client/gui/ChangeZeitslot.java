@@ -61,7 +61,7 @@ public class ChangeZeitslot extends Content {
 							shownZeitslot.setWochentag(tbwochentag.getText());
 							shownZeitslot.setAnfangszeit(tbanfangszeit.getVisibleLength());
 							shownZeitslot.setEndzeit(tbendzeit.getVisibleLength());
-							verwaltungsSvc.getSelectedZeitslot(shownZeitslot, new AsyncCallback<Zeitslot>() {
+							verwaltungsSvc.getZeitslot(shownZeitslot, new AsyncCallback<Zeitslot>() {
 									 @Override
 									  public void onFailure (Throwable caught) {
 									  }
@@ -142,7 +142,7 @@ public class ChangeZeitslot extends Content {
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								};
-								verwaltungsSvc.updateZeitslot(zeitslot.toArray(new String [0]), callback);
+								verwaltungsSvc.changeZeitslot(zeitslot.toArray(new String [0]), callback);
 						  }
 					  }
 					  });

@@ -50,7 +50,7 @@ public class ChangeStudiengang extends Content {
 			  public void onClick(ClickEvent event) {			
 					if (shownSg!=null){
 						shownSg.setBezeichnung(tbbezeichnung.getText());
-						verwaltungsSvc.getSelectedStudiengang(shownSg, new AsyncCallback<Studiengang>() {
+						verwaltungsSvc.getStudiengang(shownSg, new AsyncCallback<Studiengang>() {
 								 @Override
 								  public void onFailure (Throwable caught) {
 								  }
@@ -110,7 +110,7 @@ public class ChangeStudiengang extends Content {
 							  Window.alert ("Erfolgreich gespeichert.");
 						  } 	
 						};
-						verwaltungsSvc.updateStudiengang(sg.toArray(new String [0]), callback);
+						verwaltungsSvc.changeStudiengang(sg.toArray(new String [0]), callback);
 				  }
 			  }
 			  });	  

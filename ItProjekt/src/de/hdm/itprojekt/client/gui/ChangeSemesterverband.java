@@ -65,7 +65,7 @@ public class ChangeSemesterverband extends Content {
 						shownSv.setBezeichnung(tbstudiengang.getText());
 						shownSv.setSemester(tbsemester.getVisibleLength());
 						shownSv.setStudierendenAnzahl(tbanzahl.getVisibleLength());
-						verwaltungsSvc.getSelectedSemesterverband(shownSv, new AsyncCallback<Semesterverband>() {
+						verwaltungsSvc.getSemesterverband(shownSv, new AsyncCallback<Semesterverband>() {
 								 @Override
 								  public void onFailure (Throwable caught) {
 								  }
@@ -155,7 +155,7 @@ public class ChangeSemesterverband extends Content {
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							};
-							verwaltungsSvc.updateSemesterverband(sv.toArray(new String [0]), callback);
+							verwaltungsSvc.changeSemesterverband(sv.toArray(new String [0]), callback);
 					  }
 				  }
 				  });

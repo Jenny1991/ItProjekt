@@ -57,7 +57,7 @@ public class ChangeRaum extends Content {
 					if (shownRaum !=null){
 						shownRaum.setBezeichnung(tbbezeichnung.getText());
 						shownRaum.setKapazitaet(tbkapazität.getVisibleLength());
-						verwaltungsSvc.getSelectedRaum(shownRaum, new AsyncCallback<Raum>() {
+						verwaltungsSvc.getRaum(shownRaum, new AsyncCallback<Raum>() {
 								 @Override
 								  public void onFailure (Throwable caught) {
 								  }
@@ -128,7 +128,7 @@ public class ChangeRaum extends Content {
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							};
-							verwaltungsSvc.updateRaum(raum.toArray(new String [0]), callback);
+							verwaltungsSvc.changeRaum(raum.toArray(new String [0]), callback);
 					  }
 				  }
 				  });

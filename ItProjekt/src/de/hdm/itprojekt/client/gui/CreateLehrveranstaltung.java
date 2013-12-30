@@ -132,7 +132,7 @@ import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								};
-								verwaltungsSvc.addLehrveranstaltung(lv.toArray(new String [0]), callback);
+								verwaltungsSvc.createLehrveranstaltung(lv.toArray(new String [0]), callback);
 						  }
 					  }
 					  });

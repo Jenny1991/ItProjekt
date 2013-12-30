@@ -134,7 +134,7 @@ import de.hdm.itprojekt.client.gui.SemesterverbandForm;
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								};
-								verwaltungsSvc.addSemesterverband(sv.toArray(new String [0]), callback);
+								verwaltungsSvc.createSemesterverband(sv.toArray(new String [0]), callback);
 						  }
 					  }
 					  });

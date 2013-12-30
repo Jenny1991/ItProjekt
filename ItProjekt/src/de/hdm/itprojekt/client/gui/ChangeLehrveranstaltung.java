@@ -90,7 +90,7 @@ public class ChangeLehrveranstaltung extends Content {
 					shownLV.setBezeichnung(tbbezeichnung.getText());
 					shownLV.setSemester(tbsemester.getSelectedIndex());
 					shownLV.setUmfang(tbumfang.getSelectedIndex());
-					verwaltungsSvc.getSelectedLehrveranstaltung(shownLV, new AsyncCallback<Lehrveranstaltung>() {
+					verwaltungsSvc.getLehrveranstaltung(shownLV, new AsyncCallback<Lehrveranstaltung>() {
 						 @Override
 						  public void onFailure (Throwable caught) {
 						  }
@@ -163,7 +163,7 @@ public void changeSelectedDozent(){
 					  Window.alert ("Erfolgreich gespeichert.");
 				  } 	
 				};
-				verwaltungsSvc.updateLehrveranstaltung(lv.toArray(new String [0]), callback);
+				verwaltungsSvc.changeLehrveranstaltung(lv.toArray(new String [0]), callback);
 		  }
 	  }
 	  });
