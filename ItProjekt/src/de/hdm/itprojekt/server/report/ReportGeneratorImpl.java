@@ -1,10 +1,14 @@
 package de.hdm.itprojekt.server.report;
 
+import de.hdm.thies.bankProjekt.shared.bo.Customer;
+import de.hdm.thies.bankProjekt.shared.report.Column;
 import de.hdm.thies.bankProjekt.shared.report.StundenplanDozentReport;
 import de.hdm.thies.bankProjekt.shared.report.SimpleReport;
 
 import java.util.Date;
 import java.util.Vector;
+
+
 
 
 
@@ -167,13 +171,38 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
     result.addRow(headline);
 
     /*
-     * Nun werden s�mtliche Stundenplaneintraege des Dozenten ausgelesen und  und
-     * Kontostand sukzessive in die Tabelle eingetragen.
+     * Nun werden s�mtliche Stundenplaneintraege des Dozenten ausgelesen und in die Tabelle eingetragen.
      */
     Vector<Stundenplaneintrag> stundenplaneintraege = this.verwaltung.getAllStundenplaneintragOf(d);
     for (Stundenplaneintrag a : stundenplaneintraege) {
-      // Eine leere Zeile anlegen.
-      Row accountRow = new Row();
+      
+    if (a.getZeitslot().getAnfangszeit() == 8.15){
+    	  Vector<Stundenplaneintrag> b = new Vector<Stundenplaneintrag>();
+    	  b.add(a);
+    }
+      
+      
+    	
+    Row accountRow = new Row();
+
+    if (a.getZeitslot().getWochentag().equals("Montag") && a.getZeitslot().getAnfangszeit() == 8.15){ 
+    	accountRow.addColumn(new Column(a.toString()));
+    }
+    if (a.getZeitslot().getWochentag().equals("Dienstag") && a.getZeitslot().getAnfangszeit() == 8.15){ 
+		accountRow.addColumn(new Column(a.toString()));
+	}
+    if (a.getZeitslot().getWochentag().equals("Mittwoch") && a.getZeitslot().getAnfangszeit() == 8.15){ 
+    	accountRow.addColumn(new Column(a.toString()));
+    }
+      
+      
+      
+      
+      // Erste Spalte: Kontonummer hinzufügen
+      accountRow.addColumn(new Column(String.valueOf(a.getId())));
+      
+      
+      
       
       //a.getZeitslotId()  (alles)
       //a.getLehrveranstaltungId() 
@@ -183,12 +212,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
       //Stundenplaneintrag durch selektierung in die
       //jeweilige Spalte und folgend üBerprüfung der Reihenfolge.
 
-      // Erste Spalte: Kontonummer hinzuf�gen
-      accountRow.addColumn(new Column(String.valueOf()));
-
-      // Zweite Spalte: Kontostand hinzuf�gen
-      accountRow.addColumn(new Column(String.valueOf(this.verwaltung
-          .getBalanceOf(a))));
+      
 
       // und schlie�lich die Zeile dem Report hinzuf�gen.
       result.addRow(accountRow);

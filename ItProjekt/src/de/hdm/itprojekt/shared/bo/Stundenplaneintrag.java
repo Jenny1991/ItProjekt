@@ -7,61 +7,61 @@ public class Stundenplaneintrag extends BusinessObjekt {
 	/**
 	 * jeweilige Businessobjekte der Stundenplaneintraege
 	 */
-	private int dozentId;
-	private int lehrveranstaltungId;
-	private int raumId;
-	private int zeitslotId;
-	private int semesterverbandID;
+	private Dozent dozent;
+	private Lehrveranstaltung lehrveranstaltung;
+	private Raum raum;
+	private Zeitslot zeitslot;
+	private Semesterverband semesterverband;
 	
 	public Stundenplaneintrag(){
 	}
-	
-	public 
 
-	public int getDozentId() {
-		return dozentId;
+	public Dozent getDozent() {
+		return dozent;
 	}
 
-	public void setDozentId(int dozentId) {
-		this.dozentId = dozentId;
+	public void setDozent(Dozent dozent) {
+		this.dozent = dozent;
 	}
 
-	public int getLehrveranstaltungId() {
-		return lehrveranstaltungId;
+	public Lehrveranstaltung getLehrveranstaltung() {
+		return lehrveranstaltung;
 	}
 
-	public void setLehrveranstaltungId(int lehrveranstaltungId) {
-		this.lehrveranstaltungId = lehrveranstaltungId;
+	public void setLehrveranstaltung(Lehrveranstaltung lehrveranstaltung) {
+		this.lehrveranstaltung = lehrveranstaltung;
 	}
 
-	public int getRaumId() {
-		return raumId;
+	public Raum getRaum() {
+		return raum;
 	}
 
-	public void setRaumId(int raumId) {
-		this.raumId = raumId;
+	public void setRaum(Raum raum) {
+		this.raum = raum;
 	}
 
-	public int getZeitslotId() {
-		return zeitslotId;
+	public Zeitslot getZeitslot() {
+		return zeitslot;
 	}
 
-	public void setZeitslotId(int zeitslotId) {
-		this.zeitslotId = zeitslotId;
+	public void setZeitslot(Zeitslot zeitslot) {
+		this.zeitslot = zeitslot;
 	}
 
-	public int getSemesterverbandID() {
-		return semesterverbandID;
+	public Semesterverband getSemesterverband() {
+		return semesterverband;
 	}
 
-	public void setSemesterverbandID(int semesterverbandID) {
-		this.semesterverbandID = semesterverbandID;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setSemesterverband(Semesterverband semesterverband) {
+		this.semesterverband = semesterverband;
 	}
 	
-
+	public String toString(){
+		return this.zeitslot.getAnfangszeit() + " - " + this.zeitslot.getEndzeit() + "\n" +
+				this.lehrveranstaltung.getBezeichnung() + "\n" +
+				this.raum.getBezeichnung();
+	}
+	
+	
 
 }

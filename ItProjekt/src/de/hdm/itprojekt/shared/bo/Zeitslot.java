@@ -52,7 +52,6 @@ public class Zeitslot extends BusinessObjekt {
 	public void setEndzeit(double endzeit) {
 		this.endzeit = endzeit;
 	}
-
 	
 }
 
