@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.shared.bo;
 
-public class Stundenplan {
+public class Stundenplan extends BusinessObjekt {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String studienhalbjahr;
 	
