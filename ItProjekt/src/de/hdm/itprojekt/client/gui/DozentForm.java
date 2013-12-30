@@ -4,7 +4,9 @@
  */
 package de.hdm.itprojekt.client.gui;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
+
 
 
 
@@ -12,46 +14,61 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.SplitLayoutPanel;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
-
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientsideSettings;
 import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.bo.Dozent;
 import de.hdm.itprojekt.shared.Verwaltungsklasse;
 import de.hdm.itprojekt.client.*;
-import de.hdm.itprojekt.client.ItProjekt;
+import de.hdm.itprojekt.client.gui.*;
 
 
 /**
  * @author Hofmann
  *
  */
-public class DozentForm extends ItProjekt {
+public class DozentForm extends Content {
 
 	/**
 	 * Aufbau der Seite, um den Dozent anzuzeigen, zu löschen und zu bearbeiten
 	 */
 	
-	TextBox nachnameTextBox = new TextBox();
-	TextBox vornameTextBox = new TextBox();
-	FlexTable tabelleDozent = new FlexTable();
-	Label valueLabel = new Label();
+	//final Label flexTable = new Label();
+	//private VerticalPanel detailsPanel = new VerticalPanel();
 	
-	VerwaltungsklasseAsync verwaltungsklasse = ClientsideSettings
+	final TextBox nachnameTextBox = new TextBox();
+	final TextBox vornameTextBox = new TextBox();
+	final FlexTable tabelleDozent = new FlexTable();
+	//final CreateDozent2 cd = new CreateDozent2();
+	
+	
+	//final Label valueLabel = new Label();
+	
+	/*VerwaltungsklasseAsync verwaltungsklasse = ClientsideSettings
 			.getVerwaltungsklasse();
 	Dozent shownDozent = null;
+	*/
 
 	
 	public void onLoad() {
-		//FlexTable tabelleDozent = new FlexTable();
+		
+		showWidget();
+		//final VerticalPanel detailsPanel = new VerticalPanel();
+		//this.add(tabelleDozent);
+		/**
+		 //FlexTable tabelleDozent = new FlexTable();
 		
 		Button deleteDozentButton = new Button("Dozent löschen");
 		deleteDozentButton.addClickHandler(new ClickHandler() {
@@ -89,21 +106,63 @@ public class DozentForm extends ItProjekt {
 		tabelleDozent.setWidget(1, 2, changeDozentButton);
 		tabelleDozent.setWidget(1, 1, nachnameTextBox);
 		tabelleDozent.setWidget(1, 2, vornameTextBox);
-				
+		*/		
+		//TextBox nachnameTextBox = new TextBox();
+		//TextBox vornameTextBox = new TextBox();
+		//int row = tabelleDozent.getRowCount();
+		//Label valueLabel = new Label();
 		
 		
+		
+		Button createDozentButton = new Button ("Dozent anlegen");
+		
+		/**createDozentButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				CreateDozent2 cd = new CreateDozent2();
+				this.add(cd);
+			}
+		});*/
 
+		
+		Button changeDozentButton = new Button("Dozent bearbeiten");
+		Button deleteDozentButton = new Button("Dozent löschen");
+
+		
+		tabelleDozent.setText(0, 0, "Nachname");
+		tabelleDozent.setCellPadding(10);
+		tabelleDozent.setText(0, 1, "Vorname");
+		tabelleDozent.setText(0, 3, "Funktionen");
+		tabelleDozent.setWidget(1, 3, deleteDozentButton);
+		tabelleDozent.setWidget(1, 4, changeDozentButton);
+		tabelleDozent.setText(1, 0, "Thies");
+		tabelleDozent.setText(1, 1, "Peter");
+		tabelleDozent.setText(2, 0, "Rathke");
+		tabelleDozent.setText(2, 1, "Christian");
+		//tabelleDozent.setWidget(1, 1, nachnameTextBox);
+		//tabelleDozent.setWidget(1, 2, vornameTextBox);
+		
+		
+		//RootPanel.get("detailsPanel").clear();
+		//detailsPanel.add(createDozentButton);
+		
+	}
+		
+	public void showWidget() {
+		
+		this.add(tabelleDozent);
 	}
 	
-	public Dozent updateFlexTable (Dozent result) {
+	
+	/**public Dozent updateFlexTable (Dozent result) {
 		for (int i = 0; i < getAllDozent.size(); i++) { //getAllDozent wird noch als Methode oder Klasse benötigt
-			tabelleDozent.addItem(getAllDozent.get(i).getVorname())
+			tabelleDozent.addItem(getAllDozent.get(i).getVorname());
 			
 		}
 	}
+*/
+}
 	
-	
-	void setFields () {
+	/**
 		nachnameTextBox.setText(shownDozent.getNachname());
 		vornameTextBox.setText(shownDozent.getVorname());
 	}
@@ -185,5 +244,6 @@ public class DozentForm extends ItProjekt {
 	
 	
 }
+*/
 
 

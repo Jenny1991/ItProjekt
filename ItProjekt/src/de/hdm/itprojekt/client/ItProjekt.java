@@ -2,6 +2,7 @@ package de.hdm.itprojekt.client;
 
 
 import net.sourceforge.htmlunit.corejs.javascript.ast.FunctionNode.Form;
+
 import de.hdm.itprojekt.shared.FieldVerifier;
 
 
@@ -213,47 +214,8 @@ public class ItProjekt implements EntryPoint {
 			dozentButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
-					TextBox nachnameTextBox = new TextBox();
-					TextBox vornameTextBox = new TextBox();
-					FlexTable tabelleDozent = new FlexTable();
-					//int row = tabelleDozent.getRowCount();
-					//Label valueLabel = new Label();
-					
-					
-					
-					Button createDozentButton = new Button ("Dozent anlegen");
-					
-					/**createDozentButton.addClickHandler(new ClickHandler() {
-						public void onClick(ClickEvent event) {
-							CreateDozent cd = new CreateDozent();
-							detailsPanel.add(cd);
-						}
-					});
-					*
-					*/
-					
-					Button changeDozentButton = new Button("Dozent bearbeiten");
-					Button deleteDozentButton = new Button("Dozent löschen");
-
-					
-					tabelleDozent.setText(0, 0, "Nachname");
-					tabelleDozent.setCellPadding(10);
-					tabelleDozent.setText(0, 1, "Vorname");
-					tabelleDozent.setText(0, 3, "Funktionen");
-					tabelleDozent.setWidget(1, 3, deleteDozentButton);
-					tabelleDozent.setWidget(1, 4, changeDozentButton);
-					tabelleDozent.setText(1, 0, "Thies");
-					tabelleDozent.setText(1, 1, "Peter");
-					tabelleDozent.setText(2, 0, "Rathke");
-					tabelleDozent.setText(2, 1, "Christian");
-					//tabelleDozent.setWidget(1, 1, nachnameTextBox);
-					//tabelleDozent.setWidget(1, 2, vornameTextBox);
-					
-					
-					//RootPanel.get("detailsPanel").clear();
-					detailsPanel.add(tabelleDozent);
-					detailsPanel.add(createDozentButton);
-					
+				DozentForm df = new DozentForm();
+				detailsPanel.add(df);
 				}
 			});
 			
