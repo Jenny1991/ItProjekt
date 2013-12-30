@@ -27,7 +27,7 @@ import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
  * 
  */
 
-public class ChangeLehrveranstaltung extends VerticalPanel {
+public class ChangeLehrveranstaltung extends Content {
 	
 	private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();

@@ -26,7 +26,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 	 * 
 	 */
 
-	public class ChangeDozent extends VerticalPanel {
+	public class ChangeDozent extends Content {
 		
 		private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();

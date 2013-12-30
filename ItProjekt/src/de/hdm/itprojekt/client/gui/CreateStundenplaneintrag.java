@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -26,7 +28,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 	 * 
 	 */
 
-public class CreateStundenplaneintrag extends VerticalPanel {
+public class CreateStundenplaneintrag extends Content {
 		
 		private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();
@@ -89,6 +91,13 @@ public class CreateStundenplaneintrag extends VerticalPanel {
 				  vPanel.add(speichern);
 				  
 				  RootPanel.get("detailsPanel").add(vPanel); 
+				  
+				  verwaltungsSvc.getAllDozent(new AsyncCallback<ArrayList<Dozent>>()){
+					  
+				  }
+				  
+				  
+				  
 				  
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {

@@ -19,7 +19,7 @@ import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.bo.Dozent;
 import de.hdm.itprojekt.shared.bo.Semesterverband;
 
-public class ChangeSemesterverband extends VerticalPanel {
+public class ChangeSemesterverband extends Content {
 
 	private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();

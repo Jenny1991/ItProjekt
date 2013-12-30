@@ -19,7 +19,7 @@ import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.bo.Dozent;
 import de.hdm.itprojekt.shared.bo.Raum;
 
-public class ChangeRaum extends VerticalPanel {
+public class ChangeRaum extends Content {
 	
 	private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();

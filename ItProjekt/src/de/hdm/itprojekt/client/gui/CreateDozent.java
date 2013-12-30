@@ -24,7 +24,7 @@ import de.hdm.itprojekt.client.gui.DozentForm;
  * 
  */
 
-public class CreateDozent extends VerticalPanel {
+public class CreateDozent extends Content {
 	
 	private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
