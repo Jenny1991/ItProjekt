@@ -97,7 +97,7 @@ public class CreateStudiengang extends Content {
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							};
-							verwaltungsSvc.addStudiengang(sg.toArray(new String [0]), callback);
+							verwaltungsSvc.createStudiengang(sg.toArray(new String [0]), callback);
 					  }
 				  }
 				  });

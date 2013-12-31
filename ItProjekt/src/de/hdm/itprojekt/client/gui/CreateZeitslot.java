@@ -123,7 +123,7 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								};
-								verwaltungsSvc.addZeitslot(zeitslot.toArray(new String [0]), callback);
+								verwaltungsSvc.createZeitslot(zeitslot.toArray(new String [0]), callback);
 						  }
 					  }
 					  });

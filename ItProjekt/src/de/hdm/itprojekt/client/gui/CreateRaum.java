@@ -109,7 +109,7 @@ import de.hdm.itprojekt.client.gui.RaumForm;
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								};
-								verwaltungsSvc.addRaum(raum.toArray(new String [0]), callback);
+								verwaltungsSvc.createRaum(raum.toArray(new String [0]), callback);
 						  }
 					  }
 					  });

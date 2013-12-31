@@ -108,7 +108,7 @@ public class CreateDozent2 extends Content {
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							};
-							verwaltungsSvc.addDozent(dozent.toArray(new String [0]), callback);
+							verwaltungsSvc.createDozent(dozent.toArray(new String [0]), callback);
 					  }
 				  }
 				  });

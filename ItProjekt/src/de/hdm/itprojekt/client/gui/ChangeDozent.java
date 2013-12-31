@@ -77,7 +77,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 							if (shownDozent!=null){
 								shownDozent.setVorname(tbvorname.getText());
 								shownDozent.setNachname(tbnachname.getText());
-								verwaltungsSvc.getSelectedDozent(shownDozent, new AsyncCallback<Dozent>() {
+								verwaltungsSvc.getDozent(shownDozent, new AsyncCallback<Dozent>() {
 										 @Override
 										  public void onFailure (Throwable caught) {
 										  }
@@ -148,7 +148,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								};
-								verwaltungsSvc.updateDozent(dozent.toArray(new String [0]), callback);
+								verwaltungsSvc.changeDozent(dozent.toArray(new String [0]), callback);
 						  }
 					  }
 					  });	  
