@@ -80,6 +80,14 @@ public class Stundenplaneintrag extends BusinessObjekt {
 	public void setZeitslot(Zeitslot zeitslot) {
 		this.zeitslot = zeitslot;
 	}
+	
+	public void setSemesterverbandId(int id){
+		this.semesterverband.setId(id);
+	}
+	
+	public int getSemesterverbandId(){
+		return this.semesterverband.getId();
+	}
 
 	public Semesterverband getSemesterverband() {
 		return semesterverband;
