@@ -173,49 +173,71 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
     /*
      * Nun werden s�mtliche Stundenplaneintraege des Dozenten ausgelesen und in die Tabelle eingetragen.
      */
+    
     Vector<Stundenplaneintrag> stundenplaneintraege = this.verwaltung.getAllStundenplaneintragOf(d);
+    
+    Vector<Stundenplaneintrag> vecMo = new Vector<Stundenplaneintrag> ();
+    Vector<Stundenplaneintrag> vecDi = new Vector<Stundenplaneintrag> ();
+    Vector<Stundenplaneintrag> vecMi = new Vector<Stundenplaneintrag> ();
+    Vector<Stundenplaneintrag> vecDo = new Vector<Stundenplaneintrag> ();
+    Vector<Stundenplaneintrag> vecFr = new Vector<Stundenplaneintrag> ();
+    Vector<Stundenplaneintrag> vecDef = new Vector<Stundenplaneintrag> ();
+    
     for (Stundenplaneintrag a : stundenplaneintraege) {
-      
-    if (a.getZeitslot().getAnfangszeit() == 8.15){
-    	  Vector<Stundenplaneintrag> b = new Vector<Stundenplaneintrag>();
-    	  b.add(a);
-    }  
     	
-    Row accountRow = new Row();
-
-    if (a.getZeitslot().getWochentag().equals("Montag") && a.getZeitslot().getAnfangszeit() == 8.15){ 
-    	accountRow.addColumn(new Column(a.toString()));
+    	switch (a.getZeitslot().getWochentag()) {
+        case "Montag" : vecMo.add(a);
+                 break;
+        case "Dienstag": vecDi.add(a) ;
+                 break;
+        case "Mittwoch": vecMi.add(a) ;
+                 break;
+        case "Donnerstag": vecDo.add(a) ;
+                 break;
+        case "Freitag": vecFr.add(a) ;
+                 break;
+        default: vecDef.add(a) ;
+                 break;
     }
-    if (a.getZeitslot().getWochentag().equals("Dienstag") && a.getZeitslot().getAnfangszeit() == 8.15){ 
-		accountRow.addColumn(new Column(a.toString()));
-	}
-    if (a.getZeitslot().getWochentag().equals("Mittwoch") && a.getZeitslot().getAnfangszeit() == 8.15){ 
-    	accountRow.addColumn(new Column(a.toString()));
-    }
-      
-      
-      
-      
-      // Erste Spalte: Kontonummer hinzufügen
-      accountRow.addColumn(new Column(String.valueOf(a.getId())));
-      
-      
-      
-      
-      //a.getZeitslotId()  (alles)
-      //a.getLehrveranstaltungId() 
-      //a.getRaumId()
-      
-      //Erstellen von 5 Spalten und hinzufügen des jeweiligen 
-      //Stundenplaneintrag durch selektierung in die
-      //jeweilige Spalte und folgend üBerprüfung der Reihenfolge.
-
-      
-
-      // und schlie�lich die Zeile dem Report hinzuf�gen.
-      result.addRow(accountRow);
-    }
-
+}
+    	
+    	for ( int i = 0; i<6; i++){
+    		Row accountRow = new Row();
+    	
+    		if (vecMo.elementAt(i) != null){
+    			accountRow.addColumn(new Column(vecMo.elementAt(i).toString()));}
+    		else {
+    			accountRow.addColumn(new Column("----"));
+    		}
+    		
+    		if (vecDi.elementAt(i) != null){
+    			accountRow.addColumn(new Column(vecMo.elementAt(i).toString()));}
+    		else {
+    			accountRow.addColumn(new Column("----"));
+    		}
+    		
+    		if (vecMi.elementAt(i) != null){
+    			accountRow.addColumn(new Column(vecMo.elementAt(i).toString()));}
+    		else {
+    			accountRow.addColumn(new Column("----"));
+    		}
+    		
+    		if (vecDo.elementAt(i) != null){
+    			accountRow.addColumn(new Column(vecMo.elementAt(i).toString()));}
+    		else {
+    			accountRow.addColumn(new Column("----"));
+    		}
+    		
+    		if (vecFr.elementAt(i) != null){
+    			accountRow.addColumn(new Column(vecMo.elementAt(i).toString()));}
+    		else {
+    			accountRow.addColumn(new Column("----"));
+    		}
+    		
+    		// und schlie�lich die Zeile dem Report hinzuf�gen.
+            result.addRow(accountRow);
+    		
+    		}
     /*
      * Zum Schluss m�ssen wir noch den fertigen Report zur�ckgeben.
      */
