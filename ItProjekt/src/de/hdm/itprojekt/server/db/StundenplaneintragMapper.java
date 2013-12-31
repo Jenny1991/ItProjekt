@@ -75,8 +75,8 @@ public class StundenplaneintragMapper {
       Statement stmt = con.createStatement();
 
       // Statement ausfüllen und als Query an die DB schicken
-      ResultSet rs = stmt.executeQuery("SELECT id, dozentId, raumId, zeitslotId, studiengangId, "
-    		  + "semesterverbandId, stundenplanId, lehrverantsaltungId FROM Stundenplaneintrag "
+      ResultSet rs = stmt.executeQuery("SELECT id, dozentId, raumId, zeitslotId, "
+    		  + "semesterverbandId, lehrveranstaltungId FROM Stundenplaneintrag "
     		  + "WHERE id=" + id);
 
       /*
@@ -90,9 +90,7 @@ public class StundenplaneintragMapper {
         s.setDozentId(rs.getInt("dozentId"));
         s.setRaumId(rs.getInt("raumId"));
         s.setZeitslotId(rs.getInt("zeitslotId"));
-        s.setStudiengangId(rs.getInt("studiengangId"));
         s.setSemesterverbandId(rs.getInt("semesterverbandId"));
-        s.setStundenplanId(rs.getInt("stundenplanId"));
         s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungId"));
         
         return s;
@@ -113,7 +111,7 @@ public class StundenplaneintragMapper {
    *         repräsentieren. Bei evtl. Exceptions wird ein partiell gefüllter
    *         oder ggf. auch leerer Vetor zurückgeliefert.
    */
-  public Vector<Stundenplaneintrag> findAll() {
+  public Vector<Stundenplaneintrag> findByDozentOrderByAnfangszeit() {
     Connection con = DBConnection.connection();
 
     // Ergebnisvektor vorbereiten
@@ -122,9 +120,10 @@ public class StundenplaneintragMapper {
     try {
       Statement stmt = con.createStatement();
 
-      ResultSet rs = stmt.executeQuery("SELECT id, dozentId, raumId, zeitslotId, studiengangId, "
-    	+ "semesterverbandId, stundenplanId, lehrveranstaltungId "
-    	+ "FROM stundenplaneintrag "
+      ResultSet rs = stmt.executeQuery("SELECT stundenplaneintrag.id, stundenplaneintrag.dozentId, stundenplaneintrag.raumId, stundenplaneintrag.zeitslotId, "
+    	+ "stundenplaneintrag.semesterverbandId, stundenplaneintrag.lehrveranstaltungId, "
+    	+ "FROM stundenplaneintrag, stundenplaneintragzeitslot, dozent, zeitslot "
+    	+ "INNER JOIN stundenplaneintrag ON "
         + " ORDER BY id");
 
       // Für jeden Eintrag im Suchergebnis wird nun ein Stundenplaneintrag-Objekt erstellt.
@@ -134,9 +133,7 @@ public class StundenplaneintragMapper {
         s.setDozentId(rs.getInt("dozentId"));
         s.setRaumId(rs.getInt("raumId"));
         s.setZeitslotId(rs.getInt("zeitslotId"));
-        s.setStudiengangId(rs.getInt("studiengangId"));
         s.setSemesterverbandId(rs.getInt("semesterverbandId"));
-        s.setStundenplanId(rs.getInt("stundenplanId"));
         s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungId"));
 
         // Hinzufügen des neuen Objekts zum Ergebnisvektor
@@ -151,6 +148,50 @@ public class StundenplaneintragMapper {
     return result;
   }
 
+  
+  /**
+   * Auslesen aller Stundenplaneinträge.
+   * 
+   * @return Ein Vektor mit Stundenplaneintrag-Objekten, die sämtliche Stundenplaneinträge
+   *         repräsentieren. Bei evtl. Exceptions wird ein partiell gefüllter
+   *         oder ggf. auch leerer Vetor zurückgeliefert.
+   */
+  public Vector<Stundenplaneintrag> findAll() {
+    Connection con = DBConnection.connection();
+
+    // Ergebnisvektor vorbereiten
+    Vector<Stundenplaneintrag> result = new Vector<Stundenplaneintrag>();
+
+    try {
+      Statement stmt = con.createStatement();
+
+      ResultSet rs = stmt.executeQuery("SELECT id, dozentId, raumId, zeitslotId, "
+    	+ "semesterverbandId, lehrveranstaltungId "
+    	+ "FROM stundenplaneintrag "
+        + " ORDER BY id");
+
+      // Für jeden Eintrag im Suchergebnis wird nun ein Stundenplaneintrag-Objekt erstellt.
+      while (rs.next()) {
+        Stundenplaneintrag s = new Stundenplaneintrag();
+        s.setId(rs.getInt("id"));
+        s.setDozentId(rs.getInt("dozentId"));
+        s.setRaumId(rs.getInt("raumId"));
+        s.setZeitslotId(rs.getInt("zeitslotId"));
+        s.setSemesterverbandId(rs.getInt("semesterverbandId"));
+        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungId"));
+
+        // Hinzufügen des neuen Objekts zum Ergebnisvektor
+        result.addElement(s);
+      }
+    }
+    catch (SQLException e2) {
+      e2.printStackTrace();
+    }
+
+    // Ergebnisvektor zurückgeben
+    return result;
+  }
+  
   
   /**
    * Einfügen eines <code>Stundenplaneintrag</code>-Objekts in die Datenbank. Dabei wird
@@ -185,10 +226,10 @@ public class StundenplaneintragMapper {
         stmt = con.createStatement();
 
         // Jetzt erst erfolgt die tatsächliche Einfügeoperation
-        stmt.executeUpdate("INSERT INTO stundenplaneintrag (id, dozentId, raumId, zeitslotId, studiengangId, "
-    		  + "semesterverbandId, stundenplanId, lehrveranstaltungId FROM Stundenplaneintrag) " + "VALUES ("
-            + s.getId() + "," + s.getDozentId() + "," + s.getRaumId() + s.getzeitslotId() + s.getstudiengangId() 
-            + s.getsemesterverbandId() + s.getstundenplanId() + s.getlehrveranstaltungId() );
+        stmt.executeUpdate("INSERT INTO stundenplaneintrag (id, dozentId, raumId, zeitslotId, "
+    		  + "semesterverbandId, lehrveranstaltungId FROM Stundenplaneintrag) " + "VALUES ("
+            + s.getId() + "," + s.getDozentId() + "," + s.getRaumId() + s.getzeitslotId()  
+            + s.getsemesterverbandId() + s.getlehrveranstaltungId() );
       }
     }
     catch (SQLException e2) {
