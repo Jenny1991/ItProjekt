@@ -3,7 +3,7 @@ package de.hdm.itprojekt.shared.bo;
 public class Dozent extends BusinessObjekt {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 /**
  * Vorname des Dozenten
  */

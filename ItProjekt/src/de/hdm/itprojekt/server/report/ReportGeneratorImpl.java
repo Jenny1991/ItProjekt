@@ -179,9 +179,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
     if (a.getZeitslot().getAnfangszeit() == 8.15){
     	  Vector<Stundenplaneintrag> b = new Vector<Stundenplaneintrag>();
     	  b.add(a);
-    }
-      
-      
+    }  
     	
     Row accountRow = new Row();
 

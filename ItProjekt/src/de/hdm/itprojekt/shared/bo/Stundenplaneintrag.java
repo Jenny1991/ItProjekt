@@ -15,6 +15,14 @@ public class Stundenplaneintrag extends BusinessObjekt {
 	
 	public Stundenplaneintrag(){
 	}
+	
+	public void setDozentId(int id){
+		this.dozent.setId(id);
+	}
+	
+	public int getDozentId(){
+		return this.dozent.getId();
+	}
 
 	public Dozent getDozent() {
 		return dozent;
@@ -24,12 +32,29 @@ public class Stundenplaneintrag extends BusinessObjekt {
 		this.dozent = dozent;
 	}
 
+	
+	public void setLehrveranstaltungId( int id){
+		this.lehrveranstaltung.getId();
+	}
+	
+	public int getLehrveranstaltungId(){
+		return this.lehrveranstaltung.getId();
+	}
+	
 	public Lehrveranstaltung getLehrveranstaltung() {
 		return lehrveranstaltung;
 	}
 
 	public void setLehrveranstaltung(Lehrveranstaltung lehrveranstaltung) {
 		this.lehrveranstaltung = lehrveranstaltung;
+	}
+	
+	public void setRaumId(int id){
+		this.raum.setId(id);
+	}
+	
+	public int getRaumId(){
+		return this.raum.getId();
 	}
 
 	public Raum getRaum() {
@@ -38,6 +63,14 @@ public class Stundenplaneintrag extends BusinessObjekt {
 
 	public void setRaum(Raum raum) {
 		this.raum = raum;
+	}
+	
+	public void setZeitslotId(int id){
+		this.zeitslot.getId();
+	}
+	
+	public int getZeitslotId(){
+		return this.zeitslot.getId();
 	}
 
 	public Zeitslot getZeitslot() {
