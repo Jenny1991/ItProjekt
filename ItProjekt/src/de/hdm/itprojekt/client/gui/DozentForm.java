@@ -4,13 +4,11 @@
  */
 package de.hdm.itprojekt.client.gui;
 
+import java.util.ArrayList;
+
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
-
-
-
-
-
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -46,13 +44,21 @@ public class DozentForm extends Content {
 	 */
 	
 	//final Label flexTable = new Label();
-	//private VerticalPanel detailsPanel = new VerticalPanel();
+	private VerticalPanel detailsPanel = new VerticalPanel();
 	
 	final TextBox nachnameTextBox = new TextBox();
 	final TextBox vornameTextBox = new TextBox();
 	final FlexTable tabelleDozent = new FlexTable();
-	//final CreateDozent2 cd = new CreateDozent2();
+	final Button createDozentButton = new Button ("Dozent anlegen");
+	final Button changeDozentButton = new Button("Dozent bearbeiten");
+	final Button deleteDozentButton = new Button("Dozent löschen");
 	
+	final CreateDozent2 createD = new CreateDozent2();
+	final ChangeDozent changeD = new ChangeDozent();
+	//final DeleteDozent deleteD = new DeleteDozent();
+	
+	final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+	 
 	
 	//final Label valueLabel = new Label();
 	
@@ -109,24 +115,15 @@ public class DozentForm extends Content {
 		*/		
 		//TextBox nachnameTextBox = new TextBox();
 		//TextBox vornameTextBox = new TextBox();
-		//int row = tabelleDozent.getRowCount();
+		
+		
 		//Label valueLabel = new Label();
 		
-		
-		
-		Button createDozentButton = new Button ("Dozent anlegen");
-		
-		/**createDozentButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				CreateDozent2 cd = new CreateDozent2();
-				this.add(cd);
-			}
-		});*/
 
 		
-		Button changeDozentButton = new Button("Dozent bearbeiten");
-		Button deleteDozentButton = new Button("Dozent löschen");
-
+		
+	//	int row = tabelleDozent.getRowCount();
+		
 		
 		tabelleDozent.setText(0, 0, "Nachname");
 		tabelleDozent.setCellPadding(10);
@@ -141,6 +138,18 @@ public class DozentForm extends Content {
 		//tabelleDozent.setWidget(1, 1, nachnameTextBox);
 		//tabelleDozent.setWidget(1, 2, vornameTextBox);
 		
+		createDozentButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+			showNeueSeite();
+			}
+		});
+		
+		/**changeDozentButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				this.add(changeD);
+			}
+		});*/
+		
 		
 		//RootPanel.get("detailsPanel").clear();
 		//detailsPanel.add(createDozentButton);
@@ -150,7 +159,20 @@ public class DozentForm extends Content {
 	public void showWidget() {
 		
 		this.add(tabelleDozent);
+		this.add(createDozentButton);
+		this.add(changeDozentButton);
+		this.add(deleteDozentButton);
+
 	}
+	
+	public void showNeueSeite() {
+		this.clear();
+		//this.add(changeD);
+		
+		this.add(createD);
+		//this.add(deleteD);
+	}
+
 	
 	
 	/**public Dozent updateFlexTable (Dozent result) {
@@ -161,6 +183,10 @@ public class DozentForm extends Content {
 	}
 */
 }
+
+
+
+
 	
 	/**
 		nachnameTextBox.setText(shownDozent.getNachname());

@@ -2,8 +2,8 @@ package de.hdm.itprojekt.client;
 
 
 import net.sourceforge.htmlunit.corejs.javascript.ast.FunctionNode.Form;
-
 import de.hdm.itprojekt.shared.FieldVerifier;
+
 
 
 //import com.google.appengine.api.images.Image.Format;
@@ -37,7 +37,6 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 
 import de.hdm.itprojekt.client.gui.*;
-import de.hdm.itprojekt.client.gui.CreateDozent;
 
 
 
@@ -180,21 +179,21 @@ public class ItProjekt implements EntryPoint {
 			report.addItem(stundenplanButton);
 			report.addItem(raumplanButton);
 				
-			/**stundenplanButton.addClickHandler(new ClickHandler() {
+			stundenplanButton.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					StundenplanForm spf = new StundenplanForm();
-					RootPanel.get("ItProjektFrame").clear();
-					//RootPanel.get("ItProjektFrame").add(spf);
+					detailsPanel.clear();
+					detailsPanel.add(spf);
 				}
 			});
 			
 			raumplanButton.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					RaumplanForm rpf = new RaumplanForm();
-					RootPanel.get("ItProjektFrame").clear();
-					//RootPanel.get("ItProjektFrame").add(rpf);
+					detailsPanel.clear();
+					detailsPanel.add(rpf);
 				}
-			});*/
+			});
 			
 			/*
 			 * Zweig: Stammdaten mit Dozent, Zeitslot, Raum, Studiengang, Semesterverband, Lehrveranstaltung
@@ -209,55 +208,54 @@ public class ItProjekt implements EntryPoint {
 			stammdaten.addItem(semesterverbandButton);
 			stammdaten.addItem(lehrveranstaltungButton);
 			
-			
 
 			dozentButton.addClickHandler(new ClickHandler() {
-				@Override
 				public void onClick(ClickEvent event) {
 				DozentForm df = new DozentForm();
+				detailsPanel.clear();
 				detailsPanel.add(df);
 				}
 			});
 			
-			/**zeitslotButton.addClickHandler(new ClickHandler(){
+			zeitslotButton.addClickHandler(new ClickHandler(){
 				public void onClick(ClickEvent event) {
 					ZeitslotForm zf = new ZeitslotForm();
-					RootPanel.get("ItProjektFrame").clear();
-					//RootPanel.get("ItProjektFrame").add(zf);
+					detailsPanel.clear();
+					detailsPanel.add(zf);
 				}
 			});
 			
 			raumButton.addClickHandler(new ClickHandler(){
 				public void onClick(ClickEvent event) {
 					RaumForm rf = new RaumForm();
-					RootPanel.get("ItProjektFrame").clear();
-					//RootPanel.get("ItProjektFrame").add(rf);
+					detailsPanel.clear();
+					detailsPanel.add(rf);
 				}
 			});
 			
 			studiengangButton.addClickHandler(new ClickHandler(){
 				public void onClick(ClickEvent event) {
 					StudiengangForm sgf = new StudiengangForm();
-					RootPanel.get("ItProjektFrame").clear();
-					//RootPanel.get("ItProjektFrame").add(sgf);
+					detailsPanel.clear();
+					detailsPanel.add(sgf);
 				}
 			});
 			
 			semesterverbandButton.addClickHandler(new ClickHandler(){
 				public void onClick(ClickEvent event) {
 					SemesterverbandForm svf = new SemesterverbandForm();
-					RootPanel.get("ItProjektFrame").clear();
-					//RootPanel.get("ItProjektFrame").add(svf);
+					detailsPanel.clear();
+					detailsPanel.add(svf);
 				}
 			});
 			
-			/*lehrveranstaltungButton.addClickHandler(new ClickHandler(){
+			lehrveranstaltungButton.addClickHandler(new ClickHandler(){
 				public void onClick(ClickEvent event) {
 					LehrveranstaltungForm lf = new LehrveranstaltungForm();
-					RootPanel.get("ItProjektFrame").clear();
-					RootPanel.get("ItProjektFrame"),add(lf);
+					detailsPanel.clear();
+					detailsPanel.add(lf);
 				}
-			}); */
+			});
 			
 			
 			/*
@@ -268,13 +266,13 @@ public class ItProjekt implements EntryPoint {
 			bewegungsdaten.setText("Bewegungsdaten");
 			bewegungsdaten.addItem(stundenplaneintragButton);
 			
-			/**stundenplaneintragButton.addClickHandler(new ClickHandler(){
+			stundenplaneintragButton.addClickHandler(new ClickHandler(){
 				public void onClick(ClickEvent event) {
 					StundenplaneintragForm sef = new StundenplaneintragForm();
-					RootPanel.get("ItProjektFrame").clear();
-					//RootPanel.get("ItProjektFrame").add(sef);
+					detailsPanel.clear();
+					detailsPanel.add(sef);
 				}
-			});*/
+			});
 			
 			
 			/*

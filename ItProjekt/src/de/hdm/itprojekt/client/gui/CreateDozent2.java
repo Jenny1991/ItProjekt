@@ -28,13 +28,14 @@ import de.hdm.itprojekt.client.gui.DozentForm;
 
 public class CreateDozent2 extends Content {
 	
-	private VerticalPanel vPanel = new VerticalPanel ();
+	/** Brauchen wir nicht
+	 * private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
-	private HorizontalPanel hoPanel = new HorizontalPanel ();
+	private HorizontalPanel hoPanel = new HorizontalPanel ();*/
 	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 	
 	  /**
-	   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
+	   * Jede Klasse enthï¿½t eine ï¿½berschrift, die definiert, was der User machen kann.
 		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   */
 	
 	  protected String getHeadlineText() {
@@ -42,7 +43,7 @@ public class CreateDozent2 extends Content {
 	  }
 
 	  /**
-	   * Unter der Überschrift trägt der User die Daten des neuen Dozenten ein. 
+	   * Unter der ï¿½berschrift trï¿½gt der User die Daten des neuen Dozenten ein. 
 	   */
 	  final Label lbvorname = new Label ("Vorname"); 
 	  final Label lbnachname = new Label ("Nachname");
@@ -56,7 +57,9 @@ public class CreateDozent2 extends Content {
 	  */
 	  public void onLoad () {
 
-			  hPanel.add(lbnachname);
+		  
+		  /** Panels werden durch this. ersetzt
+		   * hPanel.add(lbnachname);
 			  hPanel.add(tbnachname);
 			  hoPanel.add(lbvorname);
 			  hoPanel.add(tbvorname);
@@ -65,6 +68,15 @@ public class CreateDozent2 extends Content {
 			  vPanel.add(speichern);
 			  
 			  RootPanel.get("detailsPanel").add(vPanel); 
+			  */
+		  this.add(lbnachname);
+		  this.add(tbnachname);
+		  this.add(lbvorname);
+		  this.add(tbvorname);
+		 // vPanel.add(hPanel);
+		 // vPanel.add(hoPanel);
+		  this.add(speichern);
+		  
 			  
 				  speichern.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
@@ -77,7 +89,7 @@ public class CreateDozent2 extends Content {
 					  if (tbnachname.getText().isEmpty());
 					  if (tbvorname.getText().isEmpty()); {	
 						  allFilled = false;
-					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+					  Window.alert ("Bitte fÃ¼llen Sie alle Felder aus."); }
 					  
 					  if (allFilled == true) {
 						  final String nachname = tbnachname.getText().trim();
@@ -91,7 +103,7 @@ public class CreateDozent2 extends Content {
 							  return;
 						  
 						  if (verwaltungsSvc == null) {
-							  verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+							 // verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 						  }
 					
 						  AsyncCallback<Dozent> callback = new  AsyncCallback<Dozent> () {
@@ -108,7 +120,7 @@ public class CreateDozent2 extends Content {
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							};
-							verwaltungsSvc.createDozent(dozent.toArray(new String [0]), callback);
+							//verwaltungsSvc.createDozent(dozent.toArray(new String [0]), callback);
 					  }
 				  }
 				  });

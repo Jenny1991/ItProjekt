@@ -36,7 +36,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 		private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 
 		  /**
-		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
+		   * Jede Klasse enthï¿½t eine ï¿½berschrift, die definiert, was der User machen kann.
 		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.
 		   */
 		
@@ -45,7 +45,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 		  }
 
 		  /**
-		   * Unter der Überschrift trägt der User die neuen Daten des  Dozenten ein. 
+		   * Unter der ï¿½berschrift trï¿½gt der User die neuen Daten des  Dozenten ein. 
 		   */
 		  final Label lbvorname = new Label ("Vorname"); 
 		  final Label lbnachname = new Label ("Nachname");
@@ -117,7 +117,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 						  if (tbnachname.getText().isEmpty());
 						  if (tbvorname.getText().isEmpty()); {	
 							  allFilled = false;
-						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+						  Window.alert ("Bitte fï¿½llen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) {
 							  final String nachname = tbnachname.getText().trim();
