@@ -34,7 +34,7 @@ public class Stundenplaneintrag extends BusinessObjekt {
 
 	
 	public void setLehrveranstaltungId( int id){
-		this.lehrveranstaltung.getId();
+		this.lehrveranstaltung.setId(id);
 	}
 	
 	public int getLehrveranstaltungId(){
@@ -66,7 +66,7 @@ public class Stundenplaneintrag extends BusinessObjekt {
 	}
 	
 	public void setZeitslotId(int id){
-		this.zeitslot.getId();
+		this.zeitslot.setId(id);
 	}
 	
 	public int getZeitslotId(){
