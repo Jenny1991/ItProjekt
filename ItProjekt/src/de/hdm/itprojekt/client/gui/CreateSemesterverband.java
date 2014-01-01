@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -30,23 +31,25 @@ import de.hdm.itprojekt.client.gui.SemesterverbandForm;
 
 	public class CreateSemesterverband extends Content {
 		
-		private VerticalPanel vPanel = new VerticalPanel ();
+		private final HTML ueberschrift = new HTML ("<h2>Neuen Semesterverband anlegen<h2>");
+	
+		/*private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();
 		private HorizontalPanel hoPanel = new HorizontalPanel ();
 		private HorizontalPanel horPanel = new HorizontalPanel ();
-		private HorizontalPanel hrPanel = new HorizontalPanel ();
+		private HorizontalPanel hrPanel = new HorizontalPanel ();*/
 		private ArrayList<Semesterverband> sv = new ArrayList<Semesterverband> ();
 
 		  /**
-		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
+		   * Jede Klasse enthï¿½t eine ï¿½berschrift, die definiert, was der User machen kann.
 		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.		   */
 		  
-		protected String getHeadlineText() {
+		/*protected String getHeadlineText() {
 		    return "Semesterverband anlegen";
-		  }
+		  }*/
 
 		  /**
-		   * Unter der Überschrift trägt der User die Daten des neuen Semesterverbands ein. 
+		   * Unter der ï¿½berschrift trï¿½gt der User die Daten des neuen Semesterverbands ein. 
 		   */
 		  final Label lbjahrgang = new Label ("Jahrgang"); 
 		  final Label lbstudiengang = new Label ("Studiengang");
@@ -63,8 +66,20 @@ import de.hdm.itprojekt.client.gui.SemesterverbandForm;
 		  * Anordnen der Buttons und Labels auf den Panels
 		  */
 		  public void onLoad () {
-
-				  hPanel.add(lbjahrgang);
+			  
+			  this.add(ueberschrift);
+			  
+			  this.add(lbjahrgang);
+			  this.add(tbjahrgang);
+			  this.add(lbstudiengang);
+			  this.add(tbstudiengang);
+			  this.add(lbsemester);
+			  this.add(tbsemester);
+			  this.add(lbanzahl);
+			  this.add(tbanzahl);
+			  this.add(speichern);
+			  
+				  /*hPanel.add(lbjahrgang);
 				  hPanel.add(tbjahrgang);
 				  hoPanel.add(lbstudiengang);
 				  hoPanel.add(tbstudiengang);
@@ -77,7 +92,7 @@ import de.hdm.itprojekt.client.gui.SemesterverbandForm;
 				  vPanel.add(horPanel);
 				  vPanel.add(speichern);
 				  
-				  RootPanel.get("detailsPanel").add(vPanel); 
+				  RootPanel.get("detailsPanel").add(vPanel); */
 
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
@@ -92,7 +107,7 @@ import de.hdm.itprojekt.client.gui.SemesterverbandForm;
 						  if (tbstudiengang.getText().isEmpty());
 						  if (tbsemester.getText().isEmpty()); 
 						  { allFilled = false;
-						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+						  Window.alert ("Bitte fÃ¼llen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) { 
 							  final String jahrgang = tbjahrgang.getText().trim();
@@ -114,7 +129,7 @@ import de.hdm.itprojekt.client.gui.SemesterverbandForm;
 								  return;
 							  
 							  if (verwaltungsSvc == null) {
-								  verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+								  //verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 							  }
 						
 							  AsyncCallback<Semesterverband> callback = new  AsyncCallback<Semesterverband> () {
@@ -134,7 +149,7 @@ import de.hdm.itprojekt.client.gui.SemesterverbandForm;
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								};
-								verwaltungsSvc.createSemesterverband(sv.toArray(new String [0]), callback);
+								//verwaltungsSvc.createSemesterverband(sv.toArray(new String [0]), callback);
 						  }
 					  }
 					  });

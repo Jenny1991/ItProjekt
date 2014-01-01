@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -29,24 +30,27 @@ import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
 
 public class ChangeLehrveranstaltung extends Content {
 	
-	private VerticalPanel vPanel = new VerticalPanel ();
+	
+	private final HTML ueberschrift = new HTML ("<h2>Lehrveranstaltung bearbeiten<h2>");
+	
+	/*private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
 	private HorizontalPanel hoPanel = new HorizontalPanel ();
-	private HorizontalPanel horPanel = new HorizontalPanel ();
+	private HorizontalPanel horPanel = new HorizontalPanel ();*/
 	
 	Lehrveranstaltung shownLV = null;
 	private ArrayList<Lehrveranstaltung> lv = new ArrayList<Lehrveranstaltung> ();
 	
 	  /**
-	   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
+	   * Jede Klasse enthï¿½t eine ï¿½berschrift, die definiert, was der User machen kann.
 		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.  */
 	  
-	protected String getHeadlineText() {
+	/*protected String getHeadlineText() {
 	    return "Lehrveranstaltung bearbeiten";
-	  }
+	  }*/
 
 	  /**
-	   * Unter der Überschrift trägt der User die neuen Daten der Lehrveranstaltung ein. 
+	   * Unter der ï¿½berschrift trï¿½gt der User die neuen Daten der Lehrveranstaltung ein. 
 	   */
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final Label lbsemester = new Label ("Semester");
@@ -61,7 +65,7 @@ public class ChangeLehrveranstaltung extends Content {
 	    tbsemester.addItem("6");
 	    tbsemester.addItem("7");
 	    tbsemester.setVisibleItemCount(7);
-	    RootPanel.get().add(tbsemester);
+	    this.add(tbsemester);
 	    }
 	  final ListBox tbumfang = new ListBox (); {
 	  	tbumfang.addItem("1 SWS");
@@ -69,7 +73,7 @@ public class ChangeLehrveranstaltung extends Content {
 	  	tbumfang.addItem("3 SWS");
 	  	tbumfang.addItem("4 SWS");
 	  	tbumfang.setVisibleItemCount(4);
-	    RootPanel.get().add(tbumfang);
+	  	this.add(tbumfang);
 	    }
 	  final Button speichern = new Button ("speichern");
 	  final Button bearbeiten = new Button ("bearbeiten"); 
@@ -79,10 +83,15 @@ public class ChangeLehrveranstaltung extends Content {
 	  * Anordnen der Buttons und Labels auf den Panels
 	  */
 	  public void onLoad () {
+		  this.add(lbbezeichnung);
+		  this.add(tbbezeichnung);
+		  this.add(lbsemester);
+		  this.add(tbsemester);
+		  this.add(lbumfang);
+		  this.add(tbumfang);
+		  this.add(bearbeiten);
 		  
-		  vPanel.add(bearbeiten);
-		  
-		  RootPanel.get("detailsPanel").add(vPanel); 
+		  //RootPanel.get("detailsPanel").add(vPanel); 
 		  
 		  bearbeiten.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event){
@@ -90,7 +99,7 @@ public class ChangeLehrveranstaltung extends Content {
 					shownLV.setBezeichnung(tbbezeichnung.getText());
 					shownLV.setSemester(tbsemester.getSelectedIndex());
 					shownLV.setUmfang(tbumfang.getSelectedIndex());
-					verwaltungsSvc.getLehrveranstaltung(shownLV, new AsyncCallback<Lehrveranstaltung>() {
+					/*verwaltungsSvc.getLehrveranstaltung(shownLV, new AsyncCallback<Lehrveranstaltung>() {
 						 @Override
 						  public void onFailure (Throwable caught) {
 						  }
@@ -104,12 +113,14 @@ public class ChangeLehrveranstaltung extends Content {
 							  emptyWidget();
 							  changeSelectedDozent();											  
 						  }
-					  });
+					  });*/
 			  }
 	  }
 	  
 public void changeSelectedDozent(){	 
-	  hPanel.add(lbbezeichnung);
+	
+	showWidget();
+	 /* hPanel.add(lbbezeichnung);
 	  hPanel.add(tbbezeichnung);
 	  hoPanel.add(lbsemester);
 	  hoPanel.add(tbsemester);
@@ -120,7 +131,7 @@ public void changeSelectedDozent(){
 	  vPanel.add(horPanel);
 	  vPanel.add(speichern);
 	  
-	  RootPanel.get("detailsPanel").add(vPanel); 
+	  RootPanel.get("detailsPanel").add(vPanel);*/ 
 
  speichern.addClickHandler(new ClickHandler() {
 	  public void onClick(ClickEvent event) {
@@ -132,7 +143,7 @@ public void changeSelectedDozent(){
 		  
 		  if (tbbezeichnung.getText().isEmpty());
 		  {	allFilled = false;
-		  Window.alert("Bitte füllen Sie alle Felder aus."); }
+		  Window.alert("Bitte fÃ¼llen Sie alle Felder aus."); }
 		 
 		  if (allFilled == true) { 
 			  final String bezeichnung = tbbezeichnung.getText().trim();
@@ -144,7 +155,7 @@ public void changeSelectedDozent(){
 				  return;
 			  
 			  if (verwaltungsSvc == null) {
-				  verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+				 // verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 			  }
 		
 			  AsyncCallback<Void> callback = new  AsyncCallback<Void> () {
@@ -163,7 +174,7 @@ public void changeSelectedDozent(){
 					  Window.alert ("Erfolgreich gespeichert.");
 				  } 	
 				};
-				verwaltungsSvc.changeLehrveranstaltung(lv.toArray(new String [0]), callback);
+				//verwaltungsSvc.changeLehrveranstaltung(lv.toArray(new String [0]), callback);
 		  }
 	  }
 	  });
@@ -174,5 +185,15 @@ public void emptyWidget(){
 	}
 
 		  });
+	  }
+	  
+	  public void showWidget() {
+		  this.add(lbbezeichnung);
+		  this.add(tbbezeichnung);
+		  this.add(lbsemester);
+		  this.add(tbsemester);
+		  this.add(lbumfang);
+		  this.add(tbumfang);
+		  this.add(speichern);
 	  }
 }

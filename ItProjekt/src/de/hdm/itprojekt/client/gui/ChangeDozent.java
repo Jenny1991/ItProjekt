@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -28,9 +29,11 @@ import de.hdm.itprojekt.client.ItProjekt;
 
 	public class ChangeDozent extends Content {
 		
-		private VerticalPanel vPanel = new VerticalPanel ();
+		private final HTML ueberschrift = new HTML ("<h2>Dozent bearbeiten<h2>");
+		
+		/*private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();
-		private HorizontalPanel hoPanel = new HorizontalPanel ();
+		private HorizontalPanel hoPanel = new HorizontalPanel ();*/
 
 		Dozent shownDozent = null;
 		private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
@@ -40,9 +43,9 @@ import de.hdm.itprojekt.client.ItProjekt;
 		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.
 		   */
 		
-		  protected String getHeadlineText() {
+		 /* protected String getHeadlineText() {
 		    return "Dozent bearbeiten";
-		  }
+		  }*/
 
 		  /**
 		   * Unter der �berschrift tr�gt der User die neuen Daten des  Dozenten ein. 
@@ -60,6 +63,8 @@ import de.hdm.itprojekt.client.ItProjekt;
 		  */
 		  public void onLoad () {
 
+			  this.add(ueberschrift);
+			  
 			/*	  hPanel.add(lbnachname);
 				  hPanel.add(tbnachname);
 				  hoPanel.add(lbvorname);
@@ -67,17 +72,24 @@ import de.hdm.itprojekt.client.ItProjekt;
 				  vPanel.add(hPanel);
 				  vPanel.add(hoPanel);
 			!!	  an dieser Stelle muss die FlexTable hin, da der Bearbeiten-Button dort ist!!
-				  */ 
-				  vPanel.add(bearbeiten);
 				  
-				  RootPanel.get("detailsPanel").add(vPanel); 
+				  vPanel.add(bearbeiten);*/
+			  this.add(lbnachname);
+			  this.add(tbnachname);
+			  this.add(lbvorname);
+			  this.add(tbvorname);
+			  //vPanel.add(hPanel);
+			  //vPanel.add(hoPanel);
+			  this.add(bearbeiten);
+				  
+				  //RootPanel.get("detailsPanel").add(vPanel); 
 
 				  bearbeiten.addClickHandler(new ClickHandler(){
 					  public void onClick(ClickEvent event) {			
 							if (shownDozent!=null){
 								shownDozent.setVorname(tbvorname.getText());
 								shownDozent.setNachname(tbnachname.getText());
-								verwaltungsSvc.getDozent(shownDozent, new AsyncCallback<Dozent>() {
+								/*verwaltungsSvc.getDozent(shownDozent, new AsyncCallback<Dozent>() {
 										 @Override
 										  public void onFailure (Throwable caught) {
 										  }
@@ -90,12 +102,13 @@ import de.hdm.itprojekt.client.ItProjekt;
 											  emptyWidget();
 											  changeSelectedDozent();											  
 										  }
-									  });
+									  });*/
 							  }
 					  }
 					  
 				  public void changeSelectedDozent(){	 
-					 hPanel.add(lbnachname);
+					 showWidget();
+					  /*hPanel.add(lbnachname);
 					 hPanel.add(tbnachname);
 					 hoPanel.add(lbvorname);
 					 hoPanel.add(tbvorname);
@@ -103,7 +116,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 					 vPanel.add(hoPanel);
 					 vPanel.add(speichern);
 					 
-					 RootPanel.get("detailsPanel").add(vPanel); 
+					 RootPanel.get("detailsPanel").add(vPanel); */
 
 
 				  speichern.addClickHandler(new ClickHandler() {
@@ -117,7 +130,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 						  if (tbnachname.getText().isEmpty());
 						  if (tbvorname.getText().isEmpty()); {	
 							  allFilled = false;
-						  Window.alert ("Bitte f�llen Sie alle Felder aus."); }
+						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) {
 							  final String nachname = tbnachname.getText().trim();
@@ -131,7 +144,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 								  return;
 							  
 							  if (verwaltungsSvc == null) {
-								  verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+								  //verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 							  }
 						
 							  AsyncCallback<Void> callback = new  AsyncCallback<Void> () {
@@ -148,7 +161,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								};
-								verwaltungsSvc.changeDozent(dozent.toArray(new String [0]), callback);
+								//verwaltungsSvc.changeDozent(dozent.toArray(new String [0]), callback);
 						  }
 					  }
 					  });	  
@@ -159,5 +172,14 @@ public void emptyWidget(){
 	}
 
 				  });
-		  }
+		  
+		}
+		  
+	public void showWidget() {
+		this.add(lbnachname);
+		 this.add(tbnachname);
+		 this.add(lbvorname);
+		 this.add(tbvorname);
+		 this.add(speichern);
+	}
 }

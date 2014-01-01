@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -28,6 +29,8 @@ import de.hdm.itprojekt.client.gui.DozentForm;
 
 public class CreateDozent2 extends Content {
 	
+	private final HTML ueberschrift = new HTML ("<h2>Neuen Dozenten anlegen<h2>");
+	
 	/** Brauchen wir nicht
 	 * private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
@@ -38,9 +41,9 @@ public class CreateDozent2 extends Content {
 	   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
 		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   */
 	
-	  protected String getHeadlineText() {
+	  /*protected String getHeadlineText() {
 	    return "Dozent anlegen";
-	  }
+	  }*/
 
 	  /**
 	   * Unter der �berschrift tr�gt der User die Daten des neuen Dozenten ein. 
@@ -57,6 +60,7 @@ public class CreateDozent2 extends Content {
 	  */
 	  public void onLoad () {
 
+		  this.add(ueberschrift);
 		  
 		  /** Panels werden durch this. ersetzt
 		   * hPanel.add(lbnachname);

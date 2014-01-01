@@ -12,33 +12,38 @@
 	 */
 
 
-	import java.util.ArrayList;
+	//import java.util.ArrayList;
 
-	import com.google.gwt.core.shared.GWT;
-	import com.google.gwt.dom.client.Style.Unit;
-	import com.google.gwt.event.dom.client.ClickEvent;
-	import com.google.gwt.event.dom.client.ClickHandler;
-	import com.google.gwt.user.client.rpc.AsyncCallback;
+
+	//import com.google.gwt.core.shared.GWT;
+	//import com.google.gwt.dom.client.Style.Unit;
+	import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+	//import com.google.gwt.user.client.rpc.AsyncCallback;
 	import com.google.gwt.user.client.ui.Button;
-	import com.google.gwt.user.client.ui.DockLayoutPanel;
-	import com.google.gwt.user.client.ui.Grid;
+	//import com.google.gwt.user.client.ui.DockLayoutPanel;
+	//import com.google.gwt.user.client.ui.Grid;
 	import com.google.gwt.user.client.ui.HTML;
-	import com.google.gwt.user.client.ui.HorizontalPanel;
-	import com.google.gwt.user.client.ui.Label;
-	import com.google.gwt.user.client.ui.RootLayoutPanel;
-	import com.google.gwt.user.client.ui.TextBox;
-	import com.google.gwt.user.client.ui.DockLayoutPanel;
-	import com.google.gwt.user.client.ui.FlexTable;
-	import com.google.gwt.user.client.ui.Panel;
-	import com.google.gwt.user.client.ui.RootPanel;
-	import com.google.gwt.user.client.ui.VerticalPanel;
+	//import com.google.gwt.user.client.ui.HorizontalPanel;
+	//import com.google.gwt.user.client.ui.Label;
+	//import com.google.gwt.user.client.ui.RootLayoutPanel;
+	//import com.google.gwt.user.client.ui.TextBox;
+	//import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.FlexTable;
 
-	import de.hdm.itprojekt.client.ClientsideSettings;
-	import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
-	import de.hdm.itprojekt.shared.bo.Dozent;
-	import de.hdm.itprojekt.shared.Verwaltungsklasse;
-	import de.hdm.itprojekt.client.*;
-	import de.hdm.itprojekt.client.gui.*;
+import de.hdm.itprojekt.shared.Verwaltungsklasse;
+import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
+	//import com.google.gwt.user.client.ui.Panel;
+	//import com.google.gwt.user.client.ui.RootPanel;
+	//import com.google.gwt.user.client.ui.VerticalPanel;
+
+	//import de.hdm.itprojekt.client.ClientsideSettings;
+	//import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
+	//import de.hdm.itprojekt.shared.bo.Dozent;
+	//import de.hdm.itprojekt.shared.Verwaltungsklasse;
+	//import de.hdm.itprojekt.client.*;
+	//import de.hdm.itprojekt.client.gui.*;
 	
 	
 public class SemesterverbandForm extends Content {
@@ -46,6 +51,9 @@ public class SemesterverbandForm extends Content {
 			/**
 			 * Aufbau der Seite, um den Raum anzuzeigen, zu löschen und zu bearbeiten
 			 */
+			
+			private final HTML ueberschrift = new HTML ("<h2>Übersicht der Semesterverbände<h2>");
+
 			
 			//final Label flexTable = new Label();
 			//private VerticalPanel detailsPanel = new VerticalPanel();
@@ -57,11 +65,11 @@ public class SemesterverbandForm extends Content {
 			final Button changeSvButton = new Button("Semesterverband bearbeiten");
 			final Button deleteSvButton = new Button("Semesterverband löschen");
 			
-			//final CreateSemesterverband createSv = new CreateSemesterverband();
-			//final ChangeSemesterverband changeSv = new ChangeSemesterverband();
+			final CreateSemesterverband createSv = new CreateSemesterverband();
+			final ChangeSemesterverband changeSv = new ChangeSemesterverband();
 			//final DeleteSemesterverband deleteSv = new DeleteSemesterverband();
 			
-			// final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+			final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 			 
 			
 			//final Label valueLabel = new Label();
@@ -71,6 +79,7 @@ public class SemesterverbandForm extends Content {
 			
 			public void onLoad() {
 				
+				this.add(ueberschrift);
 				showWidget();
 			
 				
@@ -87,30 +96,47 @@ public class SemesterverbandForm extends Content {
 				tabelleSv.setWidget(1, 5, changeSvButton);
 
 				
-				/**createSvButton.addClickHandler(new ClickHandler() {
+				createSvButton.addClickHandler(new ClickHandler() {
 					public void onClick(ClickEvent event) {
-					this.add(createSv);
+						showCreate();
 					}
 				});
 				
 				changeSvButton.addClickHandler(new ClickHandler() {
 					public void onClick(ClickEvent event) {
-						this.add(changeSv);
+						showChange();
+					}
+				});
+				
+				/*deleteSvButton.addClickHandler(new ClickHandler() {
+					public void onClick(ClickEvent event) {
+						showDelete();
 					}
 				});*/
 				
 			}
 				
 			public void showWidget() {
-				
 				this.add(tabelleSv);
 				this.add(createSvButton);
 				this.add(changeSvButton);
 				this.add(deleteSvButton);
-				//this.add(changeSv);
-				//this.add(createSv);
-				//this.add(deleteSv);
 			}
+			
+			public void showCreate() {
+				this.clear();
+				this.add(createSv);
+			}
+			
+			public void showChange() {
+				this.clear();
+				this.add(changeSv);
+			}
+			
+			/*public void showDelete() {
+				this.clear();
+				this.add(deleteSv);
+			}*/
 			
 			
 			/**public Semesterverband updateFlexTable (Semesterverband result) {

@@ -68,9 +68,12 @@ public class ItProjekt implements EntryPoint {
 
 	public class ItProjekt implements EntryPoint {
 		
-		protected String getHeadlineText() {
+		/*protected String getHeadlineText() {
 			return "Herzlich Willkommen im Stundenplansystem der HdM";
-		}
+		}*/
+		
+		private final HTML ueberschrift = new HTML ("<h2>Herzlich Willkommen im Stundenplansystem der HdM<h2>");
+		
 		
 		/*
 	     * Ab hier bauen wir sukzessive den Navigator mit seinen Buttons aus.
@@ -113,6 +116,8 @@ public class ItProjekt implements EntryPoint {
 			mainPanel.addSouth(detailsPanel, 520);
 
 			RootPanel.get("ItProjektFrame").add(rlp);
+			
+			detailsPanel.add(ueberschrift);
 			
 			
 			/**RootLayoutPanel rlp = RootLayoutPanel.get();
@@ -249,11 +254,11 @@ public class ItProjekt implements EntryPoint {
 				}
 			});
 			
-			lehrveranstaltungButton.addClickHandler(new ClickHandler(){
+			lehrveranstaltungButton.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
-					LehrveranstaltungForm lf = new LehrveranstaltungForm();
+					LehrveranstaltungForm lv = new LehrveranstaltungForm();
 					detailsPanel.clear();
-					detailsPanel.add(lf);
+					detailsPanel.add(lv);
 				}
 			});
 			
