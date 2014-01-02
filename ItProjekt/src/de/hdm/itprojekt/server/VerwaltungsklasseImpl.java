@@ -2,8 +2,16 @@ package de.hdm.itprojekt.server;
 
 import java.util.Vector;
 
+import de.hdm.itprojekt.server.db.DozentMapper;
+import de.hdm.itprojekt.server.db.LehrveranstaltungMapper;
+import de.hdm.itprojekt.server.db.RaumMapper;
+import de.hdm.itprojekt.server.db.SemesterverbandMapper;
+import de.hdm.itprojekt.server.db.StundenplanMapper;
+import de.hdm.itprojekt.server.db.StundenplaneintragMapper;
+import de.hdm.itprojekt.server.db.ZeitslotMapper;
 import de.hdm.itprojekt.shared.Verwaltungsklasse;
 import de.hdm.itprojekt.shared.bo.*;
+
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -17,6 +25,20 @@ implements Verwaltungsklasse {
 	 * Standard StundenplaneintragID
 	 */
 	private static final long serialVersionUID = 7027992284251455305L;
+
+	private RaumMapper raumMapper = null;
+	
+	private DozentMapper dozentMapper = null;
+	
+	private LehrveranstaltungMapper lehrveranstaltungMapper = null;
+	
+	private SemesterverbandMapper semesterverbandMapper = null;
+	
+	private StundenplaneintragMapper stundenplaneintragMapper = null;
+	
+	private StundenplanMapper stundenplanMapper = null;
+	
+	private ZeitslotMapper zeitslotMapper = null;
 	
 	private Dozent dozent = null;
 	private Raum raum = null;
@@ -82,7 +104,68 @@ implements Verwaltungsklasse {
 	
 		return rVektor;
 	}
-
+	
+	
+	
+	/**
+	 * Auslesen aller Dozenten
+	 */
+	public Vector<Dozent> getAllDozenten() throws IllegalArgumentException {
+	    return this.dozentMapper.findAll();
+	  }
+	
+	
+	/**
+	 * Auslesen aller Räume
+	 */
+	
+	public Vector<Raum> getAllRaume() throws IllegalArgumentException {
+	    return this.raumMapper.findAll();
+	  }
+	
+	
+	/**
+	 * Auslesen aller Lehrveranstaltungen
+	 */
+	public Vector<Lehrveranstaltung> getAllLehrveranstaltungen() throws IllegalArgumentException {
+	    return this.lehrveranstaltungMapper.findAll();
+	  }
+	
+	
+	
+	/**
+	 * Auslesen aller Semesterverbände
+	 */
+	
+	public Vector<Semesterverband> getAllSemsterverbaende() throws IllegalArgumentException {
+	    return this.semesterverbandMapper.findAll();
+	  }
+	
+	/**
+	 * Auslesen aller Zeitslots
+	 */
+	
+	public Vector<Zeitslot> getAllZeitslots() throws IllegalArgumentException {
+	    return this.zeitslotMapper.findAll();
+	  }
+	
+	/**
+	 * Auslesen aller Stundenpläne
+	 */
+	
+	public Vector<Stundenplan> getAllStundenplaene() throws IllegalArgumentException {
+	    return this.stundenplanMapper.findAll();
+	  }
+	
+	/**
+	 * Auslesen aller Stundenplaneinträge
+	 */
+	
+	public Vector<Stundenplaneintrag> getAllStundenplaneintraege() throws IllegalArgumentException {
+	    return this.stundenplaneintragMapper.findAll();
+	  }
+	
+	
 	public Dozent createDozent(String vorname, String nachname)
 			throws IllegalArgumentException {
 		Dozent a = new Dozent();
@@ -141,7 +224,7 @@ implements Verwaltungsklasse {
 		Stundenplaneintrag s = new Stundenplaneintrag();
 		
 		s.setDozentId(d.getId());
-		s.setLehrveranstaltungsId(l.getId());
+		s.setLehrveranstaltungId(l.getId());
 		s.setRaumId(r.getId());
 		s.setZeitslotId(z.getId());
 		s.setSemesterverbandId(sv.getId());
@@ -185,7 +268,7 @@ implements Verwaltungsklasse {
 
 	public void deleteDozent(Dozent d) throws IllegalArgumentException {
 		
-		Vector<Dozent> dozenten = this.getStundenplaneintragOf(d);
+		Vector<Stundenplaneintrag> dozenten = this.getAllStundenplaneintragOf(d);
 
 		    if (dozenten != null) {
 		    	//Bildschirmmeldung: Dozent kann nicht geloescht werden, da noch Stundenplaneintrï¿½ï¿½ge
