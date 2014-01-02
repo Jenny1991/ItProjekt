@@ -54,7 +54,7 @@ public class DozentForm extends Content {
 	final Button changeDozentButton = new Button("Dozent bearbeiten");
 	final Button deleteDozentButton = new Button("Dozent löschen");
 	
-	final CreateDozent2 createD = new CreateDozent2();
+	final CreateDozent createD = new CreateDozent();
 	final ChangeDozent changeD = new ChangeDozent();
 	//final DeleteDozent deleteD = new DeleteDozent();
 	

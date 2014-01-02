@@ -1,10 +1,13 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -26,18 +29,21 @@ import de.hdm.itprojekt.client.gui.DozentForm;
 
 public class CreateDozent extends Content {
 	
-	/*private VerticalPanel vPanel = new VerticalPanel ();
+	private final HTML ueberschrift = new HTML ("<h2>Neuen Dozenten anlegen<h2>");
+	
+	/** Brauchen wir nicht
+	 * private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
 	private HorizontalPanel hoPanel = new HorizontalPanel ();*/
+	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 	
 	  /**
 	   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
-	   * Diese ist durch die Methode #getHeadlineText() zu erstellen.
-	   */
+		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   */
 	
-	  protected String getHeadlineText() {
+	  /*protected String getHeadlineText() {
 	    return "Dozent anlegen";
-	  }
+	  }*/
 
 	  /**
 	   * Unter der �berschrift tr�gt der User die Daten des neuen Dozenten ein. 
@@ -46,8 +52,7 @@ public class CreateDozent extends Content {
 	  final Label lbnachname = new Label ("Nachname");
 	  final TextBox tbvorname = new TextBox ();
 	  final TextBox tbnachname = new TextBox ();
-	  final Button speichern = new Button ("speichern");
-	  Dozent d;	  
+	  final Button speichern = new Button ("speichern"); 
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 
 	  /**
@@ -55,7 +60,10 @@ public class CreateDozent extends Content {
 	  */
 	  public void onLoad () {
 
-			  /*hPanel.add(lbnachname);
+		  this.add(ueberschrift);
+		  
+		  /** Panels werden durch this. ersetzt
+		   * hPanel.add(lbnachname);
 			  hPanel.add(tbnachname);
 			  hoPanel.add(lbvorname);
 			  hoPanel.add(tbvorname);
@@ -63,76 +71,66 @@ public class CreateDozent extends Content {
 			  vPanel.add(hoPanel);
 			  vPanel.add(speichern);
 			  
-			  RootPanel.get("detailsPanel").add(vPanel); */
-		  
+			  RootPanel.get("detailsPanel").add(vPanel); 
+			  */
 		  this.add(lbnachname);
 		  this.add(tbnachname);
 		  this.add(lbvorname);
 		  this.add(tbvorname);
+		 // vPanel.add(hPanel);
+		 // vPanel.add(hoPanel);
 		  this.add(speichern);
+		  
 			  
 				  speichern.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
-					  boolean allFilled = true;
-					  if (tbnachname.getText().isEmpty());
-					  if (tbvorname.getText().isEmpty());
-					  {	allFilled = false;
-					  Window.alert ("Bitte f�llen Sie alle Felder aus."); }
-					  
-					  if (allFilled == true) { 
-					  d = new Dozent();
-					  d.setNachname(tbnachname.getText().trim());
-					  d.setVorname(tbvorname.getText().trim());
-					  tbnachname.setFocus(true);
-					  tbvorname.setFocus(true);
-					  
-					  /*Kapier ich nicht ganz --> Nachschauen:Callabck und AsyncCallback
-					   * Lui und Domi m�ssen noch addDozent im Async anlegen
-					   */
-					  verwaltungsSvc.addDozent (d, new AsyncCallback<Dozent>() {
-					  
-					  @Override
-					  public void onFailure (Throwable caught) {
-						  Window.alert("Der Dozent konnte nicht angelegt werden.");
-					  }
-
-					  @Override
-					  public void onSuccess(Dozent result) {
-						  tbnachname.setText("");
-						  tbvorname.setText("");
-						  Window.alert ("Erfolgreich gespeichert.");
-					  }
-					});
+					  addDozent();
 				  }
-			  	}
-			  });
-	  }
-	  
-	  
-	  /*
-	   * Wir nutzen eine Nested Class zum Aufruf des Service, um den neuen Dozenten zu erhalten
-	  */
-	  
-	  private void refreshDozentForm () {
-		 
-		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-	
-		  AsyncCallback<Dozent> callback = new  AsyncCallback<Dozent> () {
+				  
+				  private void addDozent () {	
+					  boolean allFilled = true;
+				  
+					  if (tbnachname.getText().isEmpty());
+					  if (tbvorname.getText().isEmpty()); {	
+						  allFilled = false;
+					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+					  
+					  if (allFilled == true) {					
+						  final String nachname = tbnachname.getText().trim();
+						  final String vorname = tbvorname.getText().trim();
+						  tbnachname.setFocus(true);
+						  tbvorname.setFocus(true);
+						  
+						  if (dozent.contains(vorname))
+							  return;
+						  if (dozent.contains(nachname))
+							  return;
+						  
+						  if (verwaltungsSvc == null) {
+							 // verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+						  }
+					
+						 verwaltungsSvc.createDozent(dozent, new AsyncCallback<ArrayList<Dozent>>() {
 
-			  @Override
-			  public void onFailure(Throwable caught) {
-			  }
+							  @Override
+							  public void onFailure (Throwable caught) {
+								  Window.alert("Der Dozent konnte nicht angelegt werden.");
+							  }
 
-			  @Override
-			  public void onSuccess(Dozent result) {
-				  updateFlexTable(result);
-				  /*Methode muss von Verena gemacht werden --> aktualisiert die Tabellen der FlexTable*/
-			  }		
-			};
-			verwaltungsSvc.createDozent(d.getVorname(), d.getNachname(), callback);
+							  @Override
+							  public void onSuccess(ArrayList<Dozent> result) {
+								  tbnachname.setText("");
+								  tbvorname.setText("");
+								  Window.alert ("Erfolgreich gespeichert.");
+							  } 	
+							});
+							//verwaltungsSvc.createDozent(dozent.toArray(new String [0]), callback);
+					  }
+				  }
+				  });
 	  }
-	  
-}
+}  
+			  	
 		
 
 
