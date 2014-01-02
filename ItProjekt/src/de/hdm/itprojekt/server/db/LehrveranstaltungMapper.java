@@ -12,8 +12,8 @@ import de.hdm.itprojekt.shared.bo.*;
  * gelöscht werden können. Das Mapping ist bidirektional. D.h., Objekte können
  * in DB-Strukturen und DB-Strukturen in Objekte umgewandelt werden.
  * 
- * @see DozentMapper, RaumMapper, SemesterverbandMapper, StundenplaneintragMapper, 
- * StundenplanMapper, ZeitslotMapper
+ * @see DozentMapper, RaumMapper, SemesterverbandMapper, StudiengangMapper, 
+ * StundenplaneintragMapper, StundenplanMapper, ZeitslotMapper
  * @author Schmieder, Thies
  */
 public class LehrveranstaltungMapper {

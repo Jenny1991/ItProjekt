@@ -13,7 +13,7 @@ import de.hdm.itprojekt.shared.bo.*;
  * in DB-Strukturen und DB-Strukturen in Objekte umgewandelt werden.
  * 
  * @see DozentMapper, LehrveranstaltungMapper, SemesterverbandMapper,
- * StundenplaneintragMapper, StundenplanMapper, ZeitslotMapper
+ * StudiengangMapper, StundenplaneintragMapper, StundenplanMapper, ZeitslotMapper
  * @author Schmieder, Thies
  */
 public class RaumMapper {
