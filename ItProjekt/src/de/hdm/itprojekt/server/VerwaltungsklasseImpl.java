@@ -330,7 +330,7 @@ implements Verwaltungsklasse {
 
 	public Semesterverband changeSemsterverband(Semesterverband sv)
 			throws IllegalArgumentException {
-		this.semesterverbandMapper.update(s);
+		this.semesterverbandMapper.update(sv);
 		return null;
 	}
 
