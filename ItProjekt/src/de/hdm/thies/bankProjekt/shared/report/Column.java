@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * Spalte eines <code>Row</code>-Objekts. <code>Column</code>-Objekte
- * implementieren das <code>Serializable</code>-Interface und können daher als
- * Kopie z.B. vom Server an den Client übertragen werden.
+ * implementieren das <code>Serializable</code>-Interface und k??nnen daher als
+ * Kopie z.B. vom Server an den Client ??bertragen werden.
  * 
  * @see Row
  * @author Thies
@@ -26,7 +26,7 @@ public class Column implements Serializable {
   /**
    * <p>
    * Serialisierbare Klassen, die mittels GWT-RPC transportiert werden sollen,
-   * müssen einen No-Argument-Konstruktor besitzen. Ist kein Konstruktor
+   * m??ssen einen No-Argument-Konstruktor besitzen. Ist kein Konstruktor
    * explizit angegeben, so existiert in Java-Klassen der Default-Konstruktor,
    * der dem No-Argument-Konstruktor entspricht.
    * </p>
@@ -34,7 +34,7 @@ public class Column implements Serializable {
    * Besitzt eine Klasse mind. einen explizit implementierten Konstruktor, so
    * gelten nur diese explizit implementierten Konstruktoren. Der
    * Default-Konstruktor gilt dann nicht. Wenn wir in einer solchen Situation
-   * aber dennoch einen No-Argument-Konstruktor benötigen, müssen wir diesen wie
+   * aber dennoch einen No-Argument-Konstruktor ben??tigen, m??ssen wir diesen wie
    * in diesem Beispiel explizit implementieren.
    * </p>
    * 
@@ -64,7 +64,7 @@ public class Column implements Serializable {
   }
 
   /**
-   * Überschreiben des aktuellen Spaltenwerts.
+   * ??berschreiben des aktuellen Spaltenwerts.
    * 
    * @param value neuer Spaltenwert
    */

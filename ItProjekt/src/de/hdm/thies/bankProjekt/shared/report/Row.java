@@ -5,8 +5,8 @@ import java.util.Vector;
 
 /**
  * Zeile einer Tabelle eines <code>SimpleReport</code>-Objekts. <code>Row</code>
- * -Objekte implementieren das <code>Serializable</code>-Interface und können
- * daher als Kopie z.B. vom Server an den Client übertragen werden.
+ * -Objekte implementieren das <code>Serializable</code>-Interface und k??nnen
+ * daher als Kopie z.B. vom Server an den Client ??bertragen werden.
  * 
  * @see SimpleReport
  * @see Column
@@ -19,12 +19,12 @@ public class Row implements Serializable {
    */
   private static final long serialVersionUID = 1L;
   /**
-   * Speicherplatz für die Spalten der Zeile.
+   * Speicherplatz f??r die Spalten der Zeile.
    */
   private Vector<Column> columns = new Vector<Column>();
 
   /**
-   * Hinzufügen einer Spalte.
+   * Hinzuf??gen einer Spalte.
    * 
    * @param c das Spaltenobjekt
    */
@@ -42,16 +42,16 @@ public class Row implements Serializable {
   }
 
   /**
-   * Auslesen sämtlicher Spalten.
+   * Auslesen s??mtlicher Spalten.
    * 
-   * @return <code>Vector</code>-Objekts mit sämtlichen Spalten
+   * @return <code>Vector</code>-Objekts mit s??mtlichen Spalten
    */
   public Vector<Column> getColumns() {
     return this.columns;
   }
 
   /**
-   * Auslesen der Anzahl sämtlicher Spalten.
+   * Auslesen der Anzahl s??mtlicher Spalten.
    * 
    * @return int Anzahl der Spalten
    */
@@ -64,7 +64,7 @@ public class Row implements Serializable {
    * 
    * @param i der Index der auszulesenden Spalte (0 <= i < n), mit n = Anzahl
    *          der Spalten.
-   * @return das gewünschte Spaltenobjekt.
+   * @return das gew??nschte Spaltenobjekt.
    */
   public Column getColumnAt(int i) {
     return this.columns.elementAt(i);

@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * <p>
  * Basisklasse aller Reports. Reports sind als <code>Serializable</code>
- * deklariert, damit sie von dem Server an den Client gesendet werden können.
+ * deklariert, damit sie von dem Server an den Client gesendet werden k??nnen.
  * Der Zugriff auf Reports erfolgt also nach deren Bereitstellung lokal auf dem
  * Client.
  * </p>
@@ -27,8 +27,8 @@ public abstract class Report implements Serializable {
 
   /**
    * Ein kleines Impressum, das eine Art Briefkopf darstellt. Jedes Unternehmen
-   * einige Daten wie Firmenname, Adresse, Logo, etc. auf Geschäftsdokumenten
-   * ab. Dies gilt auch für die hier realisierten Reports.
+   * einige Daten wie Firmenname, Adresse, Logo, etc. auf Gesch??ftsdokumenten
+   * ab. Dies gilt auch f??r die hier realisierten Reports.
    */
   private Paragraph imprint = null;
 
@@ -113,7 +113,7 @@ public abstract class Report implements Serializable {
   /**
    * Setzen des Erstellungsdatums. <b>Hinweis:</b> Der Aufruf dieser Methoden
    * ist nicht unbedingt erforderlich, da jeder Report bei seiner Erstellung
-   * automatisch den aktuellen Zeitpunkt festhält.
+   * automatisch den aktuellen Zeitpunkt festh??lt.
    * 
    * @param created Zeitpunkt der Erstellung
    */
