@@ -26,12 +26,12 @@ import de.hdm.itprojekt.client.gui.DozentForm;
 
 public class CreateDozent extends Content {
 	
-	private VerticalPanel vPanel = new VerticalPanel ();
+	/*private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
-	private HorizontalPanel hoPanel = new HorizontalPanel ();
+	private HorizontalPanel hoPanel = new HorizontalPanel ();*/
 	
 	  /**
-	   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
+	   * Jede Klasse enthï¿½t eine ï¿½berschrift, die definiert, was der User machen kann.
 	   * Diese ist durch die Methode #getHeadlineText() zu erstellen.
 	   */
 	
@@ -40,7 +40,7 @@ public class CreateDozent extends Content {
 	  }
 
 	  /**
-	   * Unter der Überschrift trägt der User die Daten des neuen Dozenten ein. 
+	   * Unter der ï¿½berschrift trï¿½gt der User die Daten des neuen Dozenten ein. 
 	   */
 	  final Label lbvorname = new Label ("Vorname"); 
 	  final Label lbnachname = new Label ("Nachname");
@@ -55,7 +55,7 @@ public class CreateDozent extends Content {
 	  */
 	  public void onLoad () {
 
-			  hPanel.add(lbnachname);
+			  /*hPanel.add(lbnachname);
 			  hPanel.add(tbnachname);
 			  hoPanel.add(lbvorname);
 			  hoPanel.add(tbvorname);
@@ -63,7 +63,13 @@ public class CreateDozent extends Content {
 			  vPanel.add(hoPanel);
 			  vPanel.add(speichern);
 			  
-			  RootPanel.get("detailsPanel").add(vPanel); 
+			  RootPanel.get("detailsPanel").add(vPanel); */
+		  
+		  this.add(lbnachname);
+		  this.add(tbnachname);
+		  this.add(lbvorname);
+		  this.add(tbvorname);
+		  this.add(speichern);
 			  
 				  speichern.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
@@ -71,7 +77,7 @@ public class CreateDozent extends Content {
 					  if (tbnachname.getText().isEmpty());
 					  if (tbvorname.getText().isEmpty());
 					  {	allFilled = false;
-					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+					  Window.alert ("Bitte fï¿½llen Sie alle Felder aus."); }
 					  
 					  if (allFilled == true) { 
 					  d = new Dozent();
@@ -81,7 +87,7 @@ public class CreateDozent extends Content {
 					  tbvorname.setFocus(true);
 					  
 					  /*Kapier ich nicht ganz --> Nachschauen:Callabck und AsyncCallback
-					   * Lui und Domi müssen noch addDozent im Async anlegen
+					   * Lui und Domi mï¿½ssen noch addDozent im Async anlegen
 					   */
 					  verwaltungsSvc.addDozent (d, new AsyncCallback<Dozent>() {
 					  

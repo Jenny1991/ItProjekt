@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -30,22 +31,25 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 
 	public class CreateZeitslot extends Content {
 		
-		private VerticalPanel vPanel = new VerticalPanel ();
+		private final HTML ueberschrift = new HTML ("<h2>Neuen Zeitslot anlegen<h2>");
+		
+		
+		/*private VerticalPanel vPanel = new VerticalPanel ();
 		private HorizontalPanel hPanel = new HorizontalPanel ();
 		private HorizontalPanel hoPanel = new HorizontalPanel ();
-		private HorizontalPanel horPanel = new HorizontalPanel ();
+		private HorizontalPanel horPanel = new HorizontalPanel ();*/
 		private ArrayList<Zeitslot> zeitslot = new ArrayList<Zeitslot> ();
 		
 		  /**
-		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
+		   * Jede Klasse enthï¿½t eine ï¿½berschrift, die definiert, was der User machen kann.
 		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.		   */
 		  
-		  protected String getHeadlineText() {
+		  /*protected String getHeadlineText() {
 		    return "Zeitslot anlegen";
-		  }
+		  }*/
 
 		  /**
-		   * Unter der Überschrift trägt der User die Daten des neuen Zeitslots ein. 
+		   * Unter der ï¿½berschrift trï¿½gt der User die Daten des neuen Zeitslots ein. 
 		   */
 		  final Label lbwochentag = new Label ("Wochentag"); 
 		  final Label lbanfangszeit = new Label ("Anfangszeit");
@@ -61,7 +65,7 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 		  */
 		  public void onLoad () {
 
-				  hPanel.add(lbwochentag);
+				  /*hPanel.add(lbwochentag);
 				  hPanel.add(tbwochentag);
 				  hoPanel.add(lbanfangszeit);
 				  hoPanel.add(tbanfangszeit);
@@ -72,7 +76,17 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 				  vPanel.add(horPanel);
 				  vPanel.add(speichern);
 				  
-				  RootPanel.get("detailsPanel").add(vPanel); 
+				  RootPanel.get("detailsPanel").add(vPanel); */
+			  
+			  this.add(ueberschrift);
+			  
+			  this.add(lbwochentag);
+			  this.add(tbwochentag);
+			  this.add(lbanfangszeit);
+			  this.add(tbanfangszeit);
+			  this.add(lbendzeit);
+			  this.add(tbendzeit);
+			  this.add(speichern);
 				  
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
@@ -86,7 +100,7 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 						  if (tbanfangszeit.getText().isEmpty());
 						  if (tbendzeit.getText().isEmpty());
 						  {	allFilled = false;
-						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+						  Window.alert ("Bitte fÃ¼llen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) { 
 							  final String wochentag = tbwochentag.getText().trim();
@@ -104,7 +118,7 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 								  return;
 							  
 							  if (verwaltungsSvc == null) {
-								  verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+								 // verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 							  }
 						
 							  AsyncCallback<Zeitslot> callback = new  AsyncCallback<Zeitslot> () {
@@ -118,12 +132,12 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 								  public void onSuccess(Zeitslot result) {
 									  
 									  tbwochentag.setText("");
-									  tbanfangszeit.setVisibleLength(anfangszeit);
-									  tbendzeit.setVisibleLength(endzeit);
+									 // tbanfangszeit.setVisibleLength(anfangszeit);
+									  //tbendzeit.setVisibleLength(endzeit);
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								};
-								verwaltungsSvc.createZeitslot(zeitslot.toArray(new String [0]), callback);
+								//verwaltungsSvc.createZeitslot(zeitslot.toArray(new String [0]), callback);
 						  }
 					  }
 					  });

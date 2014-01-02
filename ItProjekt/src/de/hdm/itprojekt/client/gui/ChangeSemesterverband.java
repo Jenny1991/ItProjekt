@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -21,25 +22,27 @@ import de.hdm.itprojekt.shared.bo.Semesterverband;
 
 public class ChangeSemesterverband extends Content {
 
-	private VerticalPanel vPanel = new VerticalPanel ();
+	private final HTML ueberschrift = new HTML ("<h2>Semesterverband bearbeiten<h2>");
+	
+	/*private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
 	private HorizontalPanel hoPanel = new HorizontalPanel ();
 	private HorizontalPanel horPanel = new HorizontalPanel ();
-	private HorizontalPanel hrPanel = new HorizontalPanel ();
+	private HorizontalPanel hrPanel = new HorizontalPanel ();*/
 	
 	Semesterverband shownSv = null;
 	private ArrayList<Semesterverband> sv = new ArrayList<Semesterverband> ();
 
 	  /**
-	   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
+	   * Jede Klasse enthï¿½t eine ï¿½berschrift, die definiert, was der User machen kann.
 	   * Diese ist durch die Methode #getHeadlineText() zu erstellen.		   */
 	  
-	protected String getHeadlineText() {
+	/*protected String getHeadlineText() {
 	    return "Semesterverband bearbeiten";
-	  }
+	  }*/
 
 	  /**
-	   * Unter der Überschrift trägt der User die neuen Daten des Semesterverbands ein. 
+	   * Unter der ï¿½berschrift trï¿½gt der User die neuen Daten des Semesterverbands ein. 
 	   */
 	  final Label lbjahrgang = new Label ("Jahrgang"); 
 	  final Label lbstudiengang = new Label ("Studiengang");
@@ -58,14 +61,27 @@ public class ChangeSemesterverband extends Content {
 	  */
 	  public void onLoad () {
 		  
+		  this.add(ueberschrift);
+		  
+		  this.add(lbjahrgang);
+		  this.add(tbjahrgang);
+		  this.add(lbstudiengang);
+		  this.add(tbstudiengang);
+		  this.add(lbsemester);
+		  this.add(tbsemester);
+		  this.add(lbanzahl);
+		  this.add(tbanzahl);
+		  this.add(bearbeiten);
+		  
+		  
 		  bearbeiten.addClickHandler(new ClickHandler(){
 			  public void onClick(ClickEvent event) {			
 					if (shownSv!=null){
 						shownSv.setJahrgang(tbjahrgang.getText());
-						shownSv.setBezeichnung(tbstudiengang.getText());
+						//shownSv.setBezeichnung(tbstudiengang.getText());
 						shownSv.setSemester(tbsemester.getVisibleLength());
 						shownSv.setStudierendenAnzahl(tbanzahl.getVisibleLength());
-						verwaltungsSvc.getSemesterverband(shownSv, new AsyncCallback<Semesterverband>() {
+						/*verwaltungsSvc.getSemesterverband(shownSv, new AsyncCallback<Semesterverband>() {
 								 @Override
 								  public void onFailure (Throwable caught) {
 								  }
@@ -80,12 +96,14 @@ public class ChangeSemesterverband extends Content {
 									  emptyWidget();
 									  changeSelctedSemesterverband();											  
 								  }
-							  });
+							  });*/
 					  }
 			  }
 
 		  public void changeSelctedSemesterverband(){
-			  hPanel.add(lbjahrgang);
+			  
+			  showWidget();
+			  /*hPanel.add(lbjahrgang);
 			  hPanel.add(tbjahrgang);
 			  hoPanel.add(lbstudiengang);
 			  hoPanel.add(tbstudiengang);
@@ -98,7 +116,7 @@ public class ChangeSemesterverband extends Content {
 			  vPanel.add(horPanel);
 			  vPanel.add(speichern);
 			  
-			  RootPanel.get("detailsPanel").add(vPanel); 
+			  RootPanel.get("detailsPanel").add(vPanel); */
 
 			  speichern.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
@@ -113,7 +131,7 @@ public class ChangeSemesterverband extends Content {
 					  if (tbstudiengang.getText().isEmpty());
 					  if (tbsemester.getText().isEmpty()); 
 					  { allFilled = false;
-					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+					  Window.alert ("Bitte fÃ¼llen Sie alle Felder aus."); }
 					  
 					  if (allFilled == true) { 
 						  final String jahrgang = tbjahrgang.getText().trim();
@@ -135,7 +153,7 @@ public class ChangeSemesterverband extends Content {
 							  return;
 						  
 						  if (verwaltungsSvc == null) {
-							  verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+							  //verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 						  }
 					
 						  AsyncCallback<Void> callback = new  AsyncCallback<Void> () {
@@ -155,7 +173,7 @@ public class ChangeSemesterverband extends Content {
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							};
-							verwaltungsSvc.changeSemesterverband(sv.toArray(new String [0]), callback);
+							//verwaltungsSvc.changeSemesterverband(sv.toArray(new String [0]), callback);
 					  }
 				  }
 				  });
@@ -167,6 +185,18 @@ public class ChangeSemesterverband extends Content {
 
 							  });
 					  }
+	  
+	  public void showWidget() {
+		  this.add(lbjahrgang);
+		  this.add(tbjahrgang);
+		  this.add(lbstudiengang);
+		  this.add(tbstudiengang);
+		  this.add(lbsemester);
+		  this.add(tbsemester);
+		  this.add(lbanzahl);
+		  this.add(tbanzahl);
+		  this.add(speichern);
+	  }
 			}
 		  
 

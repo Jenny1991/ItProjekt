@@ -2,11 +2,14 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.ArrayList;
 
+
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -28,21 +31,24 @@ import de.hdm.itprojekt.client.gui.StudiengangForm;
  */
 
 public class CreateStudiengang extends Content {
+	
+	private final HTML ueberschrift = new HTML ("<h2>Neuen Studiengang anlegen<h2>");
+	
 
-	private VerticalPanel vPanel = new VerticalPanel ();
-	private HorizontalPanel hPanel = new HorizontalPanel ();
+	/*private VerticalPanel vPanel = new VerticalPanel ();
+	private HorizontalPanel hPanel = new HorizontalPanel ();*/
 	private ArrayList<Studiengang> sg = new ArrayList<Studiengang> ();
 
 	  /**
-	   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
+	   * Jede Klasse enthï¿½t eine ï¿½berschrift, die definiert, was der User machen kann.
 		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   */
 	  
-	protected String getHeadlineText() {
+	/*protected String getHeadlineText() {
 	    return "Studiengang anlegen";
-	  }
+	  }*/
 
 	  /**
-	   * Unter der Überschrift trägt der User die Daten des neuen Studiengangs ein. 
+	   * Unter der ï¿½berschrift trï¿½gt der User die Daten des neuen Studiengangs ein. 
 	   */
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final TextBox tbbezeichnung = new TextBox ();
@@ -54,12 +60,18 @@ public class CreateStudiengang extends Content {
 	  */
 	  public void onLoad () {
 
-			  hPanel.add(lbbezeichnung);
+		  this.add(ueberschrift);
+			  /*hPanel.add(lbbezeichnung);
 			  hPanel.add(tbbezeichnung);
 			  vPanel.add(hPanel);
 			  vPanel.add(speichern);
 			  
-			  RootPanel.get("detailsPanel").add(vPanel); 
+			  RootPanel.get("detailsPanel").add(vPanel); */
+		  	
+		  	this.add(lbbezeichnung);
+		  	this.add(tbbezeichnung);
+		  	this.add(speichern);
+		  	
 			    
 			  speichern.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
@@ -71,7 +83,7 @@ public class CreateStudiengang extends Content {
 					  
 					  if (tbbezeichnung.getText().isEmpty());
 					  {	allFilled = false;
-					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+					  Window.alert ("Bitte fÃ¼llen Sie alle Felder aus."); }
 					  
 					  if (allFilled == true) { 
 						  final String bezeichnung = tbbezeichnung.getText().trim();
@@ -81,7 +93,7 @@ public class CreateStudiengang extends Content {
 							  return;
 						  
 						  if (verwaltungsSvc == null) {
-							  verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+							 // verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 						  }
 					
 						  AsyncCallback<Studiengang> callback = new  AsyncCallback<Studiengang> () {
@@ -97,7 +109,7 @@ public class CreateStudiengang extends Content {
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							};
-							verwaltungsSvc.createStudiengang(sg.toArray(new String [0]), callback);
+							//verwaltungsSvc.createStudiengang(sg.toArray(new String [0]), callback);
 					  }
 				  }
 				  });
