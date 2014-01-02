@@ -105,13 +105,14 @@ public class StundenplaneintragMapper {
   }
 
   /**
-   * Auslesen aller Stundenplaneinträge.
+   * Auslesen aller Stundenplaneinträge nach einem bestimmten Dozenten, sortiert nach der Anfangszeit.
    * 
    * @return Ein Vektor mit Stundenplaneintrag-Objekten, die sämtliche Stundenplaneinträge
-   *         repräsentieren. Bei evtl. Exceptions wird ein partiell gefüllter
+   *         repräsentieren, die dem übergebenen Dozenten zugeordnet sind und nach der Anfangszeit 
+   *         im Zeitslot sortiert sind. Bei evtl. Exceptions wird ein partiell gefüllter
    *         oder ggf. auch leerer Vetor zurückgeliefert.
    */
-  public Vector<Stundenplaneintrag> findByDozentOrderByAnfangszeit() {
+  public Vector<Stundenplaneintrag> findByDozentOrderByAnfangszeit(int dozentid) {
     Connection con = DBConnection.connection();
 
     // Ergebnisvektor vorbereiten
@@ -122,9 +123,68 @@ public class StundenplaneintragMapper {
 
       ResultSet rs = stmt.executeQuery("SELECT stundenplaneintrag.id, stundenplaneintrag.dozentId, stundenplaneintrag.raumId, stundenplaneintrag.zeitslotId, "
     	+ "stundenplaneintrag.semesterverbandId, stundenplaneintrag.lehrveranstaltungId, "
-    	+ "FROM stundenplaneintrag, stundenplaneintragzeitslot, dozent, zeitslot "
-    	+ "INNER JOIN stundenplaneintrag ON "
-        + " ORDER BY id");
+    	+ "FROM stundenplaneintrag"
+    	+ "INNER JOIN ( "
+    	+ "stundenplaneintragzeitslot "
+    	+ "INNER JOIN "
+    	+ "zeitslot "
+    	+ "ON "
+    	+ "zeitslot.id = stundenplaneintragzeitslot.zeitslotid) "
+    	+ "ON "
+    	+ "stundenplaneintrag.zeitslotid = stundenplaneintragzeitslot.zeitslotid "
+    	+ "WHERE "
+    	+ "stundenplaneintrag.dozentid =  " + dozentid
+    	+ "ORDER BY zeitslot.anfangszeit");
+
+      // Für jeden Eintrag im Suchergebnis wird nun ein Stundenplaneintrag-Objekt erstellt.
+      while (rs.next()) {
+        Stundenplaneintrag s = new Stundenplaneintrag();
+        s.setId(rs.getInt("id"));
+        s.setDozentId(rs.getInt("dozentId"));
+        s.setRaumId(rs.getInt("raumId"));
+        s.setZeitslotId(rs.getInt("zeitslotId"));
+        s.setSemesterverbandId(rs.getInt("semesterverbandId"));
+        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungId"));
+
+        // Hinzufügen des neuen Objekts zum Ergebnisvektor
+        result.addElement(s);
+      }
+    }
+    catch (SQLException e2) {
+      e2.printStackTrace();
+    }
+
+    // Ergebnisvektor zurückgeben
+    return result;
+  }
+  
+  /**
+   * Auslesen aller Stundenplaneinträge nach einem bestimmten Dozenten, sortiert nach der Anfangszeit.
+   * 
+   * @return Ein Vektor mit Stundenplaneintrag-Objekten, die sämtliche Stundenplaneinträge
+   *         repräsentieren, die dem übergebenen Dozenten zugeordnet sind und nach der Anfangszeit 
+   *         im Zeitslot sortiert sind. Bei evtl. Exceptions wird ein partiell gefüllter
+   *         oder ggf. auch leerer Vetor zurückgeliefert.
+   */
+  public Vector<Stundenplaneintrag> findByRaumOrderByAnfangszeit(int raumid) {
+    Connection con = DBConnection.connection();
+
+    // Ergebnisvektor vorbereiten
+    Vector<Stundenplaneintrag> result = new Vector<Stundenplaneintrag>();
+
+    try {
+      Statement stmt = con.createStatement();
+
+      ResultSet rs = stmt.executeQuery("SELECT stundenplaneintrag.id, stundenplaneintrag.dozentId, stundenplaneintrag.raumId, stundenplaneintrag.zeitslotId, "
+    	+ "stundenplaneintrag.semesterverbandId, stundenplaneintrag.lehrveranstaltungId, "
+    	+ "FROM stundenplaneintrag"
+    	+ "INNER JOIN "
+    	+ "zeitslot "
+    	+ "ON "
+    	+ "zeitslot.id = stundenplaneintragzeitslot.zeitslotid) "
+    	+ "WHERE "
+    	+ "stundenplaneintrag.raumid =  " + raumid
+    	+ "ORDER BY zeitslot.anfangszeit");
 
       // Für jeden Eintrag im Suchergebnis wird nun ein Stundenplaneintrag-Objekt erstellt.
       while (rs.next()) {
