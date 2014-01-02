@@ -68,6 +68,7 @@ implements Verwaltungsklasse {
 		this.semesterverband = semesterverband;
 	}
 
+
 	public VerwaltungsklasseImpl() throws IllegalArgumentException {
 		
 	  }
@@ -273,7 +274,7 @@ implements Verwaltungsklasse {
 		    if (dozenten != null) {
 		    	//Bildschirmmeldung: Dozent kann nicht geloescht werden, da noch Stundenplaneintr��ge
 		    } else {
-		 //   	this.DozentMapper.delete(d);
+		   	this.dozentMapper.delete(d);
 		    }
 	}
 	
@@ -306,41 +307,41 @@ implements Verwaltungsklasse {
 	}
 
 	public Dozent changeDozent(Dozent d) throws IllegalArgumentException {
-		// this.DozentMapper.update(d);
+		 this.dozentMapper.update(d);
 		return null;
 	}
 
 	public Stundenplaneintrag changeStundenplaneintrag(Stundenplaneintrag s)
 			throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		this.stundenplaneintragMapper.update(s);
 		return null;
 	}
 
 	public Lehrveranstaltung changeLehrveranstaltung(Lehrveranstaltung l)
 			throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		this.lehrveranstaltungMapper.update(l);
 		return null;
 	}
 
 	public Raum changeRaum(Raum r) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		this.raumMapper.update(r);
 		return null;
 	}
 
 	public Semesterverband changeSemsterverband(Semesterverband sv)
 			throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		this.semesterverbandMapper.update(sv);
 		return null;
 	}
 
 	public Studiengang changeStudiengang(Studiengang s)
 			throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		//this.studiengangMapper.update(s)
 		return null;
 	}
 
 	public Zeitslot changeZeitslot(Zeitslot z) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		this.zeitslotMapper.update(z);
 		return null;
 	}
 

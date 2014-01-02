@@ -12,6 +12,7 @@ public class Stundenplaneintrag extends BusinessObjekt {
 	private Raum raum;
 	private Zeitslot zeitslot;
 	private Semesterverband semesterverband;
+	private Studiengang studiengang;
 	
 	public Stundenplaneintrag(){
 	}
@@ -95,6 +96,14 @@ public class Stundenplaneintrag extends BusinessObjekt {
 
 	public void setSemesterverband(Semesterverband semesterverband) {
 		this.semesterverband = semesterverband;
+	}
+	
+	public int getStudiengangId(){
+		return this.studiengang.getId();
+	}
+	
+	public void setStudiengangId(int id){
+		this.studiengang.setId(id);
 	}
 	
 	public String toString(){
