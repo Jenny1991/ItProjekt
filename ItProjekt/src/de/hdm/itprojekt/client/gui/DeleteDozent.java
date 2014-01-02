@@ -26,7 +26,8 @@ import de.hdm.itprojekt.shared.bo.Dozent;
 public class DeleteDozent extends Content {
 	
 	private final HTML ueberschrift = new HTML ("<h2>Dozent löschen<h2>");
-
+	
+	Dozent d;
 	Dozent shownDozent = null;
 	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 	
@@ -45,34 +46,35 @@ public class DeleteDozent extends Content {
 	  * Anordnen der Buttons und Labels auf den Panels
 	  */
 	  public void onLoad () {
-
-		  this.add(ueberschrift);
-		  this.add(lbnachname);
-		  this.add(tbnachname);
-		  this.add(lbvorname);
-		  this.add(tbvorname);
-		  this.add(loeschen);
-			  
-			  loeschen.addClickHandler(new ClickHandler(){
+		  showWidget();
+		  
+		  /*  loeschen.addClickHandler(new ClickHandler(){
 				  public void onClick(ClickEvent event) {			
-						if (shownDozent!=null){
-							shownDozent.setVorname(tbvorname.getText());
-							shownDozent.setNachname(tbnachname.getText());
+						if (d!=null){
+							d.setVorname(tbvorname.getText().trim());
+							d.setNachname(tbnachname.getText().trim());
 							deleteSelectedDozent();
-						  }
-				  }
+						  } 
+				  } */
 
-				  
-			  public void deleteSelectedDozent(){	 
-				 showWidget();
-				  speichern.addClickHandler(new ClickHandler() {
+		  speichern.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
-					  deleteDozent();
+						if (d!=null){
+							d.setVorname(tbvorname.getText().trim());
+							d.setNachname(tbnachname.getText().trim());
+							deleteDozent();
+							}
+				  		}
+				  	});
 				  }
+			  
+				 private void deleteDozent () {
+					 boolean allFilled = true;
 				  
-				  private void deleteDozent () {
-					  if (dozent.isEmpty()){
-						  verwaltungsSvc.deleteDozent(dozent, new AsyncCallback<Void>(){
+					  if (allFilled == true) {	
+						  emptyWidget(); }
+					  if (dozent.size() != 0) {
+						  verwaltungsSvc.deleteDozent(d, new AsyncCallback<Void>() {
 							  @Override
 							  public void onFailure (Throwable caught) {
 								  Window.alert("Der Dozent konnte nicht gelöscht werden.");
@@ -86,10 +88,6 @@ public class DeleteDozent extends Content {
 						  });
 					  }
 				  }
-		  });
-			  }
-			  });
-	  }
   	  
 public void emptyWidget(){
 this.emptyWidget();

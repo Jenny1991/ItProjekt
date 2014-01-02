@@ -35,6 +35,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 		private HorizontalPanel hPanel = new HorizontalPanel ();
 		private HorizontalPanel hoPanel = new HorizontalPanel ();*/
 
+		Dozent d;
 		Dozent shownDozent = null;
 		private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 
@@ -54,7 +55,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 		  final Label lbnachname = new Label ("Nachname");
 		  final TextBox tbvorname = new TextBox ();
 		  final TextBox tbnachname = new TextBox ();
-		  final Button bearbeiten = new Button ("bearbeiten"); 
+		  //final Button bearbeiten = new Button ("bearbeiten"); 
 		  final Button speichern = new Button ("speichern");
 		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 			   
@@ -78,18 +79,19 @@ import de.hdm.itprojekt.client.ItProjekt;
 			  this.add(tbnachname);
 			  this.add(lbvorname);
 			  this.add(tbvorname);
+			  this.add(speichern);
 			  //vPanel.add(hPanel);
 			  //vPanel.add(hoPanel);
-			  this.add(bearbeiten);
+			  //this.add(bearbeiten);
 				  
 				  //RootPanel.get("detailsPanel").add(vPanel); 
 
-				  bearbeiten.addClickHandler(new ClickHandler(){
+				 /* bearbeiten.addClickHandler(new ClickHandler(){
 					  public void onClick(ClickEvent event) {			
 							if (shownDozent!=null){
 								shownDozent.setVorname(tbvorname.getText());
 								shownDozent.setNachname(tbnachname.getText());
-								/*verwaltungsSvc.getDozent(shownDozent, new AsyncCallback<Dozent>() {
+								verwaltungsSvc.getDozent(shownDozent, new AsyncCallback<Dozent>() {
 										 @Override
 										  public void onFailure (Throwable caught) {
 										  }
@@ -102,12 +104,12 @@ import de.hdm.itprojekt.client.ItProjekt;
 											  emptyWidget();
 											  changeSelectedDozent();											  
 										  }
-									  });*/
+									  });
 							  }
-					  }
+					  }*/
 					  
-				  public void changeSelectedDozent(){	 
-					 showWidget();
+				//  public void changeSelectedDozent(){	 
+					// showWidget();
 					  /*hPanel.add(lbnachname);
 					 hPanel.add(tbnachname);
 					 hoPanel.add(lbvorname);
@@ -121,6 +123,9 @@ import de.hdm.itprojekt.client.ItProjekt;
 
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
+						  Dozent d = new Dozent ();
+						  d.setNachname(tbnachname.getText().trim());
+						  d.setVorname(tbvorname.getText().trim());
 						  updateDozent();
 					  }
 					  
@@ -133,12 +138,12 @@ import de.hdm.itprojekt.client.ItProjekt;
 						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) {
-							  final String nachname = tbnachname.getText().trim();
-							  final String vorname = tbvorname.getText().trim();
+							  d.setNachname(tbnachname.getText().trim());
+							  d.setVorname(tbvorname.getText().trim());
 							  tbnachname.setFocus(true);
 							  tbvorname.setFocus(true);
 							  
-							  if (dozent.contains(vorname))
+							/*  if (dozent.contains(vorname))
 								  return;
 							  if (dozent.contains(nachname))
 								  return;
@@ -147,7 +152,9 @@ import de.hdm.itprojekt.client.ItProjekt;
 								  //verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 							  }
 						
-							  AsyncCallback<Void> callback = new  AsyncCallback<Void> () {
+							  AsyncCallback<Void> callback = new  AsyncCallback<Void> () { */
+							  
+							  verwaltungsSvc.changeDozent(d, new  AsyncCallback<Dozent> () {
 
 								  @Override
 								  public void onFailure (Throwable caught) {
@@ -155,12 +162,12 @@ import de.hdm.itprojekt.client.ItProjekt;
 								  }
 
 								  @Override
-								  public void onSuccess(Void result) {
+								  public void onSuccess(Dozent result) {
 									  tbnachname.setText("");
 									  tbvorname.setText("");
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
-								};
+								});
 								//verwaltungsSvc.changeDozent(dozent.toArray(new String [0]), callback);
 						  }
 					  }
@@ -171,9 +178,9 @@ public void emptyWidget(){
 	this.emptyWidget();
 	}
 
-				  });
+				  //});
 		  
-		}
+		//}
 		  
 	public void showWidget() {
 		this.add(lbnachname);

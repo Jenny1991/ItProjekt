@@ -35,6 +35,8 @@ public class CreateDozent extends Content {
 	 * private VerticalPanel vPanel = new VerticalPanel ();
 	private HorizontalPanel hPanel = new HorizontalPanel ();
 	private HorizontalPanel hoPanel = new HorizontalPanel ();*/
+	
+	Dozent d;
 	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 	
 	  /**
@@ -87,7 +89,8 @@ public class CreateDozent extends Content {
 					  addDozent();
 				  }
 				  
-				  private void addDozent () {	
+				  private void addDozent () {
+					  Dozent d = new Dozent();
 					  boolean allFilled = true;
 				  
 					  if (tbnachname.getText().isEmpty());
@@ -95,22 +98,24 @@ public class CreateDozent extends Content {
 						  allFilled = false;
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 					  
-					  if (allFilled == true) {					
-						  final String nachname = tbnachname.getText().trim();
-						  final String vorname = tbvorname.getText().trim();
+					  if (allFilled == true) {	
+						  d.setNachname(tbnachname.getText().trim());
+						  d.setVorname(tbvorname.getText().trim());
+						  String vorname = tbvorname.getText().trim();
+						  String nachname = tbnachname.getText().trim();
 						  tbnachname.setFocus(true);
 						  tbvorname.setFocus(true);
 						  
-						  if (dozent.contains(vorname))
+						 /* if (dozent.contains(vorname))
 							  return;
 						  if (dozent.contains(nachname))
 							  return;
 						  
 						  if (verwaltungsSvc == null) {
 							 // verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-						  }
+						  } */
 					
-						 verwaltungsSvc.createDozent(dozent, new AsyncCallback<ArrayList<Dozent>>() {
+						 verwaltungsSvc.createDozent(vorname, nachname, new AsyncCallback<Dozent>() {
 
 							  @Override
 							  public void onFailure (Throwable caught) {
@@ -118,7 +123,7 @@ public class CreateDozent extends Content {
 							  }
 
 							  @Override
-							  public void onSuccess(ArrayList<Dozent> result) {
+							  public void onSuccess(Dozent result) {
 								  tbnachname.setText("");
 								  tbvorname.setText("");
 								  Window.alert ("Erfolgreich gespeichert.");
