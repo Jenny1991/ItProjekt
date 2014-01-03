@@ -1,26 +1,14 @@
 package de.hdm.itprojekt.server.report;
 
-import de.hdm.thies.bankProjekt.shared.bo.Customer;
 import de.hdm.thies.bankProjekt.shared.report.Column;
-import de.hdm.thies.bankProjekt.shared.report.StundenplanDozentReport;
+import de.hdm.thies.bankProjekt.shared.report.Row;
 import de.hdm.thies.bankProjekt.shared.report.SimpleReport;
+import de.hdm.thies.bankProjekt.shared.report.StundenplanDozentReport;
 
 import java.util.Date;
 import java.util.Vector;
 
-
-
-
-
-
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
-import de.hdm.itprojekt.client.*;
-import de.hdm.itprojekt.shared.*;
-import de.hdm.itprojekt.server.*;
-import de.hdm.itprojekt.shared.bo.*;
-import de.hdm.thies.bankProjekt.shared.report.*;
 /**
  * @author hofmann & thies & holz
  */
@@ -69,9 +57,9 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
   }
 
   /**
-   * Auslesen der zugeh�rigen BankAdministration (interner Gebrauch).
+   * Auslesen der zugeh�rigen Verwaltungsklasse (interner Gebrauch).
    * 
-   * @return das BankVerwaltungsobjekt
+   * @return das Verwaltungsklassenobjekt
    */
   protected Verwaltungsklasse getVerwaltungsklasse() {
     return this.verwaltung;
@@ -240,64 +228,6 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
     		}
     /*
      * Zum Schluss m�ssen wir noch den fertigen Report zur�ckgeben.
-     */
-    return result;
-  }
-
-  /**
-   * Erstellen von <code>AllAccountsOfAllCustomersReport</code>-Objekten.
-   * 
-   * @return der fertige Report
-   */
-  public AllAccountsOfAllCustomersReport createAllAccountsOfAllCustomersReport()
-      throws IllegalArgumentException {
-
-    if (this.getBankVerwaltung() == null)
-      return null;
-
-    /*
-     * Zun�chst legen wir uns einen leeren Report an.
-     */
-    AllAccountsOfAllCustomersReport result = new AllAccountsOfAllCustomersReport();
-
-    // Jeder Report hat einen Titel (Bezeichnung / �berschrift).
-    result.setTitle("Alle Konten aller Kunden");
-
-    // Imressum hinzuf�gen
-    this.addImprint(result);
-
-    /*
-     * Datum der Erstellung hinzuf�gen. new Date() erzeugt autom. einen
-     * "Timestamp" des Zeitpunkts der Instantiierung des Date-Objekts.
-     */
-    result.setCreated(new Date());
-
-    /*
-     * Da AllAccountsOfAllCustomersReport-Objekte aus einer Sammlung von
-     * AllAccountsOfCustomerReport-Objekten besteht, ben�tigen wir keine
-     * Kopfdaten f�r diesen Report-Typ. Wir geben einfach keine Kopfdaten an...
-     */
-
-    /*
-     * Nun m�ssen s�mtliche Kunden-Objekte ausgelesen werden. Anschlie�end wir
-     * f�r jedes Kundenobjekt c ein Aufruf von
-     * createAllAccountsOfCustomerReport(c) durchgef�hrt und somit jeweils ein
-     * AllAccountsOfCustomerReport-Objekt erzeugt. Diese Objekte werden
-     * sukzessive der result-Variable hinzugef�gt. Sie ist vom Typ
-     * AllAccountsOfAllCustomersReport, welches eine Subklasse von
-     * CompositeReport ist.
-     */
-    Vector<Customer> allCustomers = this.verwaltung.getAllCustomers();
-
-    for (Customer c : allCustomers) {
-      /*
-       * Anlegen des jew. Teil-Reports und Hinzuf�gen zum Gesamt-Report.
-       */
-      result.addSubReport(this.createAllAccountsOfCustomerReport(c));
-    }
-
-    /*
-     * Zu guter Letzt m�ssen wir noch den fertigen Report zur�ckgeben.
      */
     return result;
   }

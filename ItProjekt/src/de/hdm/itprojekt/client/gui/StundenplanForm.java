@@ -57,9 +57,6 @@ public class StundenplanForm extends Content {
 			//final TextBox nachnameTextBox = new TextBox();
 			//final TextBox vornameTextBox = new TextBox();
 			final FlexTable tabelleSp = new FlexTable();
-			final Button createSpButton = new Button ("Stundenplan anlegen");
-			final Button changeSpButton = new Button("Stundenplan bearbeiten");
-			final Button deleteSpButton = new Button("Stundenplan löschen");
 			
 			//final CreateStundenplan createSp = new CreateStundenplan();
 			//final ChangeStundenplan changeSp = new ChangeStundenplan();
@@ -84,9 +81,9 @@ public class StundenplanForm extends Content {
 				tabelleSp.setText(0, 0, "Bezeichnung");
 				tabelleSp.setCellPadding(10);
 				tabelleSp.setText(0, 1, "Kapazität");
-				tabelleSp.setText(0, 3, "Funktionen");
-				tabelleSp.setWidget(1, 4, deleteSpButton);
-				tabelleSp.setWidget(1, 5, changeSpButton);
+			//	tabelleSp.setText(0, 3, "Funktionen");
+			//	tabelleSp.setWidget(1, 4, deleteSpButton);
+			//	tabelleSp.setWidget(1, 5, changeSpButton);
 				
 
 				
@@ -108,9 +105,6 @@ public class StundenplanForm extends Content {
 			public void showWidget() {
 				
 				this.add(tabelleSp);
-				this.add(createSpButton);
-				this.add(changeSpButton);
-				this.add(deleteSpButton);
 				//this.add(changeSp);
 				//this.add(createSp);
 				//this.add(deleteSp);

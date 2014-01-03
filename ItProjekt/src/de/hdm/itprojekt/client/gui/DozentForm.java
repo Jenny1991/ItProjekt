@@ -54,9 +54,9 @@ public class DozentForm extends Content {
 	final Button changeDozentButton = new Button("Dozent bearbeiten");
 	final Button deleteDozentButton = new Button("Dozent löschen");
 	
-	final CreateDozent2 createD = new CreateDozent2();
+	final CreateDozent createD = new CreateDozent();
 	final ChangeDozent changeD = new ChangeDozent();
-	//final DeleteDozent deleteD = new DeleteDozent();
+	final DeleteDozent deleteD = new DeleteDozent();
 	
 	final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 	 
@@ -109,11 +109,11 @@ public class DozentForm extends Content {
 			}
 		});
 		
-		/*deleteDozentButton.addClickHandler(new ClickHandler() {
+		deleteDozentButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				showDelete();
 			}
-		});*/
+		});
 		
 	}
 		
@@ -137,10 +137,10 @@ public class DozentForm extends Content {
 		this.add(changeD);
 	}
 
-	/*public void showDelete() {
+	public void showDelete() {
 		this.clear();
 		this.add(deleteD);
-	}*/
+	}
 	
 	
 	/**public Dozent updateFlexTable (Dozent result) {
@@ -239,5 +239,3 @@ public class DozentForm extends Content {
 	
 }
 */
-
-

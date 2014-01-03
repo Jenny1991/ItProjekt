@@ -47,7 +47,7 @@ public class StundenplaneintragForm extends Content {
 
 
 			/**
-			 * Aufbau der Seite, um den Raum anzuzeigen, zu löschen und zu bearbeiten
+			 * Aufbau der Seite, um Stundenplaneintr�ge anzuzeigen, zu löschen und zu bearbeiten
 			 */
 			
 			//final Label flexTable = new Label();

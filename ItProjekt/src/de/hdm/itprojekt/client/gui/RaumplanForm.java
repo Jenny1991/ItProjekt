@@ -45,7 +45,7 @@ public class RaumplanForm extends Content {
 
 
 			/**
-			 * Aufbau der Seite, um den Raum anzuzeigen, zu löschen und zu bearbeiten
+			 * Aufbau der Seite, um den Raumplan anzuzeigen
 			 */
 			
 			//final Label flexTable = new Label();
@@ -54,9 +54,9 @@ public class RaumplanForm extends Content {
 			//final TextBox nachnameTextBox = new TextBox();
 			//final TextBox vornameTextBox = new TextBox();
 			final FlexTable tabelleRp = new FlexTable();
-			final Button createRpButton = new Button ("Raumplan anlegen");
-			final Button changeRpButton = new Button("Raumplan bearbeiten");
-			final Button deleteRpButton = new Button("Raumplan löschen");
+		//	final Button createRpButton = new Button ("Raumplan anlegen");
+		//	final Button changeRpButton = new Button("Raumplan bearbeiten");
+			//final Button deleteRpButton = new Button("Raumplan löschen");
 			
 			//final CreateRaum createRaum = new CreateRaum();
 			//final ChangeRaum changeRaum = new ChangeRaum();
@@ -81,9 +81,9 @@ public class RaumplanForm extends Content {
 				tabelleRp.setText(0, 0, "Bezeichnung");
 				tabelleRp.setCellPadding(10);
 				tabelleRp.setText(0, 1, "Kapazität");
-				tabelleRp.setText(0, 3, "Funktionen");
-				tabelleRp.setWidget(1, 4, deleteRpButton);
-				tabelleRp.setWidget(1, 5, changeRpButton);
+				//tabelleRp.setText(0, 3, "Funktionen");
+			//	tabelleRp.setWidget(1, 4, deleteRpButton);
+				//tabelleRp.setWidget(1, 5, changeRpButton);
 				
 				/**tabelleRaum.setText(1, 0, "Thies");
 				tabelleRaum.setText(1, 1, "Peter");
@@ -107,9 +107,9 @@ public class RaumplanForm extends Content {
 			public void showWidget() {
 				
 				this.add(tabelleRp);
-				this.add(createRpButton);
-				this.add(changeRpButton);
-				this.add(deleteRpButton);
+			//	this.add(createRpButton);
+			//	this.add(changeRpButton);
+			//	this.add(deleteRpButton);
 				//this.add(changeRp);
 				//this.add(createRp);
 				//this.add(deleteRp);
