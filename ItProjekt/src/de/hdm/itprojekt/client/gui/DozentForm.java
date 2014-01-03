@@ -11,7 +11,6 @@ import com.google.gwt.core.shared.GWT;
 //import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 //import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -33,8 +32,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.Verwaltungsklasse;
 //import de.hdm.itprojekt.client.*;
-import de.hdm.itprojekt.client.gui.*;
-import de.hdm.itprojekt.shared.bo.Dozent;
+//import de.hdm.itprojekt.client.gui.*;
 
 
 /**
@@ -58,8 +56,7 @@ public class DozentForm extends Content {
 	
 	final CreateDozent createD = new CreateDozent();
 	final ChangeDozent changeD = new ChangeDozent();
-	final DeleteDozent deleteD = new DeleteDozent();
-	Dozent d;
+	//final DeleteDozent deleteD = new DeleteDozent();
 	
 	final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 	 
@@ -136,27 +133,14 @@ public class DozentForm extends Content {
 	}
 	
 	public void showChange() {
-		// this.clear();
+		this.clear();
 		this.add(changeD);
-		
-		verwaltungsSvc.getDozent(new AsyncCallback<Dozent>(){
-
-		@Override
-		public void onFailure(Throwable caught) {
-		}
-
-		@Override
-		public void onSuccess(Dozent result) {
-		nachnameTextBox.setText(result.getNachname().trim());
-		vornameTextBox.setText(result.getVorname().trim());
-	}
-	});
 	}
 
-	public void showDelete() {
+	/*public void showDelete() {
 		this.clear();
 		this.add(deleteD);
-	}
+	}*/
 	
 	
 	/**public Dozent updateFlexTable (Dozent result) {
