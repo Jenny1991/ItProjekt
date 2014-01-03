@@ -136,7 +136,7 @@ public class DozentForm extends Content {
 	}
 	
 	public void showChange() {
-		this.clear();
+		// this.clear();
 		this.add(changeD);
 		
 		verwaltungsSvc.getDozent(new AsyncCallback<Dozent>(){
