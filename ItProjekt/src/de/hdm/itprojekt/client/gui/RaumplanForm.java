@@ -45,7 +45,7 @@ public class RaumplanForm extends Content {
 
 
 			/**
-			 * Aufbau der Seite, um den Raum anzuzeigen, zu löschen und zu bearbeiten
+			 * Aufbau der Seite, um den Raumplan anzuzeigen
 			 */
 			
 			//final Label flexTable = new Label();
