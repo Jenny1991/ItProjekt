@@ -28,7 +28,6 @@ public class DeleteDozent extends Content {
 	private final HTML ueberschrift = new HTML ("<h2>Dozent löschen<h2>");
 
 	Dozent d;
-	Dozent shownDozent = null;
 	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 	
 	  /**
@@ -39,13 +38,14 @@ public class DeleteDozent extends Content {
 	  final TextBox tbvorname = new TextBox ();
 	  final TextBox tbnachname = new TextBox ();
 	  final Button loeschen = new Button ("löschen"); 
-	  final Button speichern = new Button ("speichern");
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 		   
 	  /**
 	  * Anordnen der Buttons und Labels auf den Panels
 	  */
 	  public void onLoad () {
+		  
+		  this.add(ueberschrift);
 		  showWidget();
 		  getSelectedData();
 
@@ -82,7 +82,6 @@ public class DeleteDozent extends Content {
 
 				  @Override
 				  public void onFailure (Throwable caught) {
-					  Window.alert("Der Dozent konnte nicht gelöscht werden.");
 				  }
 
 				  @Override

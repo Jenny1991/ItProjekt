@@ -65,27 +65,9 @@ import de.hdm.itprojekt.client.ItProjekt;
 		  public void onLoad () {
 
 			  this.add(ueberschrift);
-			  
-			/*	  hPanel.add(lbnachname);
-				  hPanel.add(tbnachname);
-				  hoPanel.add(lbvorname);
-				  hoPanel.add(tbvorname);
-				  vPanel.add(hPanel);
-				  vPanel.add(hoPanel);
-			!!	  an dieser Stelle muss die FlexTable hin, da der Bearbeiten-Button dort ist!!
-				  
-				  vPanel.add(bearbeiten);*/
-			  this.add(lbnachname);
-			  this.add(tbnachname);
-			  this.add(lbvorname);
-			  this.add(tbvorname);
-			  this.add(speichern);
-			  //vPanel.add(hPanel);
-			  //vPanel.add(hoPanel);
-			  //this.add(bearbeiten);
-				  
-				  //RootPanel.get("detailsPanel").add(vPanel); 
-
+			  showWidget();
+			  getSelectedData();
+			 			  
 				 /* bearbeiten.addClickHandler(new ClickHandler(){
 					  public void onClick(ClickEvent event) {			
 							if (shownDozent!=null){
@@ -119,7 +101,6 @@ import de.hdm.itprojekt.client.ItProjekt;
 					 vPanel.add(speichern);
 					 
 					 RootPanel.get("detailsPanel").add(vPanel); */
-
 
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
@@ -174,6 +155,21 @@ import de.hdm.itprojekt.client.ItProjekt;
 					  });	  
 				  }
 				  
+		  public void getSelectedData(){
+			  verwaltungsSvc.getDozent(new AsyncCallback<Dozent>() {
+
+				  @Override
+				  public void onFailure (Throwable caught) {
+				  }
+
+				  @Override
+				  public void onSuccess(Dozent result) {
+					  if (result != null);
+					  tbnachname.setText(result.getNachname().trim());
+					  tbvorname.setText(result.getVorname().trim());
+					}
+		  		});
+		  	}
 public void emptyWidget(){
 	this.emptyWidget();
 	}
