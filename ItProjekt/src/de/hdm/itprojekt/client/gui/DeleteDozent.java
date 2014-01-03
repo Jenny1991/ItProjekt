@@ -26,7 +26,7 @@ import de.hdm.itprojekt.shared.bo.Dozent;
 public class DeleteDozent extends Content {
 	
 	private final HTML ueberschrift = new HTML ("<h2>Dozent löschen<h2>");
-	
+
 	Dozent d;
 	Dozent shownDozent = null;
 	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
@@ -47,6 +47,7 @@ public class DeleteDozent extends Content {
 	  */
 	  public void onLoad () {
 		  showWidget();
+		  getSelectedData();
 		  
 		  /*  loeschen.addClickHandler(new ClickHandler(){
 				  public void onClick(ClickEvent event) {			
@@ -57,16 +58,10 @@ public class DeleteDozent extends Content {
 						  } 
 				  } */
 
-		  speichern.addClickHandler(new ClickHandler() {
+		  loeschen.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
-						if (d!=null){
-							d.setVorname(tbvorname.getText().trim());
-							d.setNachname(tbnachname.getText().trim());
-							deleteDozent();
-							}
-				  		}
-				  	});
-				  }
+					  deleteDozent();
+				  } 
 			  
 				 private void deleteDozent () {
 					 boolean allFilled = true;
@@ -84,11 +79,30 @@ public class DeleteDozent extends Content {
 							  public void onSuccess(Void result) {
 								  Window.alert ("Erfolgreich gelöscht.");
 								  emptyWidget(); 	
-							}
-						  });
+							  } 	
+							});
 					  }
 				  }
-  	  
+				  });	  
+			  }
+
+		  public void getSelectedData(){
+			  verwaltungsSvc.getDozent(new AsyncCallback<Dozent>() {
+
+				  @Override
+				  public void onFailure (Throwable caught) {
+					  Window.alert("Der Dozent konnte nicht gelöscht werden.");
+				  }
+
+				  @Override
+				  public void onSuccess(Dozent result) {
+					  if (result != null);
+					  tbnachname.setText(result.getNachname().trim());
+					  tbvorname.setText(result.getVorname().trim());
+					}
+		  		});
+		  	}
+		  
 public void emptyWidget(){
 this.emptyWidget();
 }
