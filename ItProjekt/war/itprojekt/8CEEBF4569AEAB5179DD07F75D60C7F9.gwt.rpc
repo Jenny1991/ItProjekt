@@ -8,7 +8,7 @@ de.hdm.itprojekt.shared.bo.Lehrveranstaltung, true, true, true, true, de.hdm.itp
 de.hdm.itprojekt.shared.bo.Raum, true, true, true, true, de.hdm.itprojekt.shared.bo.Raum/4124003656, 4124003656
 de.hdm.itprojekt.shared.bo.Semesterverband, true, true, true, true, de.hdm.itprojekt.shared.bo.Semesterverband/3235719798, 3235719798
 de.hdm.itprojekt.shared.bo.Studiengang, true, true, true, true, de.hdm.itprojekt.shared.bo.Studiengang/1643166321, 1643166321
-de.hdm.itprojekt.shared.bo.Stundenplaneintrag, true, true, true, true, de.hdm.itprojekt.shared.bo.Stundenplaneintrag/1996609369, 1996609369
+de.hdm.itprojekt.shared.bo.Stundenplaneintrag, true, true, true, true, de.hdm.itprojekt.shared.bo.Stundenplaneintrag/2798384230, 2798384230
 de.hdm.itprojekt.shared.bo.Zeitslot, true, true, true, true, de.hdm.itprojekt.shared.bo.Zeitslot/2857277169, 2857277169
 java.lang.Exception, true, false, true, false, java.lang.Exception/1920171873, 1920171873
 java.lang.IllegalArgumentException, true, true, false, false, java.lang.IllegalArgumentException/1755012560, 1755012560

@@ -29,23 +29,15 @@ import de.hdm.itprojekt.client.gui.DozentForm;
 
 public class CreateDozent extends Content {
 	
-	private final HTML ueberschrift = new HTML ("<h2>Neuen Dozenten anlegen<h2>");
 	
-	/** Brauchen wir nicht
-	 * private VerticalPanel vPanel = new VerticalPanel ();
-	private HorizontalPanel hPanel = new HorizontalPanel ();
-	private HorizontalPanel hoPanel = new HorizontalPanel ();*/
+	
+	/**
+    * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann. 
+    */
+	private final HTML ueberschrift = new HTML ("<h2>Neuen Dozenten anlegen<h2>");
 	
 	Dozent d;
 	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
-	
-	  /**
-	   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   */
-	
-	  /*protected String getHeadlineText() {
-	    return "Dozent anlegen";
-	  }*/
 
 	  /**
 	   * Unter der �berschrift tr�gt der User die Daten des neuen Dozenten ein. 
@@ -63,24 +55,10 @@ public class CreateDozent extends Content {
 	  public void onLoad () {
 
 		  this.add(ueberschrift);
-		  
-		  /** Panels werden durch this. ersetzt
-		   * hPanel.add(lbnachname);
-			  hPanel.add(tbnachname);
-			  hoPanel.add(lbvorname);
-			  hoPanel.add(tbvorname);
-			  vPanel.add(hPanel);
-			  vPanel.add(hoPanel);
-			  vPanel.add(speichern);
-			  
-			  RootPanel.get("detailsPanel").add(vPanel); 
-			  */
 		  this.add(lbnachname);
 		  this.add(tbnachname);
 		  this.add(lbvorname);
 		  this.add(tbvorname);
-		 // vPanel.add(hPanel);
-		 // vPanel.add(hoPanel);
 		  this.add(speichern);
 		  
 			  
