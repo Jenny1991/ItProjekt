@@ -48,15 +48,6 @@ public class DeleteDozent extends Content {
 	  public void onLoad () {
 		  showWidget();
 		  getSelectedData();
-		  
-		  /*  loeschen.addClickHandler(new ClickHandler(){
-				  public void onClick(ClickEvent event) {			
-						if (d!=null){
-							d.setVorname(tbvorname.getText().trim());
-							d.setNachname(tbnachname.getText().trim());
-							deleteSelectedDozent();
-						  } 
-				  } */
 
 		  loeschen.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
@@ -112,6 +103,6 @@ this.add(lbnachname);
 this.add(tbnachname);
 this.add(lbvorname);
 this.add(tbvorname);
-this.add(speichern);
+this.add(loeschen);
 }
 }
