@@ -47,7 +47,7 @@ public class StundenplaneintragForm extends Content {
 
 
 			/**
-			 * Aufbau der Seite, um den Stundenplan anzuzeigen
+			 * Aufbau der Seite, um Stundenplaneintr�ge anzuzeigen, zu löschen und zu bearbeiten
 			 */
 			
 			//final Label flexTable = new Label();
@@ -56,6 +56,9 @@ public class StundenplaneintragForm extends Content {
 			//final TextBox nachnameTextBox = new TextBox();
 			//final TextBox vornameTextBox = new TextBox();
 			final FlexTable tabelleSpe = new FlexTable();
+			final Button createSpeButton = new Button ("Stundenplaneintrag anlegen");
+			final Button changeSpeButton = new Button("Stundenplaneintrag bearbeiten");
+			final Button deleteSpeButton = new Button("Stundenplaneintrag löschen");
 			
 			//final CreateStundenplaneintrag createSpe = new CreateStundenplaneintrag();
 			//final ChangeStundenplaneintrag changeSpe = new ChangeStundenplaneintrag();
@@ -80,7 +83,10 @@ public class StundenplaneintragForm extends Content {
 				tabelleSpe.setText(0, 0, "Bezeichnung");
 				tabelleSpe.setCellPadding(10);
 				tabelleSpe.setText(0, 1, "Kapazität");
-			//	tabelleSpe.setText(0, 3, "Funktionen");
+				tabelleSpe.setText(0, 3, "Funktionen");
+				tabelleSpe.setWidget(1, 4, deleteSpeButton);
+				tabelleSpe.setWidget(1, 5, changeSpeButton);
+
 				
 				/**createSpeButton.addClickHandler(new ClickHandler() {
 					public void onClick(ClickEvent event) {
@@ -99,9 +105,9 @@ public class StundenplaneintragForm extends Content {
 			public void showWidget() {
 				
 				this.add(tabelleSpe);
-	//			this.add(createSpeButton);
-	//			this.add(changeSpeButton);
-	//			this.add(deleteSpeButton);
+				this.add(createSpeButton);
+				this.add(changeSpeButton);
+				this.add(deleteSpeButton);
 				//this.add(changeSpe);
 				//this.add(createSpe);
 				//this.add(deleteSpe);
