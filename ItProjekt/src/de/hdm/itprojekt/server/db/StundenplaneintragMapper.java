@@ -352,7 +352,7 @@ public class StundenplaneintragMapper {
     Connection con = DBConnection.connection();
 
     try {
-      Statement stmt = con.createStatement();
+      Statement stmt = con.createStatement(); 
 
       stmt.executeUpdate("UPDATE stundenplaneintrag SET " + "lehrveranstaltungid=\""
               + s.getLehrveranstaltungId() + "\", " + "raumid=\""
@@ -364,7 +364,7 @@ public class StundenplaneintragMapper {
               + s.getRaumId() + "\""
               + "WHERE id=" + s.getId());
       
-      stmt.executeUpdate("UPDATE stundenplaneintrag SET " + "lehrveranstaltungid=\""
+      stmt.executeUpdate("UPDATE stundenplaneintragstundenplan SET " + "lehrveranstaltungid=\""
               + s.getLehrveranstaltungId() + "\", " + "raumid=\""
               + s.getRaumId() + "\", " + "dozentid=\"" + s.getDozentId()
               + "\" " + "WHERE id=" + s.getId());
