@@ -37,7 +37,7 @@ public class CreateDozent extends Content {
 	private final HTML ueberschrift = new HTML ("<h2>Neuen Dozenten anlegen<h2>");
 	
 	Dozent d;
-	// private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
+	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 
 	  /**
 	   * Unter der �berschrift tr�gt der User die Daten des neuen Dozenten ein. 
