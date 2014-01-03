@@ -57,8 +57,8 @@ public class DozentForm extends Content {
 	final Button deleteDozentButton = new Button("Dozent löschen");
 	
 	final CreateDozent createD = new CreateDozent();
-	//final ChangeDozent changeD = new ChangeDozent();
-	//final DeleteDozent deleteD = new DeleteDozent();
+	final ChangeDozent changeD = new ChangeDozent();
+	final DeleteDozent deleteD = new DeleteDozent();
 	Dozent d;
 	
 	final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
@@ -136,12 +136,11 @@ public class DozentForm extends Content {
 	}
 	
 	public void showChange() {
-		this.add(nachnameTextBox);
-		this.add(vornameTextBox);
-		verwaltungsSvc.getDozent(new AsyncCallback<Dozent>(){
-	//	this.clear();
-	//	this.add(changeD);
+		this.clear();
+		this.add(changeD);
 		
+		verwaltungsSvc.getDozent(new AsyncCallback<Dozent>(){
+
 		@Override
 		public void onFailure(Throwable caught) {
 		}
@@ -154,10 +153,10 @@ public class DozentForm extends Content {
 	});
 	}
 
-	/*public void showDelete() {
+	public void showDelete() {
 		this.clear();
 		this.add(deleteD);
-	}*/
+	}
 	
 	
 	/**public Dozent updateFlexTable (Dozent result) {
