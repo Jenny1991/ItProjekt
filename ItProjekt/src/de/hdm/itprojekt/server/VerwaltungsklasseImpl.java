@@ -98,7 +98,7 @@ implements Verwaltungsklasse {
 		Vector<Stundenplaneintrag> dVektor = null;
 		
 		/**
-		 * Hier müssen wir alle Stundenplaneintraege des Dozenten in den Vector reinspeichern.
+		 * Hier mï¿½ssen wir alle Stundenplaneintraege des Dozenten in den Vector reinspeichern.
 		 */
 			
 		 	dVektor = this.stundenplaneintragMapper.findByDozentOrderByAnfangszeit(d.getId());
@@ -127,7 +127,7 @@ implements Verwaltungsklasse {
 	
 	
 	/**
-	 * Auslesen aller Räume
+	 * Auslesen aller Rï¿½ume
 	 */
 	
 	public Vector<Raum> getAllRaeume() throws IllegalArgumentException {
@@ -145,7 +145,7 @@ implements Verwaltungsklasse {
 	
 	
 	/**
-	 * Auslesen aller Semesterverbände
+	 * Auslesen aller Semesterverbï¿½nde
 	 */
 	
 	public Vector<Semesterverband> getAllSemesterverbaende() throws IllegalArgumentException {
@@ -161,7 +161,7 @@ implements Verwaltungsklasse {
 	  }
 	
 	/**
-	 * Auslesen aller Stundenpläne
+	 * Auslesen aller Stundenplï¿½ne
 	 */
 	
 	public Vector<Stundenplan> getAllStundenplaene() throws IllegalArgumentException {
@@ -169,7 +169,7 @@ implements Verwaltungsklasse {
 	  }
 	
 	/**
-	 * Auslesen aller Stundenplaneinträge
+	 * Auslesen aller Stundenplaneintrï¿½ge
 	 */
 	
 	public Vector<Stundenplaneintrag> getAllStundenplaneintraege() throws IllegalArgumentException {
@@ -192,7 +192,7 @@ implements Verwaltungsklasse {
 		
 		a.setId(1);
 		
-		//Dozentmapper.insert
+		dozentMapper.insert(a);
 		return null;
 	}
 	
@@ -206,7 +206,7 @@ implements Verwaltungsklasse {
 		
 		a.setId(1);
 		
-		//lehrveranstaltungmapper.insert
+		lehrveranstaltungMapper.insert(a);
 		return null;
 	}		
 	
@@ -218,7 +218,7 @@ implements Verwaltungsklasse {
 		
 		a.setId(1);
 		
-		//Raummapper.insert
+		raumMapper.insert(a);
 		return null;
 	}
 
@@ -231,7 +231,7 @@ implements Verwaltungsklasse {
 		
 		s.setId(1);
 		
-		//studiengangmapper.insert
+		studiengangMapper.insert(s);
 		return null;
 	}
 
