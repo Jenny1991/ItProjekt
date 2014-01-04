@@ -37,7 +37,7 @@ public class CreateDozent extends Content {
 	private final HTML ueberschrift = new HTML ("<h2>Neuen Dozenten anlegen<h2>");
 	
 	Dozent d;
-	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
+	// private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 
 	  /**
 	   * Unter der �berschrift tr�gt der User die Daten des neuen Dozenten ein. 
@@ -71,18 +71,18 @@ public class CreateDozent extends Content {
 					  Dozent d = new Dozent();
 					  boolean allFilled = true;
 				  
-					  if (tbnachname.getText().isEmpty());
+				/*	  if (tbnachname.getText().isEmpty());
 					  if (tbvorname.getText().isEmpty()); {	
 						  allFilled = false;
-					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+					  Window.alert ("Bitte füllen Sie alle Felder aus."); } */
 					  
 					  if (allFilled == true) {	
-						  d.setNachname(tbnachname.getText().trim());
-						  d.setVorname(tbvorname.getText().trim());
+						//  d.setNachname(tbnachname.getText().trim());
+						//  d.setVorname(tbvorname.getText().trim());
 						  String vorname = tbvorname.getText().trim();
 						  String nachname = tbnachname.getText().trim();
-						  tbnachname.setFocus(true);
-						  tbvorname.setFocus(true);
+						//  tbnachname.setFocus(true);
+						//  tbvorname.setFocus(true);
 						  
 						 /* if (dozent.contains(vorname))
 							  return;
