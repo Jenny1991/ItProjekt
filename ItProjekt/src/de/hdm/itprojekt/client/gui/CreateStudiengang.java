@@ -63,13 +63,14 @@ public class CreateStudiengang extends Content {
 			  public void onClick(ClickEvent event) {
 				//  boolean allFilled = true;
 			  
-				  if (tbbezeichnung.getValue().isEmpty()); {
+				//  if (tbbezeichnung.getValue().isEmpty()); {
 				//	  allFilled = false;
-				  Window.alert ("Bitte füllen Sie alle Felder aus."); }
-				  {				
+				//  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+				//  {				
 				//   if (allFilled == true) {
 					  Studiengang sg = new Studiengang();
 					  sg.setBezeichnung(tbbezeichnung.getValue().trim());
+					  final String bezeichnung = tbbezeichnung.getValue().trim();
 					  tbbezeichnung.setFocus(true);	
 				  
 					  verwaltungsSvc.changeStudiengang(sg, new AsyncCallback<Studiengang> () {
@@ -86,8 +87,8 @@ public class CreateStudiengang extends Content {
 						  } 	
 						});
 				  }
-			  }
-			  });  
+			 // }
+			//  });  
 			/**  speichern.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
 					 boolean allFilled = true;
