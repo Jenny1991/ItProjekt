@@ -30,23 +30,11 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 	 */
 
 	public class CreateZeitslot extends Content {
-		
-		private final HTML ueberschrift = new HTML ("<h2>Neuen Zeitslot anlegen<h2>");
-		
-		
-		/*private VerticalPanel vPanel = new VerticalPanel ();
-		private HorizontalPanel hPanel = new HorizontalPanel ();
-		private HorizontalPanel hoPanel = new HorizontalPanel ();
-		private HorizontalPanel horPanel = new HorizontalPanel ();*/
-		private ArrayList<Zeitslot> zeitslot = new ArrayList<Zeitslot> ();
-		
-		  /**
-		   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.		   */
 		  
-		  /*protected String getHeadlineText() {
-		    return "Zeitslot anlegen";
-		  }*/
+		/**
+		   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
+		   */
+		private final HTML ueberschrift = new HTML ("<h2>Neuen Zeitslot anlegen<h2>");
 
 		  /**
 		   * Unter der �berschrift tr�gt der User die Daten des neuen Zeitslots ein. 
@@ -58,6 +46,7 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 		  final TextBox tbanfangszeit = new TextBox ();
 		  final TextBox tbendzeit = new TextBox ();
 		  final Button speichern = new Button ("speichern");
+		  
 		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 
 		  /**
@@ -65,21 +54,7 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 		  */
 		  public void onLoad () {
 
-				  /*hPanel.add(lbwochentag);
-				  hPanel.add(tbwochentag);
-				  hoPanel.add(lbanfangszeit);
-				  hoPanel.add(tbanfangszeit);
-				  horPanel.add(lbendzeit);
-				  horPanel.add(tbendzeit);
-				  vPanel.add(hPanel);
-				  vPanel.add(hoPanel);
-				  vPanel.add(horPanel);
-				  vPanel.add(speichern);
-				  
-				  RootPanel.get("detailsPanel").add(vPanel); */
-			  
-			  this.add(ueberschrift);
-			  
+			  this.add(ueberschrift); 
 			  this.add(lbwochentag);
 			  this.add(tbwochentag);
 			  this.add(lbanfangszeit);
@@ -109,19 +84,8 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 							  tbwochentag.setFocus(true);
 							  tbanfangszeit.setFocus(true);
 							  tbendzeit.setFocus(true);
-							  
-							  if (zeitslot.contains(wochentag))
-								  return;
-							  if (zeitslot.contains(anfangszeit))
-								  return;
-							  if (zeitslot.contains(endzeit))
-								  return;
-							  
-							  if (verwaltungsSvc == null) {
-								 // verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-							  }
-						
-							  AsyncCallback<Zeitslot> callback = new  AsyncCallback<Zeitslot> () {
+	
+							  verwaltungsSvc.createZeitslot(wochentag, anfangszeit, endzeit, new AsyncCallback<Zeitslot>() {
 
 								  @Override
 								  public void onFailure (Throwable caught) {
@@ -132,12 +96,11 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 								  public void onSuccess(Zeitslot result) {
 									  
 									  tbwochentag.setText("");
-									 // tbanfangszeit.setVisibleLength(anfangszeit);
-									  //tbendzeit.setVisibleLength(endzeit);
+									  tbanfangszeit.setVisibleLength(anfangszeit);
+									  tbendzeit.setVisibleLength(endzeit);
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
-								};
-								//verwaltungsSvc.createZeitslot(zeitslot.toArray(new String [0]), callback);
+								});
 						  }
 					  }
 					  });

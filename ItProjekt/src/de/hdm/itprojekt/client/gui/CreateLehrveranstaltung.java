@@ -1,25 +1,17 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.ArrayList;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
-import de.hdm.itprojekt.client.ItProjekt;
-import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 
 	/**
 	 * Hier wird eine neue Lehrveranstaltung angelegt.
@@ -42,14 +34,12 @@ import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 		  final Label lbsemester = new Label ("Semester");
 		  final Label lbumfang = new Label ("Umfang");
 		  final TextBox tbbezeichnung = new TextBox ();
-		  final ListBox tbsemester = new ListBox();
-		  final ListBox tbumfang = new ListBox (); 	  
+		  final TextBox tbsemester = new TextBox();
+		  final TextBox tbumfang = new TextBox (); 	  
 		  final Button speichern = new Button ("speichern");
 		  
 		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-		//  private Lehrveranstaltung lV;
-		//  private ArrayList<Lehrveranstaltung> lv = new ArrayList<Lehrveranstaltung> ();
-		  
+
 		  /**
 		  * Anordnen der Buttons und Labels auf den Panels
 		  */
@@ -84,7 +74,6 @@ import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 				  
 				  
 				  speichern.addClickHandler(new ClickHandler() {
-					  @Override
 					  public void onClick(ClickEvent event) {
 						  addLehrveranstaltung();
 					  }
@@ -97,14 +86,12 @@ import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 						  Window.alert("Bitte füllen Sie alle Felder aus."); }
 						 
 						  if (allFilled == true) { 
-							//  lV = new Lehrveranstaltung();
-							//  lV.setBezeichnung(tbbezeichnung.getValue().trim());
-							//  lV.setSemester(tbsemester.getVisibleItemCount());
-							//  lV.setUmfang(tbumfang.getSelectedIndex());
 							  final String bezeichnung = tbbezeichnung.getValue().trim();
-							  final int umfang = tbumfang.getSelectedIndex();
-							  final int semester = tbsemester.getSelectedIndex();
-							//  tbbezeichnung.setFocus(true);
+							  final int umfang = tbumfang.getVisibleLength();
+							  final int semester = tbsemester.getVisibleLength();
+							  tbbezeichnung.setFocus(true);
+							  tbumfang.setFocus(true);
+							  tbsemester.setFocus(true);
 						
 							  verwaltungsSvc.createLehrveranstaltung(bezeichnung, semester, umfang, new AsyncCallback <Lehrveranstaltung>() {
 
@@ -115,10 +102,9 @@ import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 
 								  @Override
 								  public void onSuccess(Lehrveranstaltung result) {
-									  
 									  tbbezeichnung.setValue("");
-									  tbsemester.setSelectedIndex(semester);
-									  tbumfang.setSelectedIndex(umfang);
+									  tbsemester.setVisibleLength(semester);
+									  tbumfang.setVisibleLength(umfang);
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 						  });

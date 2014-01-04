@@ -25,7 +25,6 @@ public class CreateStudiengang extends Content {
 	
 	  /**
 	   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   
 		   */
 	private final HTML ueberschrift = new HTML ("<h2>Neuen Studiengang anlegen<h2>");
 
@@ -37,7 +36,6 @@ public class CreateStudiengang extends Content {
 	  final Button speichern = new Button ("speichern");
 	  
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-	  // Studiengang sg = null;
 	  
 	  /**
 	  * Anordnen der Buttons und Labels auf den Panels
@@ -50,17 +48,20 @@ public class CreateStudiengang extends Content {
 		  this.add(speichern);
 		  	
 		  speichern.addClickHandler(new ClickHandler() {
-			  @Override
 			  public void onClick(ClickEvent event) {
-				//  boolean allFilled = true;
+				  addStudiengang();
+			  }
 			  
-				//  if (tbbezeichnung.getValue().isEmpty()); {
-				//	  allFilled = false;
-				//  Window.alert ("Bitte füllen Sie alle Felder aus."); }
-				//  {				
-				//   if (allFilled == true) {
+			  public void addStudiengang() {
+				  	boolean allFilled = true;
+			  
+				  	if (tbbezeichnung.getValue().isEmpty()); {
+					  allFilled = false;
+					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+				  					
+					 if (allFilled == true) {
 					  final String bezeichnung = tbbezeichnung.getValue().trim();
-					  tbbezeichnung.setFocus(true);	
+					  tbbezeichnung.setFocus(true);
 				  
 					  verwaltungsSvc.createStudiengang(bezeichnung, new AsyncCallback<Studiengang>() {
 
@@ -76,36 +77,7 @@ public class CreateStudiengang extends Content {
 						  } 	
 						});
 				  }
+			  }
 		  });
 	  }
 }
-			 // }
-			//  });  
-			/**  speichern.addClickHandler(new ClickHandler() {
-				  public void onClick(ClickEvent event) {
-					 boolean allFilled = true;
-					  
-					  if (tbbezeichnung.getValue().isEmpty());
-					  {	allFilled = false;
-					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
-					  
-					  if (allFilled == true) { 
-						  final String bezeichnung = tbbezeichnung.getValue().trim();
-						  tbbezeichnung.setFocus(true);
-					
-						  verwaltungsSvc.createStudiengang(bezeichnung, new AsyncCallback<Studiengang>() {
-
-							  @Override
-							  public void onFailure (Throwable caught) {
-								  Window.alert("Der Studiengang konnte nicht angelegt werden.");
-							  }
-
-							  @Override
-							  public void onSuccess(Studiengang result) {
-								  tbbezeichnung.setValue(bezeichnung);
-								  Window.alert ("Erfolgreich gespeichert.");
-							  } 	
-							});
-					  }
-	  }
-	  });*/

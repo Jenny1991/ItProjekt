@@ -1,12 +1,14 @@
 package de.hdm.itprojekt.client.gui;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -29,22 +31,11 @@ import de.hdm.itprojekt.client.ItProjekt;
 	 */
 
 public class CreateStundenplaneintrag extends Content {
-		
-		private VerticalPanel vPanel = new VerticalPanel ();
-		private HorizontalPanel hPanel = new HorizontalPanel ();
-		private HorizontalPanel hoPanel = new HorizontalPanel ();
-		private HorizontalPanel horPanel = new HorizontalPanel ();
-		private HorizontalPanel hrPanel = new HorizontalPanel ();
-		private HorizontalPanel horiPanel = new HorizontalPanel ();
-		private HorizontalPanel hriPanel = new HorizontalPanel ();
-		
-		  /**
-		   * Jede Klasse enthät eine Überschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.		   */
-		
-		protected String getHeadlineText() {
-		    return "Stundenplaneintrag anlegen";
-		  }
+
+		/**
+		 * Jede Klasse enthï¿½t eine ï¿½berschrift, die definiert, was der User machen kann.
+		 */
+		private final HTML ueberschrift = new HTML ("<h2>Neuen Stundenplaneintrag anlegen<h2>");
 
 		  /**
 		   * Unter der Überschrift trägt der User die Daten des neuen Stundenplaneintrags ein. 
@@ -62,39 +53,42 @@ public class CreateStundenplaneintrag extends Content {
 		  final ListBox tbsemesterverband = new ListBox (false); 
 		  final ListBox tblehrveranstaltung = new ListBox (false);
 		  final Button speichern = new Button ("speichern");
+		  
 		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-
 		  
 		  /**
 		  * Anordnen der Buttons und Labels auf den Panels
 		  */
 		  public void onLoad () {
 
-				  hPanel.add(lbdozent);
-				  hPanel.add(tbdozent);
-				  hoPanel.add(lbzeitslot);
-				  hoPanel.add(tbzeitslot);
-				  horPanel.add(lbraum);
-				  horPanel.add(tbraum);
-				  hrPanel.add(lbstudiengang);
-				  hrPanel.add(tbstudiengang);
-				  horiPanel.add(lbsemesterverband);
-				  horiPanel.add(tbsemesterverband);
-				  hriPanel.add(lblehrveranstaltung);
-				  hriPanel.add(tblehrveranstaltung);
-				  vPanel.add(hPanel);
-				  vPanel.add(hoPanel);
-				  vPanel.add(horPanel);
-				  vPanel.add(hrPanel);
-				  vPanel.add(horiPanel);
-				  vPanel.add(hriPanel);
-				  vPanel.add(speichern);
-				  
-				  RootPanel.get("detailsPanel").add(vPanel); 
-				  
-				  verwaltungsSvc.getAllDozent(new AsyncCallback<ArrayList<Dozent>>()){
-					  
-				  }
+				  this.add(ueberschrift);
+			  	  this.add(lbdozent);
+				  this.add(tbdozent);
+				  this.add(lbzeitslot);
+				  this.add(tbzeitslot);
+				  this.add(lbraum);
+				  this.add(tbraum);
+				  this.add(lbstudiengang);
+				  this.add(tbstudiengang);
+				  this.add(lbsemesterverband);
+				  this.add(tbsemesterverband);
+				  this.add(lblehrveranstaltung);
+				  this.add(tblehrveranstaltung);
+				  this.add(speichern);
+				  				  
+				  verwaltungsSvc.getAllDozenten(new AsyncCallback<Vector<Dozent>>(){
+					  @Override
+					  public void onFailure (Throwable caught) {
+					  }
+					  @Override
+					  public void onSuccess(Vector<Dozent> result){
+						  int i = 0; 
+						  while (!result.isEmpty()) {
+							  tbdozent.addItem(result.get(i).getNachname() + "/" + result.get(i).getVorname());
+							  i++;
+						  }
+					  }
+				  });
 				  
 				  
 				  
@@ -105,36 +99,28 @@ public class CreateStundenplaneintrag extends Content {
 					  }
 					  
 					  public void addStundenplaneintrag(){					  
-						  final String [] dozent;
-						  dozent = tbdozent.getItemText(tbdozent.getSelectedIndex()).split("");
-						  final String vorname = dozent [1];
-						  final String nachname = dozent [2];
-						  final String [] raum;
-						  raum = tbraum.getItemText(tbraum.getSelectedIndex()).split("");
-						  final String [] lehrveranstaltung;
-						  lehrveranstaltung = tblehrveranstaltung.getItemText(tblehrveranstaltung.getSelectedIndex()).split("");
-						  final String [] semesterverband;
-						  semesterverband = tbsemesterverband.getItemText(tbsemesterverband.getSelectedIndex()).split("");
-						  final String [] studiengang;
-						  studiengang = tbstudiengang.getItemText(tbstudiengang.getSelectedIndex()).split("");
-						  final String [] zeitslot;
-						  zeitslot = tbzeitslot.getItemText(tbzeitslot.getSelectedIndex()).split("");
+						  final String [] d;
+						  tbdozent.getItemText(tbdozent.getSelectedIndex());
+						  final String [] r;
+						  r= tbraum.getItemText(tbraum.getSelectedIndex()).split("");
+						  final String [] l;
+						  l = tblehrveranstaltung.getItemText(tblehrveranstaltung.getSelectedIndex()).split("");
+						  final String [] sv;
+						  sv = tbsemesterverband.getItemText(tbsemesterverband.getSelectedIndex()).split("");
+						  final String [] s;
+						  s = tbstudiengang.getItemText(tbstudiengang.getSelectedIndex()).split("");
+						  final String [] z;
+						  z = tbzeitslot.getItemText(tbzeitslot.getSelectedIndex()).split("");
 						  
 						  Stundenplaneintrag stdpe = new Stundenplaneintrag();
 						  
-						  verwaltungsSvc.getStundenplaneintrag(stdpe, new AsyncCallback<Stundenplaneintrag>() {
+						  verwaltungsSvc.createStundenplaneintrag(d, l, r, z, sv, new AsyncCallback<Stundenplaneintrag>() {
 								 @Override
 								  public void onFailure (Throwable caught) {
 								  }
 
 								  @Override
 								  public void onSuccess(Stundenplaneintrag result) {
-									  stdpe.setDozent(dozent[1] + " " + dozent[2]);
-									  stdpe.setLehrveranstaltungs(lehrveranstaltung[1]);
-									  stdpe.setRaum(raum[1]);
-									  stdpe.setSemesterverband(semesterverband[1]);
-									  stdpe.setStudiengang(studiengang[1]);
-									  stdpe.setZeitslot(zeitslot[1]);
 									  Window.alert("Erfolgreich gespeichert");
 								  }
 							  });
