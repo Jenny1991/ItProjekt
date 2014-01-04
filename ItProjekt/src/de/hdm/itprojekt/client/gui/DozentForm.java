@@ -88,10 +88,10 @@ public class DozentForm extends Content {
 		this.add(ueberschrift);
 		
 		tabelleDozent.setText(0, 0, "Nachname");
-		//tabelleDozent.setCellPadding(10);
+		tabelleDozent.setCellPadding(10);
 		tabelleDozent.setText(0, 1, "Vorname");
 		tabelleDozent.setText(0, 3, "Funktionen");
-		tabelleDozent.setWidget(1, 3, deleteDozentButton);
+		/*tabelleDozent.setWidget(1, 3, deleteDozentButton);
 		tabelleDozent.setWidget(1, 4, changeDozentButton);
 		
 		
@@ -111,7 +111,9 @@ public class DozentForm extends Content {
 			public void onClick(ClickEvent event) {
 				showDelete();
 			}
-		});
+		});*/
+		
+		
 		showWidget();
 		
 		getData();
@@ -131,16 +133,22 @@ public class DozentForm extends Content {
 					public void onSuccess(Vector<Dozent> result) {
 						if (result != null) {
 
-							//int row = tabelleDozent.getRowCount();
-							
-							
 							/*tabelleDozent.setText(0, 0, "Nachname");
 							//tabelleDozent.setCellPadding(10);
 							tabelleDozent.setText(0, 1, "Vorname");
 							tabelleDozent.setText(0, 3, "Funktionen");
 							tabelleDozent.setWidget(1, 3, deleteDozentButton);
-							tabelleDozent.setWidget(1, 4, changeDozentButton);
+							tabelleDozent.setWidget(1, 4, changeDozentButton);*/
 							
+							
+							int firstRow = 1;
+							for (int i = 0; i<result.size(); i++) {
+								tabelleDozent.setText(firstRow, 0, String.valueOf(result.get(i).getNachname()));
+								tabelleDozent.setText(firstRow, 2, String.valueOf(result.get(i).getVorname()));
+								tabelleDozent.setWidget(firstRow, 2, changeDozentButton);
+								tabelleDozent.setWidget(firstRow, 3, deleteDozentButton);
+								firstRow++;
+							}	
 							
 							createDozentButton.addClickHandler(new ClickHandler() {
 								public void onClick(ClickEvent event) {
@@ -158,16 +166,7 @@ public class DozentForm extends Content {
 								public void onClick(ClickEvent event) {
 									showDelete();
 								}
-							});*/
-							
-							int firstRow = 1;
-							for (int i = 0; i<result.size(); i++) {
-								tabelleDozent.setText(firstRow, 0, String.valueOf(result.get(i).getNachname()));
-								tabelleDozent.setText(firstRow, 2, String.valueOf(result.get(i).getVorname()));
-								tabelleDozent.setWidget(firstRow, 2, changeDozentButton);
-								tabelleDozent.setWidget(firstRow, 3, deleteDozentButton);
-								firstRow++;
-							}	
+							});
 							
 							showWidget();
 							
