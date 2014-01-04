@@ -36,7 +36,7 @@ public class CreateDozent extends Content {
     */
 	private final HTML ueberschrift = new HTML ("<h2>Neuen Dozenten anlegen<h2>");
 	
-	Dozent d;
+	// Dozent d;
 	// private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 
 	  /**
@@ -81,8 +81,8 @@ public class CreateDozent extends Content {
 						//  d.setVorname(tbvorname.getText().trim());
 						  String vorname = tbvorname.getText().trim();
 						  String nachname = tbnachname.getText().trim();
-						//  tbnachname.setFocus(true);
-						//  tbvorname.setFocus(true);
+						  tbnachname.setFocus(true);
+						  tbvorname.setFocus(true);
 						  
 						 /* if (dozent.contains(vorname))
 							  return;
