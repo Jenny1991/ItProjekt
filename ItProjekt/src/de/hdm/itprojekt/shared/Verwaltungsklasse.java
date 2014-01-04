@@ -21,6 +21,28 @@ public interface Verwaltungsklasse extends RemoteService {
 	public Vector<Raum> getAllStundenplaneintrag(Raum r)
 			throws IllegalArgumentException;
 	
+	public Vector<Dozent> getAllDozenten() 
+			throws IllegalArgumentException;
+	
+	public Vector<Dozent> getAllLehrveranstaltungen() 
+			throws IllegalArgumentException;
+	
+	public Vector<Dozent> getAllRaeume() 
+			throws IllegalArgumentException;
+	
+	public Vector<Dozent> getAllZeitslots() 
+			throws IllegalArgumentException;
+	
+	public Vector<Dozent> getAllStundenplaene() 
+			throws IllegalArgumentException;
+	
+	public Vector<Dozent> getAllSemesterverbaende() 
+			throws IllegalArgumentException;
+	
+	public Vector<Dozent> getAllStudiengaenge() 
+			throws IllegalArgumentException;
+	  
+	
 	public Vector<Stundenplaneintrag> getAllStundenplaneintragOf(Dozent d)
 		      throws IllegalArgumentException;
 	
