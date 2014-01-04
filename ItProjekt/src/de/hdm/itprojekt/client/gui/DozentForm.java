@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.HTML;
 //import com.google.gwt.user.client.ui.HorizontalPanel;
 //import com.google.gwt.user.client.ui.Label;
 //import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.TextBox;
+//import com.google.gwt.user.client.ui.TextBox;
 //import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 //import com.google.gwt.user.client.ui.Panel;
@@ -60,8 +60,8 @@ public class DozentForm extends Content {
 		
 	private final HTML ueberschrift = new HTML ("<h2>Übersicht der Dozenten<h2>");
 	
-	final TextBox nachnameTextBox = new TextBox();
-	final TextBox vornameTextBox = new TextBox();
+	/*final TextBox nachnameTextBox = new TextBox();
+	final TextBox vornameTextBox = new TextBox();*/
 	final FlexTable tabelleDozent = new FlexTable();
 	final Button createDozentButton = new Button ("Dozent anlegen");
 	final Button changeDozentButton = new Button("Dozent bearbeiten");
@@ -85,6 +85,7 @@ public class DozentForm extends Content {
 		
 		this.add(ueberschrift);
 		getData();
+		this.add(tabelleDozent);
 		
 		/*//final VerticalPanel detailsPanel = new VerticalPanel();
 		//this.add(tabelleDozent);
@@ -188,6 +189,7 @@ public class DozentForm extends Content {
 							}	
 							
 							showWidget();
+							
 					} else {
 						Window.alert("Keine Dozenten in der Datenbank vorhanden");
 					}
