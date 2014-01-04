@@ -61,7 +61,7 @@ import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 				  this.add(tbbezeichnung);
 				  this.add(lbsemester);
 				  this.add(tbsemester);
-				  final ListBox tbsemester = new ListBox();
+			/*	  final ListBox tbsemester = new ListBox();
 				  	tbsemester.addItem("1");
 				    tbsemester.addItem("2");
 				    tbsemester.addItem("3");
@@ -70,16 +70,16 @@ import de.hdm.itprojekt.client.gui.LehrveranstaltungForm;
 				    tbsemester.addItem("6");
 				    tbsemester.addItem("7");
 				    tbsemester.setVisibleItemCount(7);
-				  this.add(tbsemester);
+				  this.add(tbsemester); */
 				  this.add(lbumfang);
 				  this.add(tbumfang);
-				  final ListBox tbumfang = new ListBox();
+			/*	  final ListBox tbumfang = new ListBox();
 					  	tbumfang.addItem("1 SWS");
 					  	tbumfang.addItem("2 SWS");
 					  	tbumfang.addItem("3 SWS");
 					  	tbumfang.addItem("4 SWS");
 					  	tbumfang.setVisibleItemCount(4);
-					  	this.add(tbumfang); 
+					  	this.add(tbumfang); */
 				  this.add(speichern);
 				  
 				  
