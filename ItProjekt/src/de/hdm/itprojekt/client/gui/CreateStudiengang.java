@@ -59,18 +59,15 @@ public class CreateStudiengang extends Content {
 		  this.add(speichern);
 		  	
 		  speichern.addClickHandler(new ClickHandler() {
+			  @Override
 			  public void onClick(ClickEvent event) {
-				  addStudiengang();
-			  }
-			  
-			  private void addStudiengang() {	
-				  boolean allFilled = true;
+				//  boolean allFilled = true;
 			  
 				  if (tbbezeichnung.getValue().isEmpty()); {
-					  allFilled = false;
+				//	  allFilled = false;
 				  Window.alert ("Bitte füllen Sie alle Felder aus."); }
-				  
-				  if (allFilled == true) {
+				  {				
+				//   if (allFilled == true) {
 					  Studiengang sg = new Studiengang();
 					  sg.setBezeichnung(tbbezeichnung.getValue().trim());
 					  tbbezeichnung.setFocus(true);	
