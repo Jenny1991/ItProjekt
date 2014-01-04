@@ -68,7 +68,7 @@ public class CreateDozent extends Content {
 				  }
 				  
 				  private void addDozent () {
-					  Dozent d = new Dozent();
+					//  Dozent d = new Dozent();
 					  boolean allFilled = true;
 				  
 				/*	  if (tbnachname.getText().isEmpty());
