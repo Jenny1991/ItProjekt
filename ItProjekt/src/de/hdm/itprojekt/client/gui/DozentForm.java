@@ -84,10 +84,9 @@ public class DozentForm extends Content {
 	public void onLoad() {
 		
 		this.add(ueberschrift);
-		/*showWidget();
+		getData();
 		
-		
-		//final VerticalPanel detailsPanel = new VerticalPanel();
+		/*//final VerticalPanel detailsPanel = new VerticalPanel();
 		//this.add(tabelleDozent);
 		//TextBox nachnameTextBox = new TextBox();
 		//TextBox vornameTextBox = new TextBox();
@@ -127,7 +126,7 @@ public class DozentForm extends Content {
 			}
 		});
 		
-		getData();*/
+		*/
 		
 	}
 		
