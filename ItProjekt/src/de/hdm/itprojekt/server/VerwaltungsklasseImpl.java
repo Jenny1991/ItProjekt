@@ -241,15 +241,15 @@ implements Verwaltungsklasse {
 		
 		Stundenplaneintrag s = new Stundenplaneintrag();
 		
-		s.setDozentId(d.getId());
-		s.setLehrveranstaltungId(l.getId());
-		s.setRaumId(r.getId());
-		s.setZeitslotId(z.getId());
-		s.setSemesterverbandId(sv.getId());
+		s.setDozent(d);
+		s.setLehrveranstaltung(l);
+		s.setRaum(r);
+		s.setZeitslot(z);
+		s.setSemesterverband(sv);
 		
 		s.setId(1);
 		
-		//stundenplaneintragmapper.insert
+		stundenplaneintragMapper.insert(s);
 		return null;
 	}
 
@@ -265,7 +265,7 @@ implements Verwaltungsklasse {
 		
 		a.setId(1);
 		
-		//semesterverbandmapper.insert
+		semesterverbandMapper.insert(a);
 		return null;
 	}
 
@@ -280,7 +280,7 @@ implements Verwaltungsklasse {
 		
 		z.setId(1);
 		
-		// Zeitslotmapper.insert
+		zeitslotMapper.insert(z);
 		return null;
 	}
 
