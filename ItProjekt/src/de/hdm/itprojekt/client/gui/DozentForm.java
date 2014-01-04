@@ -41,7 +41,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 
 
 
-import de.hdm.itprojekt.client.ClientsideSettings;
+//import de.hdm.itprojekt.client.ClientsideSettings;
 //import de.hdm.itprojekt.client.ClientsideSettings;
 import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.Verwaltungsklasse;
@@ -129,14 +129,6 @@ public class DozentForm extends Content {
 					@Override
 					public void onSuccess(Vector<Dozent> result) {
 						if (result != null) {
-							
-							
-							
-							//final VerticalPanel detailsPanel = new VerticalPanel();
-							//this.add(tabelleDozent);
-							//TextBox nachnameTextBox = new TextBox();
-							//TextBox vornameTextBox = new TextBox();
-							//Label valueLabel = new Label();
 
 							//int row = tabelleDozent.getRowCount();
 							
