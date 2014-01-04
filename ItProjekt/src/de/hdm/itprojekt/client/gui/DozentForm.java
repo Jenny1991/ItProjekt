@@ -112,10 +112,11 @@ public class DozentForm extends Content {
 				showDelete();
 			}
 		});
+		showWidget();
 		
 		getData();
 		
-		showWidget();
+		
 		
 	}
 		
@@ -168,7 +169,7 @@ public class DozentForm extends Content {
 								firstRow++;
 							}	
 							
-							//showWidget();
+							showWidget();
 							
 					} else {
 						Window.alert("Keine Dozenten in der Datenbank vorhanden");
