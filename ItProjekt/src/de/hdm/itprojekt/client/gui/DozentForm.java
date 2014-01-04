@@ -40,6 +40,8 @@ import com.google.gwt.user.client.ui.FlexTable;
 
 
 
+
+import de.hdm.itprojekt.client.ClientsideSettings;
 //import de.hdm.itprojekt.client.ClientsideSettings;
 import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.Verwaltungsklasse;
@@ -75,39 +77,23 @@ public class DozentForm extends Content {
 	 
 	
 	
-	/*VerwaltungsklasseAsync verwaltungsklasse = ClientsideSettings
+	VerwaltungsklasseAsync verwaltungsklasse = ClientsideSettings
 			.getVerwaltungsklasse();
-	Dozent shownDozent = null;
-	*/
+	//Dozent shownDozent = null;
+	
 
 	
 	public void onLoad() {
 		
 		this.add(ueberschrift);
-		getData();
-		this.add(tabelleDozent);
-		
-		/*//final VerticalPanel detailsPanel = new VerticalPanel();
-		//this.add(tabelleDozent);
-		//TextBox nachnameTextBox = new TextBox();
-		//TextBox vornameTextBox = new TextBox();
-		//Label valueLabel = new Label();
-
-		//int row = tabelleDozent.getRowCount();
-		
 		
 		tabelleDozent.setText(0, 0, "Nachname");
-		tabelleDozent.setCellPadding(10);
+		//tabelleDozent.setCellPadding(10);
 		tabelleDozent.setText(0, 1, "Vorname");
 		tabelleDozent.setText(0, 3, "Funktionen");
 		tabelleDozent.setWidget(1, 3, deleteDozentButton);
 		tabelleDozent.setWidget(1, 4, changeDozentButton);
-		tabelleDozent.setText(1, 0, "Thies");
-		tabelleDozent.setText(1, 1, "Peter");
-		tabelleDozent.setText(2, 0, "Rathke");
-		tabelleDozent.setText(2, 1, "Christian");
-		//tabelleDozent.setWidget(1, 1, nachnameTextBox);
-		//tabelleDozent.setWidget(1, 2, vornameTextBox);
+		
 		
 		createDozentButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -127,7 +113,9 @@ public class DozentForm extends Content {
 			}
 		});
 		
-		*/
+		getData();
+		
+		showWidget();
 		
 	}
 		
@@ -135,7 +123,7 @@ public class DozentForm extends Content {
 
 	
 	public void getData() {
-		verwaltungsSvc.getAllDozenten(new AsyncCallback<Vector<Dozent>>() {
+		verwaltungsklasse.getAllDozenten(new AsyncCallback<Vector<Dozent>>() {
 			
 
 					@Override
@@ -153,7 +141,7 @@ public class DozentForm extends Content {
 							//int row = tabelleDozent.getRowCount();
 							
 							
-							tabelleDozent.setText(0, 0, "Nachname");
+							/*tabelleDozent.setText(0, 0, "Nachname");
 							//tabelleDozent.setCellPadding(10);
 							tabelleDozent.setText(0, 1, "Vorname");
 							tabelleDozent.setText(0, 3, "Funktionen");
@@ -177,7 +165,7 @@ public class DozentForm extends Content {
 								public void onClick(ClickEvent event) {
 									showDelete();
 								}
-							});
+							});*/
 							
 							int firstRow = 1;
 							for (int i = 0; i<result.size(); i++) {
@@ -188,7 +176,7 @@ public class DozentForm extends Content {
 								firstRow++;
 							}	
 							
-							showWidget();
+							//showWidget();
 							
 					} else {
 						Window.alert("Keine Dozenten in der Datenbank vorhanden");
