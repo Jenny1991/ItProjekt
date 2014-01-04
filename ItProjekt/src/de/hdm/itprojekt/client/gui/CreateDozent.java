@@ -79,8 +79,8 @@ public class CreateDozent extends Content {
 					  if (allFilled == true) {	
 						//  d.setNachname(tbnachname.getText().trim());
 						//  d.setVorname(tbvorname.getText().trim());
-						  String vorname = tbvorname.getText().trim();
-						  String nachname = tbnachname.getText().trim();
+						  String vorname = tbvorname.getValue().trim();
+						  String nachname = tbnachname.getValue().trim();
 						  tbnachname.setFocus(true);
 						  tbvorname.setFocus(true);
 						  

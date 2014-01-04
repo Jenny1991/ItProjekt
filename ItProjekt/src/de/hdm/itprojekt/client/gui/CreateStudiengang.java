@@ -32,20 +32,11 @@ import de.hdm.itprojekt.client.gui.StudiengangForm;
 
 public class CreateStudiengang extends Content {
 	
-	private final HTML ueberschrift = new HTML ("<h2>Neuen Studiengang anlegen<h2>");
-	
-
-	/*private VerticalPanel vPanel = new VerticalPanel ();
-	private HorizontalPanel hPanel = new HorizontalPanel ();*/
-	private ArrayList<Studiengang> sg = new ArrayList<Studiengang> ();
-
 	  /**
 	   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   */
-	  
-	/*protected String getHeadlineText() {
-	    return "Studiengang anlegen";
-	  }*/
+		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   
+		   */
+	private final HTML ueberschrift = new HTML ("<h2>Neuen Studiengang anlegen<h2>");
 
 	  /**
 	   * Unter der �berschrift tr�gt der User die Daten des neuen Studiengangs ein. 
@@ -61,16 +52,9 @@ public class CreateStudiengang extends Content {
 	  public void onLoad () {
 
 		  this.add(ueberschrift);
-			  /*hPanel.add(lbbezeichnung);
-			  hPanel.add(tbbezeichnung);
-			  vPanel.add(hPanel);
-			  vPanel.add(speichern);
-			  
-			  RootPanel.get("detailsPanel").add(vPanel); */
-		  	
-		  	this.add(lbbezeichnung);
-		  	this.add(tbbezeichnung);
-		  	this.add(speichern);
+		  this.add(lbbezeichnung);
+		  this.add(tbbezeichnung);
+		  this.add(speichern);
 		  	
 			    
 			  speichern.addClickHandler(new ClickHandler() {
@@ -86,17 +70,10 @@ public class CreateStudiengang extends Content {
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 					  
 					  if (allFilled == true) { 
-						  final String bezeichnung = tbbezeichnung.getText().trim();
+						  final String bezeichnung = tbbezeichnung.getValue().trim();
 						  tbbezeichnung.setFocus(true);
-						  
-						  if (sg.contains(bezeichnung))
-							  return;
-						  
-						  if (verwaltungsSvc == null) {
-							 // verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-						  }
 					
-						  AsyncCallback<Studiengang> callback = new  AsyncCallback<Studiengang> () {
+						  verwaltungsSvc.createStudiengang(bezeichnung, new AsyncCallback<Studiengang>() {
 
 							  @Override
 							  public void onFailure (Throwable caught) {
@@ -105,11 +82,10 @@ public class CreateStudiengang extends Content {
 
 							  @Override
 							  public void onSuccess(Studiengang result) {
-								  tbbezeichnung.setText("");
+								  tbbezeichnung.setValue(bezeichnung);
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
-							};
-							//verwaltungsSvc.createStudiengang(sg.toArray(new String [0]), callback);
+							});
 					  }
 				  }
 				  });
