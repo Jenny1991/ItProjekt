@@ -294,7 +294,7 @@ public class StundenplaneintragMapper {
             + s.getId() + "," + s.getDozentId() + "," + s.getRaumId() + s.getZeitslotId()  
             + s.getSemesterverbandId() + s.getLehrveranstaltungId() );
         
-     // Einfügeoperation für die Zwischentabelle stundenplaneintragsemesterverband
+        // Einfügeoperation für die Zwischentabelle stundenplaneintragsemesterverband
         rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
                 + "FROM stundenplaneintragsemesterverband ");
         
@@ -305,7 +305,7 @@ public class StundenplaneintragMapper {
        		  + "VALUES ("
               + stundenplaneintragsemesterverbandid + "," + s.getId() + "," + s.getSemesterverbandId() );
         
-     // Einfügeoperation für die Zwischentabelle stundenplaneintragzeitslotid
+        // Einfügeoperation für die Zwischentabelle stundenplaneintragzeitslotid
         rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
                 + "FROM stundenplaneintragzeitslot ");
         
@@ -315,7 +315,7 @@ public class StundenplaneintragMapper {
         	  + "(id, stundenplaneintragid, zeitslotid) "
        		  + "VALUES (" + stundenplaneintragsemesterverbandid + "," + s.getId() + "," + s.getZeitslotId() );
         
-     // Einfügeoperation für die Zwischentabelle stundenplaneintragstundenplan
+        // Einfügeoperation für die Zwischentabelle stundenplaneintragstundenplan
         rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
                 + "FROM stundenplaneintragstundenplan ");
         
@@ -360,18 +360,18 @@ public class StundenplaneintragMapper {
               + "\" " + "WHERE id=" + s.getId());
       
       stmt.executeUpdate("UPDATE stundenplaneintragsemesterverband SET " + "semesterverbandid=\""
-              + s.getSemesterverbandId() + "\", " + "raumid=\""
-              + s.getRaumId() + "\""
+              + s.getSemesterverbandId() + "\", " + "stundenplaneintragid=\""
+              + s.getId() + "\""
               + "WHERE id=" + s.getId());
       
-      stmt.executeUpdate("UPDATE stundenplaneintragstundenplan SET " + "lehrveranstaltungid=\""
-              + s.getLehrveranstaltungId() + "\", " + "raumid=\""
-              + s.getRaumId() + "\", " + "dozentid=\"" + s.getDozentId()
+      stmt.executeUpdate("UPDATE stundenplaneintragstundenplan SET " + "stundenplanid=\""
+              + s.getStundenplanId() + "\", " + "stundenplaneintragid=\""
+              + s.getId()
               + "\" " + "WHERE id=" + s.getId());
       
-      stmt.executeUpdate("UPDATE stundenplaneintrag SET " + "lehrveranstaltungid=\""
-              + s.getLehrveranstaltungId() + "\", " + "raumid=\""
-              + s.getRaumId() + "\", " + "dozentid=\"" + s.getDozentId()
+      stmt.executeUpdate("UPDATE stundenplaneintragzeitslot SET " + "zeitslotid=\""
+              + s.getZeitslotId() + "\", " + "stundenplaneintragid=\""
+              + s.getId()
               + "\" " + "WHERE id=" + s.getId());
 
     }
@@ -395,6 +395,9 @@ public class StundenplaneintragMapper {
       Statement stmt = con.createStatement();
 
       stmt.executeUpdate("DELETE FROM stundenplaneintrag " + "WHERE id=" + s.getId());
+      stmt.executeUpdate("DELETE FROM stundenplaneintragsemesterverband " + "WHERE stundenplaneintragid=" + s.getId());
+      stmt.executeUpdate("DELETE FROM stundenplaneintragstundenplan " + "WHERE stundenplaneintragid=" + s.getId());
+      stmt.executeUpdate("DELETE FROM stundenplaneintragzeitslot " + "WHERE stundenplaneintragid=" + s.getId());
 
     }
     catch (SQLException e2) {
