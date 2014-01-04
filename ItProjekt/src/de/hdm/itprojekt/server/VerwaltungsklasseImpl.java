@@ -6,6 +6,7 @@ import de.hdm.itprojekt.server.db.DozentMapper;
 import de.hdm.itprojekt.server.db.LehrveranstaltungMapper;
 import de.hdm.itprojekt.server.db.RaumMapper;
 import de.hdm.itprojekt.server.db.SemesterverbandMapper;
+import de.hdm.itprojekt.server.db.StudiengangMapper;
 import de.hdm.itprojekt.server.db.StundenplanMapper;
 import de.hdm.itprojekt.server.db.StundenplaneintragMapper;
 import de.hdm.itprojekt.server.db.ZeitslotMapper;
@@ -39,6 +40,8 @@ implements Verwaltungsklasse {
 	private StundenplanMapper stundenplanMapper = null;
 	
 	private ZeitslotMapper zeitslotMapper = null;
+	
+	private StudiengangMapper studiengangMapper = null;
 	
 	private Dozent dozent = null;
 	private Raum raum = null;
@@ -82,6 +85,7 @@ implements Verwaltungsklasse {
 		this.stundenplanMapper = StundenplanMapper.stundenplanMapper();
 		this.zeitslotMapper = ZeitslotMapper.zeitslotMapper();
 		this.raumMapper = RaumMapper.raumMapper();
+		this.studiengangMapper = StudiengangMapper.studiengangMapper();
 	}
 	
 	/**
@@ -126,7 +130,7 @@ implements Verwaltungsklasse {
 	 * Auslesen aller Räume
 	 */
 	
-	public Vector<Raum> getAllRaume() throws IllegalArgumentException {
+	public Vector<Raum> getAllRaeume() throws IllegalArgumentException {
 	    return this.raumMapper.findAll();
 	  }
 	
@@ -144,7 +148,7 @@ implements Verwaltungsklasse {
 	 * Auslesen aller Semesterverbände
 	 */
 	
-	public Vector<Semesterverband> getAllSemsterverbaende() throws IllegalArgumentException {
+	public Vector<Semesterverband> getAllSemesterverbaende() throws IllegalArgumentException {
 	    return this.semesterverbandMapper.findAll();
 	  }
 	
@@ -172,6 +176,13 @@ implements Verwaltungsklasse {
 	    return this.stundenplaneintragMapper.findAll();
 	  }
 	
+	/**
+	 * Auslesen aller Studiengaenge
+	 */
+	
+	public Vector<Studiengang> getAllStudiengaenge() throws IllegalArgumentException {
+	    return this.studiengangMapper.findAll();
+	  }
 	
 	public Dozent createDozent(String vorname, String nachname)
 			throws IllegalArgumentException {
