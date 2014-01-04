@@ -70,22 +70,22 @@ public interface VerwaltungsklasseAsync {
 
 	void getDozent(AsyncCallback<Dozent> callback);
 
-	void getAllStundenplaneintrag(Raum r, AsyncCallback<Vector<Raum>> callback);
+	void getAllStundenplaneintrag(Raum r, AsyncCallback<Vector<Stundenplaneintrag>> callback);
 
 	void getAllStundenplaneintragOf(Dozent d,
 			AsyncCallback<Vector<Stundenplaneintrag>> callback);
 
 	void getAllDozenten(AsyncCallback<Vector<Dozent>> callback);
 
-	void getAllLehrveranstaltungen(AsyncCallback<Vector<Dozent>> callback);
+	void getAllLehrveranstaltungen(AsyncCallback<Vector<Lehrveranstaltung>> callback);
 
-	void getAllRaeume(AsyncCallback<Vector<Dozent>> callback);
+	void getAllRaeume(AsyncCallback<Vector<Raum>> callback);
 
-	void getAllSemesterverbaende(AsyncCallback<Vector<Dozent>> callback);
+	void getAllSemesterverbaende(AsyncCallback<Vector<Semesterverband>> callback);
 
-	void getAllStudiengaenge(AsyncCallback<Vector<Dozent>> callback);
+	void getAllStudiengaenge(AsyncCallback<Vector<Studiengang>> callback);
 
-	void getAllStundenplaene(AsyncCallback<Vector<Dozent>> callback);
+	void getAllStundenplaene(AsyncCallback<Vector<Stundenplan>> callback);
 
-	void getAllZeitslots(AsyncCallback<Vector<Dozent>> callback);
+	void getAllZeitslots(AsyncCallback<Vector<Zeitslot>> callback);
 }

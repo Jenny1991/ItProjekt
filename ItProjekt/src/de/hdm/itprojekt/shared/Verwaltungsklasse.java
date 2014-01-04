@@ -18,28 +18,28 @@ public interface Verwaltungsklasse extends RemoteService {
 	public Studiengang createStudiengang(String bezeichnung)
 			throws IllegalArgumentException;
 	
-	public Vector<Raum> getAllStundenplaneintrag(Raum r)
+	public Vector<Stundenplaneintrag> getAllStundenplaneintrag(Raum r)
 			throws IllegalArgumentException;
 	
 	public Vector<Dozent> getAllDozenten() 
 			throws IllegalArgumentException;
 	
-	public Vector<Dozent> getAllLehrveranstaltungen() 
+	public Vector<Lehrveranstaltung> getAllLehrveranstaltungen() 
 			throws IllegalArgumentException;
 	
-	public Vector<Dozent> getAllRaeume() 
+	public Vector<Raum> getAllRaeume() 
 			throws IllegalArgumentException;
 	
-	public Vector<Dozent> getAllZeitslots() 
+	public Vector<Zeitslot> getAllZeitslots() 
 			throws IllegalArgumentException;
 	
-	public Vector<Dozent> getAllStundenplaene() 
+	public Vector<Stundenplan> getAllStundenplaene() 
 			throws IllegalArgumentException;
 	
-	public Vector<Dozent> getAllSemesterverbaende() 
+	public Vector<Semesterverband> getAllSemesterverbaende() 
 			throws IllegalArgumentException;
 	
-	public Vector<Dozent> getAllStudiengaenge() 
+	public Vector<Studiengang> getAllStudiengaenge() 
 			throws IllegalArgumentException;
 	  
 	

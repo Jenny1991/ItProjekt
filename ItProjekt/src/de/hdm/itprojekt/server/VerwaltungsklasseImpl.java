@@ -75,7 +75,13 @@ implements Verwaltungsklasse {
 	
 	public void init() throws IllegalArgumentException {
 		
-		//hier fehlen noch die referenzen zu den jeweiligen Mappern
+		this.dozentMapper = DozentMapper.dozentMapper();
+		this.lehrveranstaltungMapper = LehrveranstaltungMapper.lehrveranstaltungMapper();
+		this.semesterverbandMapper = SemesterverbandMapper.semesterverbandMapper();
+		this.stundenplaneintragMapper = StundenplaneintragMapper.stundenplaneintragMapper();
+		this.stundenplanMapper = StundenplanMapper.stundenplanMapper();
+		this.zeitslotMapper = ZeitslotMapper.zeitslotMapper();
+		this.raumMapper = RaumMapper.raumMapper();
 	}
 	
 	/**
@@ -88,20 +94,20 @@ implements Verwaltungsklasse {
 		Vector<Stundenplaneintrag> dVektor = null;
 		
 		/**
-		 * Hier mÃ¼ssen wir alle Stundenplaneintraege des Dozenten in den Vector reinspeichern.
+		 * Hier müssen wir alle Stundenplaneintraege des Dozenten in den Vector reinspeichern.
 		 */
 			
-		 	//dVektor = this.StundeplaneintragMapper.findByKey(d.getId());
+		 	dVektor = this.stundenplaneintragMapper.findByDozentOrderByAnfangszeit(d.getId());
 		
 		return dVektor;
 	}
 	
-	public Vector<Raum> getAllStundenplaneintrag(Raum r)
+	public Vector<Stundenplaneintrag> getAllStundenplaneintrag(Raum r)
 			throws IllegalArgumentException {
 		
-		Vector<Raum> rVektor = null;
+		Vector<Stundenplaneintrag> rVektor = null;
 		
-	 	//rVektor = this.RaumMapper.findByKey(r.getId());
+	 	rVektor = this.stundenplaneintragMapper.findByRaumOrderByAnfangszeit(r.getId());
 	
 		return rVektor;
 	}
