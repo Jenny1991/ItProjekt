@@ -44,8 +44,10 @@ public class CreateStudiengang extends Content {
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final TextBox tbbezeichnung = new TextBox ();
 	  final Button speichern = new Button ("speichern");
+	  
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-
+	  Studiengang sg = null;
+	  
 	  /**
 	  * Anordnen der Buttons und Labels auf den Panels
 	  */
@@ -56,20 +58,48 @@ public class CreateStudiengang extends Content {
 		  this.add(tbbezeichnung);
 		  this.add(speichern);
 		  	
-			    
-			  speichern.addClickHandler(new ClickHandler() {
-				  public void onClick(ClickEvent event) {
-					  addStudiengang();
-				  }
+		  speichern.addClickHandler(new ClickHandler() {
+			  public void onClick(ClickEvent event) {
+				  addStudiengang();
+			  }
+			  
+			  private void addStudiengang() {	
+				  boolean allFilled = true;
+			  
+				  if (tbbezeichnung.getValue().isEmpty()); {
+					  allFilled = false;
+				  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 				  
-				  public void addStudiengang() {
-					 /* boolean allFilled = true;
+				  if (allFilled == true) {
+					  Studiengang sg = new Studiengang();
+					  sg.setBezeichnung(tbbezeichnung.getValue().trim());
+					  tbbezeichnung.setFocus(true);	
+				  
+					  verwaltungsSvc.changeStudiengang(sg, new AsyncCallback<Studiengang> () {
+
+						  @Override
+						  public void onFailure (Throwable caught) {
+							  Window.alert("Der Studiengang konnte nicht angelegt werden.");
+						  }
+
+						  @Override
+						  public void onSuccess(Studiengang result) {
+							  tbbezeichnung.setText("");
+							  Window.alert ("Erfolgreich gespeichert.");
+						  } 	
+						});
+				  }
+			  }
+			  });  
+			/**  speichern.addClickHandler(new ClickHandler() {
+				  public void onClick(ClickEvent event) {
+					 boolean allFilled = true;
 					  
-					  if (tbbezeichnung.getText().isEmpty());
+					  if (tbbezeichnung.getValue().isEmpty());
 					  {	allFilled = false;
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 					  
-					  if (allFilled == true) { */
+					  if (allFilled == true) { 
 						  final String bezeichnung = tbbezeichnung.getValue().trim();
 						  tbbezeichnung.setFocus(true);
 					
@@ -87,7 +117,7 @@ public class CreateStudiengang extends Content {
 							  } 	
 							});
 					  }
-				  
-			  });
 	  }
+	  });*/
 }  
+}

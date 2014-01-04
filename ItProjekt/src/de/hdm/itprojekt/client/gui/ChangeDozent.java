@@ -28,25 +28,11 @@ import de.hdm.itprojekt.client.ItProjekt;
 	 */
 
 	public class ChangeDozent extends Content {
-		
-		private final HTML ueberschrift = new HTML ("<h2>Dozent bearbeiten<h2>");
-		
-		/*private VerticalPanel vPanel = new VerticalPanel ();
-		private HorizontalPanel hPanel = new HorizontalPanel ();
-		private HorizontalPanel hoPanel = new HorizontalPanel ();*/
-
-		Dozent d;
-		Dozent shownDozent = null;
-		private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
 
 		  /**
 		   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.
 		   */
-		
-		 /* protected String getHeadlineText() {
-		    return "Dozent bearbeiten";
-		  }*/
+		private final HTML ueberschrift = new HTML ("<h2>Dozent bearbeiten<h2>");
 
 		  /**
 		   * Unter der �berschrift tr�gt der User die neuen Daten des  Dozenten ein. 
@@ -55,9 +41,10 @@ import de.hdm.itprojekt.client.ItProjekt;
 		  final Label lbnachname = new Label ("Nachname");
 		  final TextBox tbvorname = new TextBox ();
 		  final TextBox tbnachname = new TextBox ();
-		  //final Button bearbeiten = new Button ("bearbeiten"); 
 		  final Button speichern = new Button ("speichern");
+		  
 		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+		  Dozent d = null;
 			   
 		  /**
 		  * Anordnen der Buttons und Labels auf den Panels
@@ -67,41 +54,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 			  this.add(ueberschrift);
 			  showWidget();
 			  getSelectedData();
-			 			  
-				 /* bearbeiten.addClickHandler(new ClickHandler(){
-					  public void onClick(ClickEvent event) {			
-							if (shownDozent!=null){
-								shownDozent.setVorname(tbvorname.getText());
-								shownDozent.setNachname(tbnachname.getText());
-								verwaltungsSvc.getDozent(shownDozent, new AsyncCallback<Dozent>() {
-										 @Override
-										  public void onFailure (Throwable caught) {
-										  }
-
-										  @Override
-										  public void onSuccess(Dozent result) {
-											  tbvorname.setText(result.getVorname());
-											  tbnachname.setText(result.getNachname());
-											  
-											  emptyWidget();
-											  changeSelectedDozent();											  
-										  }
-									  });
-							  }
-					  }*/
-					  
-				//  public void changeSelectedDozent(){	 
-					// showWidget();
-					  /*hPanel.add(lbnachname);
-					 hPanel.add(tbnachname);
-					 hoPanel.add(lbvorname);
-					 hoPanel.add(tbvorname);
-					 vPanel.add(hPanel);
-					 vPanel.add(hoPanel);
-					 vPanel.add(speichern);
-					 
-					 RootPanel.get("detailsPanel").add(vPanel); */
-
+			
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
 						  Dozent d = new Dozent ();
@@ -123,18 +76,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 							  d.setVorname(tbvorname.getText().trim());
 							  tbnachname.setFocus(true);
 							  tbvorname.setFocus(true);
-							  
-							/*  if (dozent.contains(vorname))
-								  return;
-							  if (dozent.contains(nachname))
-								  return;
-							  
-							  if (verwaltungsSvc == null) {
-								  //verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-							  }
-						
-							  AsyncCallback<Void> callback = new  AsyncCallback<Void> () { */
-							  
+							  						  
 							  verwaltungsSvc.changeDozent(d, new  AsyncCallback<Dozent> () {
 
 								  @Override
@@ -149,7 +91,6 @@ import de.hdm.itprojekt.client.ItProjekt;
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								});
-								//verwaltungsSvc.changeDozent(dozent.toArray(new String [0]), callback);
 						  }
 					  }
 					  });	  
@@ -174,10 +115,6 @@ public void emptyWidget(){
 	this.emptyWidget();
 	}
 
-				  //});
-		  
-		//}
-		  
 	public void showWidget() {
 		this.add(lbnachname);
 		 this.add(tbnachname);

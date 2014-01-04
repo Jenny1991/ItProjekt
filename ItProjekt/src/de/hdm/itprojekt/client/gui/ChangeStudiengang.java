@@ -22,21 +22,11 @@ import de.hdm.itprojekt.shared.bo.Studiengang;
 
 public class ChangeStudiengang extends Content {
 	
-	private final HTML ueberschrift = new HTML ("<h2>Studiengang bearbeiten<h2>");
-	
-	/*private VerticalPanel vPanel = new VerticalPanel ();
-	private HorizontalPanel hPanel = new HorizontalPanel ();*/
-	
-	Studiengang shownSg = null;
-	private ArrayList<Studiengang> sg = new ArrayList<Studiengang> ();
 
 	  /**
 	   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
-		   * Diese ist durch die Methode #getHeadlineText() zu erstellen.	   */
-	  
-	/*protected String getHeadlineText() {
-	    return "Studiengang bearbeiten";
-	  }*/
+	   */
+	private final HTML ueberschrift = new HTML ("<h2>Studiengang bearbeiten<h2>");
 
 	  /**
 	   * Unter der �berschrift tr�gt der User die neuen Daten des Studiengangs ein. 
@@ -44,99 +34,76 @@ public class ChangeStudiengang extends Content {
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final TextBox tbbezeichnung = new TextBox ();
 	  final Button speichern = new Button ("speichern");
-	  final Button bearbeiten = new Button ("bearbeiten");
-	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+
+	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);	  		
+	  Studiengang sg = null;
 	  
 	  public void onLoad () {
 		  
 		  this.add(ueberschrift);
+		  showWidget();
+		  getSelectedData();
 		  
-		  this.add(lbbezeichnung);
-		  this.add(tbbezeichnung);
-		  this.add(bearbeiten);
-		  
-		  bearbeiten.addClickHandler(new ClickHandler(){
-			  public void onClick(ClickEvent event) {			
-					if (shownSg!=null){
-						shownSg.setBezeichnung(tbbezeichnung.getText());
-						/*verwaltungsSvc.getStudiengang(shownSg, new AsyncCallback<Studiengang>() {
-								 @Override
-								  public void onFailure (Throwable caught) {
-								  }
-
-								  @Override
-								  public void onSuccess(Studiengang result) {
-									  tbbezeichnung.setText(result.getBezeichnung());
-
-									  emptyWidget();
-									  changeSelectedStudiengang();											  
-								  }
-							  });*/
-					  }
-			  }
-
-		  public void changeSelectedStudiengang(){
-			  showWidget();
-		  /*hPanel.add(lbbezeichnung);
-		  hPanel.add(tbbezeichnung);
-		  vPanel.add(hPanel);
-		  vPanel.add(speichern);
-		  
-		  RootPanel.get("detailsPanel").add(vPanel); */
-		    
 		  speichern.addClickHandler(new ClickHandler() {
 			  public void onClick(ClickEvent event) {
+				  Studiengang sg = new Studiengang ();
+				  sg.setBezeichnung(tbbezeichnung.getValue().trim());
 				  updateStudiengang();
 			  }
 			  
-			  public void updateStudiengang() {
+			  private void updateStudiengang () {	
 				  boolean allFilled = true;
-				  
-				  if (tbbezeichnung.getText().isEmpty());
-				  {	allFilled = false;
+			  
+				  if (tbbezeichnung.getValue().isEmpty()); {
+					  allFilled = false;
 				  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 				  
-				  if (allFilled == true) { 
-					  final String bezeichnung = tbbezeichnung.getText().trim();
+				  if (allFilled == true) {
+					  sg.setBezeichnung(tbbezeichnung.getValue().trim());
 					  tbbezeichnung.setFocus(true);
-					  
-					  if (sg.contains(bezeichnung))
-						  return;
-					  
-					  if (verwaltungsSvc == null) {
-						  //verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-					  }
-				
-					  AsyncCallback<Void> callback = new  AsyncCallback<Void> () {
+				  
+					  verwaltungsSvc.changeStudiengang(sg, new AsyncCallback<Studiengang> () {
 
 						  @Override
 						  public void onFailure (Throwable caught) {
-							  Window.alert("Der Studiengang konnte nicht angelegt werden.");
+							  Window.alert("Der Studiengang konnte nicht bearbeitet werden.");
 						  }
 
 						  @Override
-						  public void onSuccess(Void result) {
+						  public void onSuccess(Studiengang result) {
 							  tbbezeichnung.setText("");
 							  Window.alert ("Erfolgreich gespeichert.");
 						  } 	
-						};
-						//verwaltungsSvc.changeStudiengang(sg.toArray(new String [0]), callback);
+						});
 				  }
 			  }
-			  });	  
-		  }
+			  });
+	  }
+
+		  public void getSelectedData(){
+			  verwaltungsSvc.getStudiengang(new AsyncCallback<Studiengang>() {
+
+				  @Override
+				  public void onFailure (Throwable caught) {
+				  }
+
+				  @Override
+				  public void onSuccess(Studiengang result) {
+					  if (result != null);
+					  tbbezeichnung.setText(result.getBezeichnung().trim());
+					}
+		  		});
+		  	}
 		  
 public void emptyWidget(){
-this.emptyWidget();
-}
+	this.emptyWidget();
+	}
 
-		  });
+public void showWidget() {
+  this.add(lbbezeichnung);
+  this.add(tbbezeichnung);
+  this.add(speichern);
   }
-	  public void showWidget() {
-		  this.add(lbbezeichnung);
-		  this.add(tbbezeichnung);
-		  this.add(speichern);
-	  }
 }
 	  
 	  

@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.shared;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -88,4 +89,6 @@ public interface VerwaltungsklasseAsync {
 	void getAllStundenplaene(AsyncCallback<Vector<Stundenplan>> callback);
 
 	void getAllZeitslots(AsyncCallback<Vector<Zeitslot>> callback);
+	
+	void getStudiengang(AsyncCallback<Studiengang> callback);
 }

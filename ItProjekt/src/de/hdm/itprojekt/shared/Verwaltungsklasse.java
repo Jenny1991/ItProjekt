@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.shared;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
@@ -105,5 +106,7 @@ public interface Verwaltungsklasse extends RemoteService {
 	
 	public Semesterverband changeSemsterverband(Semesterverband sv)
 			throws IllegalArgumentException;
+	
+	public Studiengang getStudiengang() throws IllegalArgumentException;
 }
 
