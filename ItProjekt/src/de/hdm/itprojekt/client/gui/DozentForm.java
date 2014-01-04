@@ -77,9 +77,9 @@ public class DozentForm extends Content {
 	 
 	
 	
-	VerwaltungsklasseAsync verwaltungsklasse = ClientsideSettings
+	/*VerwaltungsklasseAsync verwaltungsklasse = ClientsideSettings
 			.getVerwaltungsklasse();
-	//Dozent shownDozent = null;
+	//Dozent shownDozent = null;*/
 	
 
 	
@@ -123,7 +123,7 @@ public class DozentForm extends Content {
 
 	
 	public void getData() {
-		verwaltungsklasse.getAllDozenten(new AsyncCallback<Vector<Dozent>>() {
+		verwaltungsSvc.getAllDozenten(new AsyncCallback<Vector<Dozent>>() {
 			
 
 					@Override
