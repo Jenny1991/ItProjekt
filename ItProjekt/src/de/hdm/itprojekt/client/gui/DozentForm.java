@@ -7,10 +7,17 @@ package de.hdm.itprojekt.client.gui;
 //import java.util.ArrayList;
 
 
+//import java.util.ArrayList;
+
+
+import java.util.Vector;
+
 import com.google.gwt.core.shared.GWT;
 //import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 //import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -28,9 +35,15 @@ import com.google.gwt.user.client.ui.FlexTable;
 //import com.google.gwt.user.client.ui.VerticalPanel;
 
 
+
+
+
+
+
 //import de.hdm.itprojekt.client.ClientsideSettings;
 import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.Verwaltungsklasse;
+import de.hdm.itprojekt.shared.bo.Dozent;
 //import de.hdm.itprojekt.client.*;
 //import de.hdm.itprojekt.client.gui.*;
 
@@ -61,7 +74,6 @@ public class DozentForm extends Content {
 	final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 	 
 	
-	//final Label valueLabel = new Label();
 	
 	/*VerwaltungsklasseAsync verwaltungsklasse = ClientsideSettings
 			.getVerwaltungsklasse();
@@ -72,7 +84,7 @@ public class DozentForm extends Content {
 	public void onLoad() {
 		
 		this.add(ueberschrift);
-		showWidget();
+		/*showWidget();
 		
 		
 		//final VerticalPanel detailsPanel = new VerticalPanel();
@@ -115,8 +127,82 @@ public class DozentForm extends Content {
 			}
 		});
 		
+		getData();*/
+		
 	}
 		
+	
+
+	
+	public void getData() {
+		verwaltungsSvc.getAllDozenten(new AsyncCallback<Vector<Dozent>>() {
+			
+
+					@Override
+					public void onSuccess(Vector<Dozent> result) {
+						if (result != null) {
+							
+							
+							
+							//final VerticalPanel detailsPanel = new VerticalPanel();
+							//this.add(tabelleDozent);
+							//TextBox nachnameTextBox = new TextBox();
+							//TextBox vornameTextBox = new TextBox();
+							//Label valueLabel = new Label();
+
+							//int row = tabelleDozent.getRowCount();
+							
+							
+							tabelleDozent.setText(0, 0, "Nachname");
+							//tabelleDozent.setCellPadding(10);
+							tabelleDozent.setText(0, 1, "Vorname");
+							tabelleDozent.setText(0, 3, "Funktionen");
+							tabelleDozent.setWidget(1, 3, deleteDozentButton);
+							tabelleDozent.setWidget(1, 4, changeDozentButton);
+							
+							
+							createDozentButton.addClickHandler(new ClickHandler() {
+								public void onClick(ClickEvent event) {
+								showCreate();
+								}
+							});
+							
+							changeDozentButton.addClickHandler(new ClickHandler() {
+								public void onClick(ClickEvent event) {
+									showChange();
+								}
+							});
+							
+							deleteDozentButton.addClickHandler(new ClickHandler() {
+								public void onClick(ClickEvent event) {
+									showDelete();
+								}
+							});
+							
+							int firstRow = 1;
+							for (int i = 0; i<result.size(); i++) {
+								tabelleDozent.setText(firstRow, 0, String.valueOf(result.get(i).getNachname()));
+								tabelleDozent.setText(firstRow, 2, String.valueOf(result.get(i).getVorname()));
+								tabelleDozent.setWidget(firstRow, 2, changeDozentButton);
+								tabelleDozent.setWidget(firstRow, 3, deleteDozentButton);
+								firstRow++;
+							}	
+							
+							showWidget();
+					} else {
+						Window.alert("Keine Dozenten in der Datenbank vorhanden");
+					}
+					
+				}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+			});
+		
+	}
 	
 	public void showWidget() {
 		
@@ -142,14 +228,13 @@ public class DozentForm extends Content {
 		this.add(deleteD);
 	}
 	
-	
-	/**public Dozent updateFlexTable (Dozent result) {
-		for (int i = 0; i < getAllDozent.size(); i++) { //getAllDozent wird noch als Methode oder Klasse benötigt
-			tabelleDozent.addItem(getAllDozent.get(i).getVorname());
+	/*public Dozent updateFlexTable (Dozent result) {
+		for (int i = 0; i < getAllDozenten.size(); i++) { //getAllDozent wird noch als Methode oder Klasse benötigt
+			tabelleDozent.addItem(getAllDozenten.get(i).getVorname());
 			
 		}
-	}
-*/
+	}*/
+
 }
 
 
