@@ -1,14 +1,14 @@
 package de.hdm.itprojekt.shared;
 
-import de.hdm.itProjekt.shared.report.*;
+import de.hdm.thies.bankProjekt.shared.report.*;
 import de.hdm.itprojekt.shared.bo.*;
-import de.hdm.itprojekt.shared.report.StundenplanDozentReport;
+
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
- * @author thies
+ * @author thies & hofmann
  */
 @RemoteServiceRelativePath("reportgenerator")
 public interface ReportGenerator extends RemoteService {
@@ -35,7 +35,7 @@ public interface ReportGenerator extends RemoteService {
 
   /**
    * Erstellen eines <code>RaumbelegungsReport</code>-Reports. Dieser
-   * Report-Typ stellt s�mtliche R�ume und ihre Belegungen dar.
+   * Report-Typ stellt samtliche Raume und ihre Belegungen dar.
    * 
    */
   public RaumbelegungsReport createRaumbelungsReport(

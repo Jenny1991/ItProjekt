@@ -2,7 +2,7 @@ package de.hdm.thies.bankProjekt.shared.report;
 
 import java.io.Serializable;
 
-public class RaumbelgungsReport 	extends CompositeReport 
+public class RaumbelegungsReport 	extends CompositeReport 
 implements Serializable {
 
 	  /**

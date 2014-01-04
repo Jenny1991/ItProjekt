@@ -2,7 +2,7 @@ package de.hdm.thies.bankProjekt.shared.report;
 
 import java.io.Serializable;
 
-public class StundenplanSemesterverbandReport 	extends CompositeReport 
+public class StundenplanSemesterverbandReport 	extends SimpleReport 
 implements Serializable {
 
 	  /**

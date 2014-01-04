@@ -1,9 +1,10 @@
 package de.hdm.itprojekt.server.report;
 
-import de.hdm.thies.bankProjekt.shared.report.Column;
-import de.hdm.thies.bankProjekt.shared.report.Row;
-import de.hdm.thies.bankProjekt.shared.report.SimpleReport;
-import de.hdm.thies.bankProjekt.shared.report.StundenplanDozentReport;
+import de.hdm.thies.bankProjekt.shared.report.*;
+import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.shared.*;
+import de.hdm.itprojekt.server.*;
+
 
 import java.util.Date;
 import java.util.Vector;
@@ -231,5 +232,32 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
      */
     return result;
   }
+
+@Override
+public void setRaum(Raum r) throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void setSemesterverband(Semesterverband sv)
+		throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public RaumbelegungsReport createRaumbelungsReport(Raum r)
+		throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public StundenplanSemesterverbandReport createStundenplanSemesterverbandReport(
+		Semesterverband sv) throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }

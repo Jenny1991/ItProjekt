@@ -22,7 +22,7 @@ public interface ReportGeneratorAsync {
 void createStundenplanDozentReport(Dozent d,
 		AsyncCallback<StundenplanDozentReport> callback);
 
-void createRaumbelungsReport(Raum r, AsyncCallback<RaumbelgungsReport> callback);
+void createRaumbelungsReport(Raum r, AsyncCallback<RaumbelegungsReport> callback);
 
 void createStundenplanSemesterverbandReport(Semesterverband sv,
 		AsyncCallback<StundenplanSemesterverbandReport> callback);
