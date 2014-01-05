@@ -1,7 +1,5 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.ArrayList;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -9,36 +7,19 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.itprojekt.shared.Verwaltungsklasse;
-import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
-import de.hdm.itprojekt.shared.bo.Dozent;
+import de.hdm.itprojekt.shared.*;
+import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
 import de.hdm.itprojekt.shared.bo.Zeitslot;
 
 public class ChangeZeitslot extends Content {
 	
-	private final HTML ueberschrift = new HTML ("<h2>Zeitslot bearbeiten<h2>");
-	
-	/*private VerticalPanel vPanel = new VerticalPanel ();
-	private HorizontalPanel hPanel = new HorizontalPanel ();
-	private HorizontalPanel hoPanel = new HorizontalPanel ();
-	private HorizontalPanel horPanel = new HorizontalPanel ();*/
-	
-	Zeitslot shownZeitslot = null;
-	private ArrayList<Zeitslot> zeitslot = new ArrayList<Zeitslot> ();
-	
 	  /**
 	   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
-	   * Diese ist durch die Methode #getHeadlineText() zu erstellen.		   */
-	  
-	  /*protected String getHeadlineText() {
-	    return "Zeitslot bearbeiten";
-	  }*/
+	   */
+	private final HTML ueberschrift = new HTML ("<h2>Zeitslot bearbeiten<h2>");
 
 	  /**
 	   * Unter der �berschrift tr�gt der User die neuen Daten des Zeitslots ein. 
@@ -50,7 +31,7 @@ public class ChangeZeitslot extends Content {
 	  final TextBox tbanfangszeit = new TextBox ();
 	  final TextBox tbendzeit = new TextBox ();
 	  final Button speichern = new Button ("speichern");
-	  final Button bearbeiten = new Button ("bearbeiten");
+
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 
 	  /**
@@ -66,55 +47,14 @@ public class ChangeZeitslot extends Content {
 			  this.add(tbanfangszeit);
 			  this.add(lbendzeit);
 			  this.add(tbendzeit);
-			  this.add(bearbeiten);
+			  this.add(speichern);
 			  
-			  
-			  bearbeiten.addClickHandler(new ClickHandler(){
-				  public void onClick(ClickEvent event) {			
-						if (shownZeitslot!=null){
-							shownZeitslot.setWochentag(tbwochentag.getText());
-							shownZeitslot.setAnfangszeit(tbanfangszeit.getVisibleLength());
-							shownZeitslot.setEndzeit(tbendzeit.getVisibleLength());
-							/*verwaltungsSvc.getZeitslot(shownZeitslot, new AsyncCallback<Zeitslot>() {
-									 @Override
-									  public void onFailure (Throwable caught) {
-									  }
-
-									  @Override
-									  public void onSuccess(Zeitslot result) {
-										  tbwochentag.setText(result.getWochentag());
-										  tbanfangszeit.setVisibleLength(result.getAnfangszeit());
-										  tbendzeit.setVisibleLength(result.getEndzeit());
-										  
-										  emptyWidget();
-										  changeSelectedZeitslot();											  
-									  }
-								  });*/
-						  }
-				  }
-
-			public void changeSelectedZeitslot(){
-				  /*hPanel.add(lbwochentag);
-				  hPanel.add(tbwochentag);
-				  hoPanel.add(lbanfangszeit);
-				  hoPanel.add(tbanfangszeit);
-				  horPanel.add(lbendzeit);
-				  horPanel.add(tbendzeit);
-				  vPanel.add(hPanel);
-				  vPanel.add(hoPanel);
-				  vPanel.add(horPanel);
-				  vPanel.add(speichern);
-				  
-				  RootPanel.get("detailsPanel").add(vPanel);*/
-				
-				showWidget();
-				  
-				  speichern.addClickHandler(new ClickHandler() {
+			  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
-						  addZeitslot();
+						  updateZeitslot();
 					  }
 					  
-					  public void addZeitslot(){
+					  public void updateZeitslot(){
 						  boolean allFilled = true;
 						  
 						  if (tbwochentag.getText().isEmpty());
@@ -124,59 +64,48 @@ public class ChangeZeitslot extends Content {
 						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) { 
-							  final String wochentag = tbwochentag.getText().trim();
-							  final double anfangszeit = tbanfangszeit.getVisibleLength();
-							  final double endzeit = tbendzeit.getVisibleLength();
+							  Zeitslot z = new Zeitslot();
+							  z.setWochentag(tbwochentag.getText().trim());
+							  z.setAnfangszeit(tbanfangszeit.getVisibleLength());
+							  z.setEndzeit(tbendzeit.getVisibleLength());
 							  tbwochentag.setFocus(true);
 							  tbanfangszeit.setFocus(true);
 							  tbendzeit.setFocus(true);
-							  
-							  if (zeitslot.contains(wochentag))
-								  return;
-							  if (zeitslot.contains(anfangszeit))
-								  return;
-							  if (zeitslot.contains(endzeit))
-								  return;
-							  
-							  if (verwaltungsSvc == null) {
-								  //verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-							  }
 						
-							  AsyncCallback<Zeitslot> callback = new  AsyncCallback<Zeitslot> () {
+							  verwaltungsSvc.changeZeitslot(z, new  AsyncCallback<Zeitslot>() {
 
 								  @Override
 								  public void onFailure (Throwable caught) {
-									  Window.alert("Das Zeitslot konnte nicht angelegt werden.");
+									  Window.alert("Das Zeitslot konnte nicht bearbeitet werden.");
 								  }
 
 								  @Override
 								  public void onSuccess(Zeitslot result) {
-									  
 									  tbwochentag.setText("");
-									 // tbanfangszeit.setVisibleLength(anfangszeit);
-									 // tbendzeit.setVisibleLength(endzeit);
+									  tbanfangszeit.setVisibleLength(result.getAnfangszeit());
+									  tbendzeit.setVisibleLength(result.getEndzeit());
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
-								};
-								//verwaltungsSvc.changeZeitslot(zeitslot.toArray(new String [0]), callback);
+								});
 						  }
 					  }
-					  });
-		  }
-				  
-public void emptyWidget(){
-	this.emptyWidget();
-	}
-			  });
-		  }
-		  
-	public void showWidget() {
-		this.add(lbwochentag);
-		this.add(tbwochentag);
-		this.add(lbanfangszeit);
-		this.add(tbanfangszeit);
-		this.add(lbendzeit);
-		this.add(tbendzeit);
-		this.add(speichern);
-	}
-}
+				  });
+			  }
+			  
+			  public void getSelectedData(){
+				  verwaltungsSvc.getZeitslot(new AsyncCallback<Zeitslot>() {
+
+					  @Override
+					  public void onFailure (Throwable caught) {
+					  }
+
+					  @Override
+					  public void onSuccess(Zeitslot result) {
+						  if (result != null);
+						  tbwochentag.setText(result.getWochentag().trim());
+						  tbanfangszeit.setVisibleLength(result.getAnfangszeit());
+						  tbendzeit.setVisibleLength(result.getEndzeit());
+						}
+			  		});
+			  	}
+		}

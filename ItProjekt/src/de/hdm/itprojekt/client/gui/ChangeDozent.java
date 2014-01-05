@@ -1,24 +1,17 @@
 package de.hdm.itprojekt.client.gui;
 
-	import java.util.ArrayList;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Dozent;
-import de.hdm.itprojekt.client.ClientsideSettings;
-import de.hdm.itprojekt.client.ItProjekt;
 
 	/**
 	 * Hier wird ein bereits angelegter Dozent bearbeitet.
@@ -44,22 +37,23 @@ import de.hdm.itprojekt.client.ItProjekt;
 		  final Button speichern = new Button ("speichern");
 		  
 		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-		  Dozent d = null;
-			   
+		  
 		  /**
 		  * Anordnen der Buttons und Labels auf den Panels
 		  */
 		  public void onLoad () {
 
-			  this.add(ueberschrift);
-			  showWidget();
-			  getSelectedData();
+			  	 this.add(ueberschrift);
+				 this.add(lbnachname);
+				 this.add(tbnachname);
+				 this.add(lbvorname);
+				 this.add(tbvorname);
+				 this.add(speichern);
+				 
+				 getSelectedData();
 			
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
-						  Dozent d = new Dozent ();
-						  d.setNachname(tbnachname.getText().trim());
-						  d.setVorname(tbvorname.getText().trim());
 						  updateDozent();
 					  }
 					  
@@ -72,6 +66,7 @@ import de.hdm.itprojekt.client.ItProjekt;
 						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) {
+							  Dozent d = new Dozent ();
 							  d.setNachname(tbnachname.getText().trim());
 							  d.setVorname(tbvorname.getText().trim());
 							  tbnachname.setFocus(true);
@@ -111,15 +106,4 @@ import de.hdm.itprojekt.client.ItProjekt;
 					}
 		  		});
 		  	}
-public void emptyWidget(){
-	this.emptyWidget();
-	}
-
-	public void showWidget() {
-		this.add(lbnachname);
-		 this.add(tbnachname);
-		 this.add(lbvorname);
-		 this.add(tbvorname);
-		 this.add(speichern);
-	}
 }
