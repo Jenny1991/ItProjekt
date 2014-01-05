@@ -27,9 +27,6 @@ public class DeleteDozent extends Content {
 	
 	private final HTML ueberschrift = new HTML ("<h2>Dozent löschen<h2>");
 
-	Dozent d;
-	private ArrayList<Dozent> dozent = new ArrayList<Dozent> ();
-	
 	  /**
 	   * Unter der ï¿½berschrift trï¿½gt der User die neuen Daten des  Dozenten ein. 
 	   */
@@ -38,7 +35,9 @@ public class DeleteDozent extends Content {
 	  final TextBox tbvorname = new TextBox ();
 	  final TextBox tbnachname = new TextBox ();
 	  final Button loeschen = new Button ("löschen"); 
+	  
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+	  Dozent d = null;
 		   
 	  /**
 	  * Anordnen der Buttons und Labels auf den Panels
@@ -46,7 +45,12 @@ public class DeleteDozent extends Content {
 	  public void onLoad () {
 		  
 		  this.add(ueberschrift);
-		  showWidget();
+		  this.add(lbnachname);
+		  this.add(tbnachname);
+		  this.add(lbvorname);
+		  this.add(tbvorname);
+		  this.add(loeschen);
+
 		  getSelectedData();
 
 		  loeschen.addClickHandler(new ClickHandler() {
@@ -58,18 +62,20 @@ public class DeleteDozent extends Content {
 					 boolean allFilled = true;
 				  
 					  if (allFilled == true) {	
-						  emptyWidget(); }
+						  emptyWidget(); 
+						  Dozent d = new Dozent();
+					  }
 					  if (dozent.size() != 0) {
 						  verwaltungsSvc.deleteDozent(d, new AsyncCallback<Void>() {
 							  @Override
 							  public void onFailure (Throwable caught) {
-								  Window.alert("Der Dozent konnte nicht gelöscht werden.");
+								  Window.alert("Der Dozent konnte nicht gelöscht werden." +
+								  		"Er ist in ein oder mehreren Stundenplaneinträgen eingetragen");
 							  }
 
 							  @Override
 							  public void onSuccess(Void result) {
 								  Window.alert ("Erfolgreich gelöscht.");
-								  emptyWidget(); 	
 							  } 	
 							});
 					  }
@@ -95,13 +101,5 @@ public class DeleteDozent extends Content {
 		  
 public void emptyWidget(){
 this.emptyWidget();
-}
-
-public void showWidget() {
-this.add(lbnachname);
-this.add(tbnachname);
-this.add(lbvorname);
-this.add(tbvorname);
-this.add(loeschen);
 }
 }

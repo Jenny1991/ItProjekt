@@ -46,13 +46,14 @@ public class CreateStundenplaneintrag extends Content {
 		  final Label lbstudiengang = new Label ("Studiengang");
 		  final Label lbsemesterverband = new Label ("Semesterverband");
 		  final Label lblehrveranstaltung = new Label ("Lehrveranstaltung");
-		  final ListBox tbdozent = new ListBox (false);
-		  final ListBox tbzeitslot = new ListBox (false);
-		  final ListBox tbraum = new ListBox (false);
-		  final ListBox tbstudiengang = new ListBox(false); 
-		  final ListBox tbsemesterverband = new ListBox (false); 
-		  final ListBox tblehrveranstaltung = new ListBox (false);
+		  final ListBox tbdozent = new ListBox ();
+		  final ListBox tbzeitslot = new ListBox ();
+		  final ListBox tbraum = new ListBox ();
+		  final ListBox tbstudiengang = new ListBox(); 
+		  final ListBox tbsemesterverband = new ListBox (); 
+		  final ListBox tblehrveranstaltung = new ListBox ();
 		  final Button speichern = new Button ("speichern");
+		  final HorizontalPanel hPanel = new HorizontalPanel();
 		  
 		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 		  
@@ -63,17 +64,17 @@ public class CreateStundenplaneintrag extends Content {
 
 				  this.add(ueberschrift);
 			  	  this.add(lbdozent);
-				  this.add(tbdozent);
+				  hPanel.add(tbdozent);
 				  this.add(lbzeitslot);
-				  this.add(tbzeitslot);
+				  hPanel.add(tbzeitslot);
 				  this.add(lbraum);
-				  this.add(tbraum);
+				  hPanel.add(tbraum);
 				  this.add(lbstudiengang);
-				  this.add(tbstudiengang);
+				  hPanel.add(tbstudiengang);
 				  this.add(lbsemesterverband);
-				  this.add(tbsemesterverband);
+				  hPanel.add(tbsemesterverband);
 				  this.add(lblehrveranstaltung);
-				  this.add(tblehrveranstaltung);
+				  hPanel.add(tblehrveranstaltung);
 				  this.add(speichern);
 				  				  
 				  verwaltungsSvc.getAllDozenten(new AsyncCallback<Vector<Dozent>>(){
@@ -90,9 +91,22 @@ public class CreateStundenplaneintrag extends Content {
 					  }
 				  });
 				  
+				  verwaltungsSvc.getAllSemesterverbaende(new AsyncCallback<Vector<Semesterverband>>(){
+					  @Override
+					  public void onFailure (Throwable caught) {
+					  }
+					  @Override
+					  public void onSuccess(Vector<Semesterverband> result){
+						  int i = 0; 
+						  while (!result.isEmpty()) {
+							  tbsemesterverband.addItem(result.get(i).getBezeichnung() + "/" + result.get(i).getJahrgang()
+							  + "/" + result.get(i).getSemester() + "/" + result.get(i).getStudierendenAnzahl());
+							  i++;
+						  }
+					  }
+				  });
 				  
-				  
-				  
+				  				  
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
 						  addStundenplaneintrag();
