@@ -128,7 +128,7 @@ public class CreateStundenplaneintrag extends Content {
 						  
 						  Stundenplaneintrag stdpe = new Stundenplaneintrag();
 						  
-						  verwaltungsSvc.createStundenplaneintrag(d, l, r, z, sv, new AsyncCallback<Stundenplaneintrag>() {
+					/**	  verwaltungsSvc.createStundenplaneintrag(d, l, r, z, sv, new AsyncCallback<Stundenplaneintrag>() {
 								 @Override
 								  public void onFailure (Throwable caught) {
 								  }
@@ -137,7 +137,7 @@ public class CreateStundenplaneintrag extends Content {
 								  public void onSuccess(Stundenplaneintrag result) {
 									  Window.alert("Erfolgreich gespeichert");
 								  }
-							  });
+							  }); */
 					  		}
 						 });
 				  

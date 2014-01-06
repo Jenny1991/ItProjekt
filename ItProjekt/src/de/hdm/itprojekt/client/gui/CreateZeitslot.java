@@ -1,25 +1,17 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Zeitslot;
-import de.hdm.itprojekt.client.ItProjekt;
-import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 
 
 	/**
@@ -96,8 +88,8 @@ import de.hdm.itprojekt.client.gui.ZeitslotForm;;
 								  public void onSuccess(Zeitslot result) {
 									  
 									  tbwochentag.setText("");
-									  tbanfangszeit.setVisibleLength(anfangszeit);
-									  tbendzeit.setVisibleLength(endzeit);
+							//		  tbanfangszeit.setVisibleLength(anfangszeit);
+								//	  tbendzeit.setVisibleLength(endzeit);
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								});

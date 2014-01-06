@@ -66,7 +66,7 @@ public class DeleteSemesterverband extends Content {
 			  public void onClick(ClickEvent event) {			
 					if (shownSv!=null){
 						shownSv.setJahrgang(tbjahrgang.getText());
-						shownSv.setBezeichnung(tbstudiengang.getText());
+				//		shownSv.setBezeichnung(tbstudiengang.getText());
 						shownSv.setSemester(tbsemester.getVisibleLength());
 						shownSv.setStudierendenAnzahl(tbanzahl.getVisibleLength());
 						deleteSelectedSemesterverband();
@@ -83,7 +83,7 @@ public class DeleteSemesterverband extends Content {
 			  
 			  private void deleteSemesterverband () {
 				  if (sv.isEmpty()){
-					  verwaltungsSvc.deleteSemesterverband(sv, new AsyncCallback<Void>(){
+				/**	  verwaltungsSvc.deleteSemesterverband(sv, new AsyncCallback<Void>(){
 						  @Override
 						  public void onFailure (Throwable caught) {
 							  Window.alert("Der Semesterverband konnte nicht gelöscht werden.");
@@ -94,7 +94,7 @@ public class DeleteSemesterverband extends Content {
 							  Window.alert ("Erfolgreich gelöscht.");
 							  emptyWidget(); 	
 						}
-					  });
+					  }); */
 				  }
 			  }
 	  });

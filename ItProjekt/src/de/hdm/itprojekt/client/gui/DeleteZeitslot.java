@@ -76,7 +76,7 @@ public class DeleteZeitslot  extends Content {
 				  
 				  private void deleteZeitslot () {
 					  if (zeitslot.isEmpty()){
-						  verwaltungsSvc.deleteZeitslot(zeitslot, new AsyncCallback<Void>(){
+			/**			  verwaltungsSvc.deleteZeitslot(zeitslot, new AsyncCallback<Void>(){
 							  @Override
 							  public void onFailure (Throwable caught) {
 								  Window.alert("Das Zeitslot konnte nicht gelöscht werden.");
@@ -87,7 +87,7 @@ public class DeleteZeitslot  extends Content {
 								  Window.alert ("Erfolgreich gelöscht.");
 								  emptyWidget(); 	
 							}
-						  });
+						  }); */
 					  }
 				  }
 		  });

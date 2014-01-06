@@ -65,7 +65,7 @@ public class DeleteStudiengang extends Content {
 			  
 			  private void deleteStudiengang () {
 				  if (sg.isEmpty()){
-					  verwaltungsSvc.deleteStudiengang(sg, new AsyncCallback<Void>(){
+				/**	  verwaltungsSvc.deleteStudiengang(sg, new AsyncCallback<Void>(){
 						  @Override
 						  public void onFailure (Throwable caught) {
 							  Window.alert("Der Studiengang konnte nicht gelöscht werden.");
@@ -76,7 +76,7 @@ public class DeleteStudiengang extends Content {
 							  Window.alert ("Erfolgreich gelöscht.");
 							  emptyWidget(); 	
 						}
-					  });
+					  }); */
 				  }
 			  }
 	  });

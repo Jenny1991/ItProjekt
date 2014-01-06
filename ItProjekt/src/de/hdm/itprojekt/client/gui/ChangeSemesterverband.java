@@ -11,8 +11,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
 import de.hdm.itprojekt.shared.*;
-import de.hdm.itprojekt.shared.bo.Dozent;
-import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
 import de.hdm.itprojekt.shared.bo.Semesterverband;
 
 public class ChangeSemesterverband extends Content {
@@ -73,7 +71,7 @@ public class ChangeSemesterverband extends Content {
 					  if (allFilled == true) { 
 						  Semesterverband sv = new Semesterverband();
 						  sv.setJahrgang(tbjahrgang.getText().trim());
-						  sv.setBezeichnung(tbstudiengang.getText());
+						//  sv.setBezeichnung(tbstudiengang.getText());
 						  sv.setStudierendenAnzahl(tbanzahl.getVisibleLength());
 						  sv.setSemester(tbsemester.getVisibleLength());
 						  tbjahrgang.setFocus(true);
@@ -103,7 +101,7 @@ public class ChangeSemesterverband extends Content {
 		  }
 		  
 		  public void getSelectedData(){
-			  verwaltungsSvc.getSemesterverband(new AsyncCallback<Semesterverband>() {
+		/**	  verwaltungsSvc.getSemesterverband(new AsyncCallback<Semesterverband>() {
 
 				  @Override
 				  public void onFailure (Throwable caught) {
@@ -117,7 +115,7 @@ public class ChangeSemesterverband extends Content {
 					  tbsemester.setVisibleLength(result.getSemester());
 					  tbanzahl.setVisibleLength(result.getStudierendenAnzahl());
 					}
-		  		});
+		  		}); */
 		  	}
 	}
 

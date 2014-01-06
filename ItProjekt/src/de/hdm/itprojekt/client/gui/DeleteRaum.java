@@ -63,7 +63,7 @@ public class DeleteRaum extends Content {
 					  
 					  public void deleteRaum(){
 						  if (raum.isEmpty()){
-							  verwaltungsSvc.deleteRaum(raum, new AsyncCallback<Void>(){
+					/**		  verwaltungsSvc.deleteRaum(raum, new AsyncCallback<Void>(){
 								  @Override
 								  public void onFailure (Throwable caught) {
 									  Window.alert("Der Raum konnte nicht gelöscht werden.");
@@ -74,7 +74,7 @@ public class DeleteRaum extends Content {
 									  Window.alert ("Erfolgreich gelöscht.");
 									  emptyWidget(); 
 								  }
-							  });
+							  }); */
 						  }
 					  }
 			  });
