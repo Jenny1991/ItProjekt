@@ -75,8 +75,8 @@ public class StundenplaneintragMapper {
       Statement stmt = con.createStatement();
 
       // Statement ausfüllen und als Query an die DB schicken
-      ResultSet rs = stmt.executeQuery("SELECT id, dozentId, raumId, zeitslotId, "
-    		  + "semesterverbandId, lehrveranstaltungId FROM Stundenplaneintrag "
+      ResultSet rs = stmt.executeQuery("SELECT id, dozentid, raumid, zeitslotid, "
+    		  + "semesterverbandid, lehrveranstaltungid, stundenplanid FROM Stundenplaneintrag "
     		  + "WHERE id=" + id);
 
       /*
@@ -87,11 +87,12 @@ public class StundenplaneintragMapper {
         // Ergebnis-Tupel in Objekt umwandeln
         Stundenplaneintrag s = new Stundenplaneintrag();
         s.setId(rs.getInt("id"));
-        s.setDozentId(rs.getInt("dozentId"));
-        s.setRaumId(rs.getInt("raumId"));
-        s.setZeitslotId(rs.getInt("zeitslotId"));
-        s.setSemesterverbandId(rs.getInt("semesterverbandId"));
-        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungId"));
+        s.setStundenplanId(rs.getInt("stundenplanid"));
+        s.setDozentId(rs.getInt("dozentid"));
+        s.setRaumId(rs.getInt("raumid"));
+        s.setZeitslotId(rs.getInt("zeitslotid"));
+        s.setSemesterverbandId(rs.getInt("semesterverbandid"));
+        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungid"));
         
         return s;
       }
@@ -121,30 +122,27 @@ public class StundenplaneintragMapper {
     try {
       Statement stmt = con.createStatement();
 
-      ResultSet rs = stmt.executeQuery("SELECT stundenplaneintrag.id, stundenplaneintrag.dozentId, stundenplaneintrag.raumId, stundenplaneintrag.zeitslotId, "
-    	+ "stundenplaneintrag.semesterverbandId, stundenplaneintrag.lehrveranstaltungId, "
+      ResultSet rs = stmt.executeQuery("SELECT stundenplaneintrag.id, stundenplaneintrag.dozentid, stundenplaneintrag.raumid, "
+    	+ "stundenplaneintrag.zeitslotid, stundenplaneintrag.semesterverbandid, stundenplaneintrag.lehrveranstaltungid "
     	+ "FROM stundenplaneintrag "
-    	+ "INNER JOIN ( "
-    	+ "stundenplaneintragzeitslot "
-    	+ "INNER JOIN "
+    	+ "INNER JOIN zeitslot "
     	+ "zeitslot "
     	+ "ON "
-    	+ "zeitslot.id = stundenplaneintragzeitslot.zeitslotid) "
-    	+ "ON "
-    	+ "stundenplaneintrag.zeitslotid = stundenplaneintragzeitslot.zeitslotid "
+    	+ "zeitslot.id = stundenplaneintrag.zeitslotid) "
     	+ "WHERE "
-    	+ "stundenplaneintrag.dozentid =  " + dozentid
+    	+ "stundenplaneintrag.dozentid = " + dozentid
     	+ " ORDER BY zeitslot.anfangszeit");
 
       // Für jeden Eintrag im Suchergebnis wird nun ein Stundenplaneintrag-Objekt erstellt.
       while (rs.next()) {
         Stundenplaneintrag s = new Stundenplaneintrag();
         s.setId(rs.getInt("id"));
-        s.setDozentId(rs.getInt("dozentId"));
-        s.setRaumId(rs.getInt("raumId"));
-        s.setZeitslotId(rs.getInt("zeitslotId"));
-        s.setSemesterverbandId(rs.getInt("semesterverbandId"));
-        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungId"));
+        s.setStundenplanId(rs.getInt("stundenplanid"));
+        s.setDozentId(rs.getInt("dozentid"));
+        s.setRaumId(rs.getInt("raumid"));
+        s.setZeitslotId(rs.getInt("zeitslotid"));
+        s.setSemesterverbandId(rs.getInt("semesterverbandid"));
+        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungid"));
 
         // Hinzufügen des neuen Objekts zum Ergebnisvektor
         result.addElement(s);
@@ -175,8 +173,8 @@ public class StundenplaneintragMapper {
     try {
       Statement stmt = con.createStatement();
 
-      ResultSet rs = stmt.executeQuery("SELECT stundenplaneintrag.id, stundenplaneintrag.dozentId, stundenplaneintrag.raumId, stundenplaneintrag.zeitslotId, "
-    	+ "stundenplaneintrag.semesterverbandId, stundenplaneintrag.lehrveranstaltungId, "
+      ResultSet rs = stmt.executeQuery("SELECT stundenplaneintrag.id, stundenplaneintrag.dozentid, stundenplaneintrag.raumid, "
+    	+ "stundenplaneintrag.zeitslotid, stundenplaneintrag.semesterverbandid, stundenplaneintrag.lehrveranstaltungid "
     	+ "FROM stundenplaneintrag "
     	+ "INNER JOIN "
     	+ "zeitslot "
@@ -190,11 +188,11 @@ public class StundenplaneintragMapper {
       while (rs.next()) {
         Stundenplaneintrag s = new Stundenplaneintrag();
         s.setId(rs.getInt("id"));
-        s.setDozentId(rs.getInt("dozentId"));
-        s.setRaumId(rs.getInt("raumId"));
-        s.setZeitslotId(rs.getInt("zeitslotId"));
-        s.setSemesterverbandId(rs.getInt("semesterverbandId"));
-        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungId"));
+        s.setDozentId(rs.getInt("dozentid"));
+        s.setRaumId(rs.getInt("raumid"));
+        s.setZeitslotId(rs.getInt("zeitslotid"));
+        s.setSemesterverbandId(rs.getInt("semesterverbandid"));
+        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungid"));
 
         // Hinzufügen des neuen Objekts zum Ergebnisvektor
         result.addElement(s);
@@ -225,8 +223,8 @@ public class StundenplaneintragMapper {
     try {
       Statement stmt = con.createStatement();
 
-      ResultSet rs = stmt.executeQuery("SELECT id, dozentId, raumId, zeitslotId, "
-    	+ "semesterverbandId, lehrveranstaltungId "
+      ResultSet rs = stmt.executeQuery("SELECT id, dozentid, raumid, zeitslotid, "
+    	+ "semesterverbandid, lehrveranstaltungid "
     	+ "FROM stundenplaneintrag "
         + " ORDER BY id");
 
@@ -294,36 +292,6 @@ public class StundenplaneintragMapper {
             + s.getId() + "," + s.getDozentId() + "," + s.getRaumId() + s.getZeitslotId()  
             + s.getSemesterverbandId() + s.getLehrveranstaltungId() );
         
-        // Einfügeoperation für die Zwischentabelle stundenplaneintragsemesterverband
-        rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-                + "FROM stundenplaneintragsemesterverband ");
-        
-        stundenplaneintragsemesterverbandid = rs.getInt("maxid") + 1;
-        
-        stmt.executeUpdate("INSERT INTO stundenplaneintragsemesterverband "
-        	  + "(id, stundenplaneintragid, semesterverbandid) "
-       		  + "VALUES ("
-              + stundenplaneintragsemesterverbandid + "," + s.getId() + "," + s.getSemesterverbandId() );
-        
-        // Einfügeoperation für die Zwischentabelle stundenplaneintragzeitslotid
-        rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-                + "FROM stundenplaneintragzeitslot ");
-        
-        stundenplaneintragzeitslotid = rs.getInt("maxid") + 1;
-        
-        stmt.executeUpdate("INSERT INTO stundenplaneintragzeitslot "
-        	  + "(id, stundenplaneintragid, zeitslotid) "
-       		  + "VALUES (" + stundenplaneintragsemesterverbandid + "," + s.getId() + "," + s.getZeitslotId() );
-        
-        // Einfügeoperation für die Zwischentabelle stundenplaneintragstundenplan
-        rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-                + "FROM stundenplaneintragstundenplan ");
-        
-        stundenplaneintragstundenplanid = rs.getInt("maxid") + 1;
-        
-        stmt.executeUpdate("INSERT INTO stundenplaneintragstundenplan "
-        	  + "(id, stundenplaneintragid, zeitslotid) "
-       		  + "VALUES (" + stundenplaneintragstundenplanid + "," + s.getId() + "," + s.getStundenplanId() );
       }
     }
     catch (SQLException e2) {
@@ -354,25 +322,13 @@ public class StundenplaneintragMapper {
     try {
       Statement stmt = con.createStatement(); 
 
-      stmt.executeUpdate("UPDATE stundenplaneintrag SET " + "lehrveranstaltungid=\""
-              + s.getLehrveranstaltungId() + "\", " + "raumid=\""
-              + s.getRaumId() + "\", " + "dozentid=\"" + s.getDozentId()
-              + "\" " + "WHERE id=" + s.getId());
-      
-      stmt.executeUpdate("UPDATE stundenplaneintragsemesterverband SET " + "semesterverbandid=\""
-              + s.getSemesterverbandId() + "\", " + "stundenplaneintragid=\""
-              + s.getId() + "\""
+      stmt.executeUpdate("UPDATE stundenplaneintrag SET " 
+    		  + "lehrveranstaltungid=\"" + s.getLehrveranstaltungId() + "\", " 
+    		  + "raumid=\"" + s.getRaumId() + "\", " 
+    		  + "dozentid=\"" + s.getDozentId() + "\", "
+    		  + "zeitslotid=\"" +  s.getZeitslotId() + "\", "
+    		  + "semesterverbandid=\"" + s.getSemesterverbandId() + "\", "
               + "WHERE id=" + s.getId());
-      
-      stmt.executeUpdate("UPDATE stundenplaneintragstundenplan SET " + "stundenplanid=\""
-              + s.getStundenplanId() + "\", " + "stundenplaneintragid=\""
-              + s.getId()
-              + "\" " + "WHERE id=" + s.getId());
-      
-      stmt.executeUpdate("UPDATE stundenplaneintragzeitslot SET " + "zeitslotid=\""
-              + s.getZeitslotId() + "\", " + "stundenplaneintragid=\""
-              + s.getId()
-              + "\" " + "WHERE id=" + s.getId());
 
     }
     catch (SQLException e2) {
@@ -395,9 +351,6 @@ public class StundenplaneintragMapper {
       Statement stmt = con.createStatement();
 
       stmt.executeUpdate("DELETE FROM stundenplaneintrag " + "WHERE id=" + s.getId());
-      stmt.executeUpdate("DELETE FROM stundenplaneintragsemesterverband " + "WHERE stundenplaneintragid=" + s.getId());
-      stmt.executeUpdate("DELETE FROM stundenplaneintragstundenplan " + "WHERE stundenplaneintragid=" + s.getId());
-      stmt.executeUpdate("DELETE FROM stundenplaneintragzeitslot " + "WHERE stundenplaneintragid=" + s.getId());
 
     }
     catch (SQLException e2) {
