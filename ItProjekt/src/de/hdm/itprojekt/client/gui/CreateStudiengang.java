@@ -72,7 +72,7 @@ public class CreateStudiengang extends Content {
 
 						  @Override
 						  public void onSuccess(Studiengang result) {
-							  tbbezeichnung.setText(result.getBezeichnung());
+							  tbbezeichnung.setText("");
 							  Window.alert ("Erfolgreich gespeichert.");
 						  } 	
 						});

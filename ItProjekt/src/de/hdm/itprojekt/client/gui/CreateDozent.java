@@ -58,7 +58,7 @@ public class CreateDozent extends Content {
 				  private void addDozent () {
 					  boolean allFilled = true;
 				  
-					  if (tbnachname.getText().isEmpty() || (tbvorname.getText().isEmpty())) {	
+					  if (tbnachname.getText().isEmpty() || tbvorname.getText().isEmpty()) {	
 						  allFilled = false;
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); } 
 					  

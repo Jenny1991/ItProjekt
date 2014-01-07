@@ -68,10 +68,8 @@ import de.hdm.itprojekt.shared.bo.Semesterverband;
 					  public void addSemesterverband(){
 						  boolean allFilled = true;
 						  
-						  if (tbjahrgang.getText().isEmpty());
-						  if (tbanzahl.getText().isEmpty());
-						  if (tbstudiengang.getText().isEmpty());
-						  if (tbsemester.getText().isEmpty()); 
+						  if (tbjahrgang.getText().isEmpty() || tbanzahl.getText().isEmpty()
+								  || tbstudiengang.getText().isEmpty() || tbsemester.getText().isEmpty()) 
 						  { allFilled = false;
 						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 						  

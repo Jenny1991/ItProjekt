@@ -63,10 +63,8 @@ import de.hdm.itprojekt.shared.bo.Zeitslot;
 					  public void addZeitslot(){
 						  boolean allFilled = true;
 						  
-						  if (tbwochentag.getText().isEmpty());
-						  if (tbanfangszeit.getText().isEmpty());
-						  if (tbendzeit.getText().isEmpty());
-						  {	allFilled = false;
+						  if (tbwochentag.getText().isEmpty() || tbanfangszeit.getText().isEmpty() || tbendzeit.getText().isEmpty()){
+							  allFilled = false;
 						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) { 

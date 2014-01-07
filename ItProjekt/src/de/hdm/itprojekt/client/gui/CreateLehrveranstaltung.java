@@ -81,7 +81,7 @@ import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
 					  public void addLehrveranstaltung(){
 						  boolean allFilled = true;
 						  
-						  if (tbbezeichnung.getValue().isEmpty());
+						  if (tbbezeichnung.getValue().isEmpty())
 						  {	allFilled = false;
 						  Window.alert("Bitte füllen Sie alle Felder aus."); }
 						 
