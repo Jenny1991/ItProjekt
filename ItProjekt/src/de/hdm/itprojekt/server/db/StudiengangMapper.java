@@ -75,7 +75,7 @@ public class StudiengangMapper {
       Statement stmt = con.createStatement();
 
       // Statement ausfüllen und als Query an die DB schicken
-      ResultSet rs = stmt.executeQuery("SELECT id, bezeichnung FROM Studiengang "
+      ResultSet rs = stmt.executeQuery("SELECT id, bezeichnung FROM studiengang "
     		  + "WHERE id=" + id);
 
       /*
@@ -171,7 +171,7 @@ public class StudiengangMapper {
         stmt = con.createStatement();
 
         // Jetzt erst erfolgt die tatsächliche Einfügeoperation
-        stmt.executeUpdate("INSERT INTO studiengang (id, bezeichnung FROM Studiengang) " + "VALUES ("
+        stmt.executeUpdate("INSERT INTO studiengang (id, bezeichnung FROM studiengang) " + "VALUES ("
             + s.getId() + "," + s.getBezeichnung() );
       }
     }

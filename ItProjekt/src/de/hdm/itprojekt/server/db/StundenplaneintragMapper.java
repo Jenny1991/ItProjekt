@@ -262,9 +262,6 @@ public class StundenplaneintragMapper {
    */
   public Stundenplaneintrag insert(Stundenplaneintrag s) {
     Connection con = DBConnection.connection();
-    int stundenplaneintragzeitslotid;
-    int stundenplaneintragsemesterverbandid;
-    int stundenplaneintragstundenplanid;
 
     try {
       Statement stmt = con.createStatement();
