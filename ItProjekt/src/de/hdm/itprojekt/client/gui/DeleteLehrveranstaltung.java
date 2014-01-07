@@ -27,9 +27,6 @@ import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
 public class DeleteLehrveranstaltung extends Content {
 	
 		private final HTML ueberschrift = new HTML ("<h2>Lehrveranstaltung löschen<h2>");
-
-		Lehrveranstaltung shownLV = null;
-		private ArrayList<Lehrveranstaltung> lv = new ArrayList<Lehrveranstaltung> ();
 		
 		/**
 		   * Unter der ï¿½berschrift trï¿½gt der User die neuen Daten der Lehrveranstaltung ein. 
@@ -38,33 +35,19 @@ public class DeleteLehrveranstaltung extends Content {
 		  final Label lbsemester = new Label ("Semester");
 		  final Label lbumfang = new Label ("Umfang");
 		  final TextBox tbbezeichnung = new TextBox ();
-		  final ListBox tbsemester = new ListBox(); {
-		    tbsemester.addItem("1");
-		    tbsemester.addItem("2");
-		    tbsemester.addItem("3");
-		    tbsemester.addItem("4");
-		    tbsemester.addItem("5");
-		    tbsemester.addItem("6");
-		    tbsemester.addItem("7");
-		    tbsemester.setVisibleItemCount(7);
-		    this.add(tbsemester);
-		    }
-		  final ListBox tbumfang = new ListBox (); {
-		  	tbumfang.addItem("1 SWS");
-		  	tbumfang.addItem("2 SWS");
-		  	tbumfang.addItem("3 SWS");
-		  	tbumfang.addItem("4 SWS");
-		  	tbumfang.setVisibleItemCount(4);
-		  	this.add(tbumfang);
-		    }
-		  final Button speichern = new Button ("speichern");
+		  final TextBox tbsemester = new TextBox();
+		  final TextBox tbumfang = new TextBox ();
 		  final Button loeschen = new Button ("löschen"); 
+		  
 		  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+		  Lehrveranstaltung lv = new Lehrveranstaltung();
 		  
 		  /**
 		  * Anordnen der Buttons und Labels auf den Panels
 		  */
 		  public void onLoad () {
+			  
+			  this.add(ueberschrift);
 			  this.add(lbbezeichnung);
 			  this.add(tbbezeichnung);
 			  this.add(lbsemester);
@@ -73,55 +56,48 @@ public class DeleteLehrveranstaltung extends Content {
 			  this.add(tbumfang);
 			  this.add(loeschen);
 			  
-			  loeschen.addClickHandler(new ClickHandler(){
-				public void onClick(ClickEvent event){
-					if (shownLV != null){
-						shownLV.setBezeichnung(tbbezeichnung.getText());
-						shownLV.setSemester(tbsemester.getSelectedIndex());
-						shownLV.setUmfang(tbumfang.getSelectedIndex());
-						deleteSelectedLehrveranstaltung();											  
+			  loeschen.addClickHandler(new ClickHandler() {
+				  public void onClick(ClickEvent event) {
+					  deleteDozent();
+				  } 
+			  
+				 private void deleteDozent () {
+					 /** ich brauche von Lui und Domi eine Methode die ich aufrufen kann, um zu sehen, ob die Lehrveranstaltung
+					  * noch in Stundenplaneinträgen eingetragen ist
+					  */				 
+					 
+					 if (lv != null) {
+						  verwaltungsSvc.deleteLehrveranstaltung(lv, new AsyncCallback<Void>(){
+							  public void onFailure (Throwable caught) {
+								  Window.alert("Der Dozent konnte nicht gelöscht werden." +
+								  		"Er ist in ein oder mehreren Stundenplaneinträgen eingetragen");
 							  }
-							}
-						  });
+
+							  @Override
+							  public void onSuccess(Void result) {
+								  Window.alert ("Erfolgreich gelöscht.");
+							  } 	
+							});
+					  }
 				  }
-		  		  
-	public void deleteSelectedLehrveranstaltung(){	 
-		showWidget();
-		speichern.addClickHandler(new ClickHandler() {
-		public void onClick(ClickEvent event) {
-			  deleteLehrveranstaltung();
-		  }
-		  
-		  private void deleteLehrveranstaltung () {
-			  if (lv.isEmpty()){
-			/**	  verwaltungsSvc.deleteLehrveranstaltung(lv, new AsyncCallback<Void>(){
-					  @Override
-					  public void onFailure (Throwable caught) {
-						  Window.alert("Die Lehrveranstaltung konnte nicht gelöscht werden.");
-					  }
-
-					  @Override
-					  public void onSuccess(Void result) {
-						  Window.alert ("Erfolgreich gelöscht.");
-						  emptyWidget(); 	
-					  }
-				  }); */
+				  });
+		  		this.clear();
 			  }
+
+public void getSelectedData(){
+/**	  verwaltungsSvc.getLehrveranstaltung(new AsyncCallback<Lehrveranstaltung>() {
+
+		  @Override
+		  public void onFailure (Throwable caught) {
 		  }
-  });
-	  }
 
-public void emptyWidget(){
-this.emptyWidget();
-}
-
-public void showWidget() {
-	  this.add(lbbezeichnung);
-	  this.add(tbbezeichnung);
-	  this.add(lbsemester);
-	  this.add(tbsemester);
-	  this.add(lbumfang);
-	  this.add(tbumfang);
-	  this.add(speichern);
-}
+		  @Override
+		  public void onSuccess(Lehrveranstaltung result) {
+			  if (result != null);
+			  tbbezeichnung.setText(result.getBezeichnung().trim());
+			  tbsemester.setVisibleLength(result.getSemester());
+			  tbumfang.setVisibleLength(result.getUmfang());
+			}
+		});*/
+	}
 }
