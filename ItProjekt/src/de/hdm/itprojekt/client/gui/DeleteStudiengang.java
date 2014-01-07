@@ -1,7 +1,5 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.ArrayList;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -27,70 +25,67 @@ public class DeleteStudiengang extends Content {
 	
 	private final HTML ueberschrift = new HTML ("<h2>Studiengang löschen<h2>");
 	
-	Studiengang shownSg = null;
-	private ArrayList<Studiengang> sg = new ArrayList<Studiengang> ();
-	
 	/**
 	   * Unter der ï¿½berschrift trï¿½gt der User die neuen Daten des Studiengangs ein. 
 	   */
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final TextBox tbbezeichnung = new TextBox ();
-	  final Button speichern = new Button ("speichern");
 	  final Button loeschen = new Button ("löschen");
+
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+	  Studiengang sg = new Studiengang();
 	  
 	  public void onLoad () {
 		  
-		  this.add(ueberschrift);
-		  
+		  this.add(ueberschrift);		  
 		  this.add(lbbezeichnung);
 		  this.add(tbbezeichnung);
 		  this.add(loeschen);
 		  
-		  loeschen.addClickHandler(new ClickHandler(){
-			  public void onClick(ClickEvent event) {			
-					if (shownSg!=null){
-						shownSg.setBezeichnung(tbbezeichnung.getText());
-						deleteSelectedStudiengang();
-					}
-			  }
-
-			  
-		  public void deleteSelectedStudiengang(){	 
-			 showWidget();
-			  speichern.addClickHandler(new ClickHandler() {
+		  getSelectedData();
+		  
+		  loeschen.addClickHandler(new ClickHandler() {
 			  public void onClick(ClickEvent event) {
 				  deleteStudiengang();
-			  }
-			  
-			  private void deleteStudiengang () {
-				  if (sg.isEmpty()){
-				/**	  verwaltungsSvc.deleteStudiengang(sg, new AsyncCallback<Void>(){
+			  } 
+		  
+			 private void deleteStudiengang () {
+				 /** ich brauche von Lui und Domi eine Methode die ich aufrufen kann, um zu sehen, ob der Studiengang noch in 
+				  * Stundenplaneinträgen eingetragen ist
+				  */				 
+				 
+				 if (sg != null) {
+					  verwaltungsSvc.deleteStudiengang(sg, new AsyncCallback<Void>() {
 						  @Override
 						  public void onFailure (Throwable caught) {
-							  Window.alert("Der Studiengang konnte nicht gelöscht werden.");
+							  Window.alert("Der Studiengang konnte nicht gelöscht werden." +
+							  		"Er ist in ein oder mehreren Stundenplaneinträgen eingetragen");
 						  }
 
 						  @Override
 						  public void onSuccess(Void result) {
 							  Window.alert ("Erfolgreich gelöscht.");
-							  emptyWidget(); 	
-						}
-					  }); */
+						  } 	
+						});
 				  }
 			  }
-	  });
+			  });
+	  		this.clear();
 		  }
-		  });
-  }
-	  
-public void emptyWidget(){
-	this.emptyWidget();
-}
-public void showWidget() {
-  this.add(lbbezeichnung);
-  this.add(tbbezeichnung);
-  this.add(speichern);
-}
+
+	  public void getSelectedData(){
+		  verwaltungsSvc.getStudiengang(new AsyncCallback<Studiengang>() {
+
+			  @Override
+			  public void onFailure (Throwable caught) {
+			  }
+
+			  @Override
+			  public void onSuccess(Studiengang result) {
+				  if (result != null);
+				  tbbezeichnung.setText(result.getBezeichnung().trim());
+				}
+	  		});
+	  	}
 }
 

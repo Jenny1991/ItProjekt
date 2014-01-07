@@ -12,6 +12,7 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.Vector;
 
+
 import com.google.gwt.core.shared.GWT;
 //import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -51,7 +52,7 @@ import de.hdm.itprojekt.shared.bo.Dozent;
 
 
 /**
- * @author Hofmann
+ * @author V. Hofmann
  *
  */
 public class DozentForm extends Content {
@@ -82,7 +83,9 @@ public class DozentForm extends Content {
 	//Dozent shownDozent = null;*/
 	
 
-	
+	/**
+	 * Folgende Methode definiert die Widgets beim Laden der Seite
+	 */
 	public void onLoad() {
 		
 		this.add(ueberschrift);
@@ -136,9 +139,9 @@ public class DozentForm extends Content {
 							/*tabelleDozent.setText(0, 0, "Nachname");
 							//tabelleDozent.setCellPadding(10);
 							tabelleDozent.setText(0, 1, "Vorname");
-							tabelleDozent.setText(0, 3, "Funktionen");*/
+							tabelleDozent.setText(0, 3, "Funktionen");
 							tabelleDozent.setWidget(1, 3, deleteDozentButton);
-							tabelleDozent.setWidget(1, 4, changeDozentButton);
+							tabelleDozent.setWidget(1, 4, changeDozentButton);*/
 							
 							
 							int firstRow = 1;
@@ -184,6 +187,10 @@ public class DozentForm extends Content {
 		
 	}
 	
+	
+	/**
+	 * Widgets werden angezeigt
+	 */
 	public void showWidget() {
 		
 		this.add(tabelleDozent);
@@ -193,16 +200,26 @@ public class DozentForm extends Content {
 
 	}
 	
+	/**
+	 * Zugriff auf die Klasse CreateDozent zum Erstellen eines Dozenten
+	 */
 	public void showCreate() {
 		this.clear();
 		this.add(createD);
 	}
 	
+	
+	/**
+	 * Zugriff auf die Klasse ChangeDozent zum Bearbeiten eines Dozenten
+	 */
 	public void showChange() {
 		this.clear();
 		this.add(changeD);
 	}
 
+	/**
+	 * Zugriff auf die Klasse DeleteDozent zum Löschen eiens Dozenten
+	 */
 	public void showDelete() {
 		this.clear();
 		this.add(deleteD);
