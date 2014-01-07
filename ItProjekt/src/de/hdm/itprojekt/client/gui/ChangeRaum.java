@@ -8,14 +8,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.itprojekt.shared.Verwaltungsklasse;
-import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
-import de.hdm.itprojekt.shared.bo.Dozent;
-import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
+import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Raum;
 
 public class ChangeRaum extends Content {
@@ -91,7 +86,7 @@ public class ChangeRaum extends Content {
 		  }
 		  
 		  public void getSelectedData(){
-			  verwaltungsSvc.getRaum(new AsyncCallback<Raum>() {
+		/**	  verwaltungsSvc.getRaum(new AsyncCallback<Raum>() {
 
 				  @Override
 				  public void onFailure (Throwable caught) {
@@ -103,7 +98,7 @@ public class ChangeRaum extends Content {
 					  tbbezeichnung.setText(result.getBezeichnung().trim());
 					  tbkapazitaet.setVisibleLength(result.getKapazitaet());
 					}
-		  		});
+		  		}); */
 		  	}
 	}
 

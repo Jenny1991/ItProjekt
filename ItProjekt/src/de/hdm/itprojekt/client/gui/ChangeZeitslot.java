@@ -11,7 +11,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
 import de.hdm.itprojekt.shared.*;
-import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
 import de.hdm.itprojekt.shared.bo.Zeitslot;
 
 public class ChangeZeitslot extends Content {
@@ -82,8 +81,8 @@ public class ChangeZeitslot extends Content {
 								  @Override
 								  public void onSuccess(Zeitslot result) {
 									  tbwochentag.setText("");
-									  tbanfangszeit.setVisibleLength(result.getAnfangszeit());
-									  tbendzeit.setVisibleLength(result.getEndzeit());
+									/**  tbanfangszeit.setVisibleLength(result.getAnfangszeit());
+									  tbendzeit.setVisibleLength(result.getEndzeit()); */
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
 								});
@@ -93,7 +92,7 @@ public class ChangeZeitslot extends Content {
 			  }
 			  
 			  public void getSelectedData(){
-				  verwaltungsSvc.getZeitslot(new AsyncCallback<Zeitslot>() {
+				  /**	  verwaltungsSvc.getZeitslot(new AsyncCallback<Zeitslot>() {
 
 					  @Override
 					  public void onFailure (Throwable caught) {
@@ -106,6 +105,6 @@ public class ChangeZeitslot extends Content {
 						  tbanfangszeit.setVisibleLength(result.getAnfangszeit());
 						  tbendzeit.setVisibleLength(result.getEndzeit());
 						}
-			  		});
+			  		});*/
 			  	}
 		}

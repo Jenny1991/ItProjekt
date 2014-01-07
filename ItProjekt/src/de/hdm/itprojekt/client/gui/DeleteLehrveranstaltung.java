@@ -94,7 +94,7 @@ public class DeleteLehrveranstaltung extends Content {
 		  
 		  private void deleteLehrveranstaltung () {
 			  if (lv.isEmpty()){
-				  verwaltungsSvc.deleteLehrveranstaltung(lv, new AsyncCallback<Void>(){
+			/**	  verwaltungsSvc.deleteLehrveranstaltung(lv, new AsyncCallback<Void>(){
 					  @Override
 					  public void onFailure (Throwable caught) {
 						  Window.alert("Die Lehrveranstaltung konnte nicht gelöscht werden.");
@@ -105,7 +105,7 @@ public class DeleteLehrveranstaltung extends Content {
 						  Window.alert ("Erfolgreich gelöscht.");
 						  emptyWidget(); 	
 					  }
-				  });
+				  }); */
 			  }
 		  }
   });

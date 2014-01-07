@@ -7,16 +7,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.itprojekt.shared.Verwaltungsklasse;
-import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
-import de.hdm.itprojekt.shared.bo.Dozent;
+import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
 
 /**
@@ -106,7 +100,7 @@ public class ChangeLehrveranstaltung extends Content {
 	  }
 	  
 	  public void getSelectedData(){
-		  verwaltungsSvc.getLehrveranstaltung(new AsyncCallback<Lehrveranstaltung>() {
+	/**	  verwaltungsSvc.getLehrveranstaltung(new AsyncCallback<Lehrveranstaltung>() {
 
 			  @Override
 			  public void onFailure (Throwable caught) {
@@ -119,6 +113,6 @@ public class ChangeLehrveranstaltung extends Content {
 				  tbsemester.setVisibleLength(result.getSemester());
 				  tbumfang.setVisibleLength(result.getUmfang());
 				}
-	  		});
+	  		});*/
 	  	}
 }

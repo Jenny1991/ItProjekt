@@ -7,7 +7,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
 
@@ -86,7 +85,7 @@ import de.hdm.itprojekt.shared.bo.Semesterverband;
 							  tbanzahl.setFocus(true);
 							  tbsemester.setFocus(true);
 			
-							  verwaltungsSvc.createSemesterverband(bezeichnung, semester, studierendenAnzahl, jahrgang, new AsyncCallback<Semesterverband>() {
+				/**			  verwaltungsSvc.createSemesterverband(bezeichnung, semester, studierendenAnzahl, jahrgang, new AsyncCallback<Semesterverband>() {
 
 								  @Override
 								  public void onFailure (Throwable caught) {
@@ -102,7 +101,7 @@ import de.hdm.itprojekt.shared.bo.Semesterverband;
 									  tbanzahl.setVisibleLength(studierendenAnzahl);
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
-								});
+								}); */
 						  }
 					  }
 					  });
