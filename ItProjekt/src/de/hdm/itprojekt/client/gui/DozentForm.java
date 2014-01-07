@@ -77,11 +77,6 @@ public class DozentForm extends Content {
 	final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 	 
 	
-	
-	/*VerwaltungsklasseAsync verwaltungsklasse = ClientsideSettings
-			.getVerwaltungsklasse();
-	//Dozent shownDozent = null;*/
-	
 
 	/**
 	 * Folgende Methode definiert die Widgets beim Laden der Seite
