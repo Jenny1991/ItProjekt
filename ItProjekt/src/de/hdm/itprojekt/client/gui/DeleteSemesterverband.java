@@ -1,7 +1,5 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.ArrayList;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -28,7 +26,7 @@ public class DeleteSemesterverband extends Content {
 	private final HTML ueberschrift = new HTML ("<h2>Semesterverband löschen<h2>");
 	
 	Semesterverband shownSv = null;
-	private ArrayList<Semesterverband> sv = new ArrayList<Semesterverband> ();
+	Semesterverband sv = new Semesterverband();
 	
 	/**
 	   * Unter der ï¿½berschrift trï¿½gt der User die neuen Daten des Semesterverbands ein. 
@@ -82,8 +80,8 @@ public class DeleteSemesterverband extends Content {
 			  }
 			  
 			  private void deleteSemesterverband () {
-				  if (sv.isEmpty()){
-				/**	  verwaltungsSvc.deleteSemesterverband(sv, new AsyncCallback<Void>(){
+				  if (sv != null){
+				  verwaltungsSvc.deleteSemesterverband(sv, new AsyncCallback<Void>(){
 						  @Override
 						  public void onFailure (Throwable caught) {
 							  Window.alert("Der Semesterverband konnte nicht gelöscht werden.");
@@ -94,7 +92,7 @@ public class DeleteSemesterverband extends Content {
 							  Window.alert ("Erfolgreich gelöscht.");
 							  emptyWidget(); 	
 						}
-					  }); */
+					  });
 				  }
 			  }
 	  });

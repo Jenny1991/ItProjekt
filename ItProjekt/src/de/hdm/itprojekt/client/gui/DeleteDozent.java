@@ -1,7 +1,5 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.ArrayList;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -59,13 +57,11 @@ public class DeleteDozent extends Content {
 				  } 
 			  
 				 private void deleteDozent () {
-					 boolean allFilled = true;
-				  
-					  if (allFilled == true) {	
-						  emptyWidget(); 
-						  Dozent d = new Dozent();
-					  }
-					  if (dozent.size() != 0) {
+					 /** ich brauche von Lui und Domi eine Methode die ich aufrufen kann, um zu sehen, ob der Dozent noch in 
+					  * Stundenplaneinträgen eingetragen ist
+					  */				 
+					 
+					 if (d != null) {
 						  verwaltungsSvc.deleteDozent(d, new AsyncCallback<Void>() {
 							  @Override
 							  public void onFailure (Throwable caught) {
@@ -80,7 +76,8 @@ public class DeleteDozent extends Content {
 							});
 					  }
 				  }
-				  });	  
+				  });
+		  		this.clear();
 			  }
 
 		  public void getSelectedData(){
@@ -98,8 +95,4 @@ public class DeleteDozent extends Content {
 					}
 		  		});
 		  	}
-		  
-public void emptyWidget(){
-this.emptyWidget();
-}
 }
