@@ -13,7 +13,6 @@ import de.hdm.itprojekt.server.db.ZeitslotMapper;
 import de.hdm.itprojekt.shared.Verwaltungsklasse;
 import de.hdm.itprojekt.shared.bo.*;
 
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
@@ -359,6 +358,12 @@ implements Verwaltungsklasse {
 
 	public Zeitslot changeZeitslot(Zeitslot z) throws IllegalArgumentException {
 		this.zeitslotMapper.update(z);
+		return null;
+	}
+
+	@Override
+	public Studiengang getStudiengang() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
