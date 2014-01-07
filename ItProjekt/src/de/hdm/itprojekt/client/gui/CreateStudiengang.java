@@ -55,7 +55,7 @@ public class CreateStudiengang extends Content {
 			  public void addStudiengang() {
 				  	boolean allFilled = true;
 			  
-				  	if (tbbezeichnung.getValue().isEmpty()); {
+				  	if (tbbezeichnung.getValue().isEmpty()) {
 					  allFilled = false;
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 				  					
