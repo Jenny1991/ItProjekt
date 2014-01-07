@@ -91,4 +91,6 @@ public interface VerwaltungsklasseAsync {
 	void getAllZeitslots(AsyncCallback<Vector<Zeitslot>> callback);
 	
 	void getStudiengang(AsyncCallback<Studiengang> callback);
+
+	void setStudiengang(Studiengang s, AsyncCallback<Void> callback);
 }

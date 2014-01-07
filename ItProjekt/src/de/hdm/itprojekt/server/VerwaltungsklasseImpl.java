@@ -45,6 +45,47 @@ implements Verwaltungsklasse {
 	private Dozent dozent = null;
 	private Raum raum = null;
 	private Semesterverband semesterverband = null;
+	private Studiengang studiengang = null;
+	private Lehrveranstaltung lehrveranstaltung = null;
+	private Stundenplaneintrag stundenplaneintrag = null;
+	private Stundenplan stundenplan = null;
+	
+	
+	public Stundenplaneintrag getStundenplaneintrag() {
+		return stundenplaneintrag;
+	}
+
+
+
+	public void setStundenplaneintrag(Stundenplaneintrag stundenplaneintrag) {
+		this.stundenplaneintrag = stundenplaneintrag;
+	}
+
+
+
+	public Stundenplan getStundenplan() {
+		return stundenplan;
+	}
+
+
+
+	public void setStundenplan(Stundenplan stundenplan) {
+		this.stundenplan = stundenplan;
+	}
+
+
+
+	public void setLehrveranstaltung(Lehrveranstaltung lehrveranstaltung) {
+		this.lehrveranstaltung = lehrveranstaltung;
+	}
+
+
+
+	public Lehrveranstaltung getLehrveranstaltung() {
+		return lehrveranstaltung;
+	}
+	
+
 	
 	public Dozent getDozent() {
 		return dozent;
@@ -70,6 +111,13 @@ implements Verwaltungsklasse {
 		this.semesterverband = semesterverband;
 	}
 
+	public Studiengang getStudiengang() throws IllegalArgumentException {
+		return studiengang;
+	}
+	
+	public void setStudiengang(Studiengang studiengang) throws IllegalArgumentException {
+		this.studiengang = studiengang;
+	}
 
 	public VerwaltungsklasseImpl() throws IllegalArgumentException {
 		
@@ -352,7 +400,7 @@ implements Verwaltungsklasse {
 
 	public Studiengang changeStudiengang(Studiengang s)
 			throws IllegalArgumentException {
-		//this.studiengangMapper.update(s)
+		this.studiengangMapper.update(s);
 		return null;
 	}
 
@@ -361,11 +409,4 @@ implements Verwaltungsklasse {
 		return null;
 	}
 
-	@Override
-	public Studiengang getStudiengang() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 }
