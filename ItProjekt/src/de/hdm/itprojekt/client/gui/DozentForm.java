@@ -126,7 +126,9 @@ public class DozentForm extends Content {
 	}
 		
 	
-
+	/**
+	 * Daten werden in die Tabelle geladen
+	 */
 	
 	public void getData() {
 		verwaltungsSvc.getAllDozenten(new AsyncCallback<Vector<Dozent>>() {
@@ -142,17 +144,23 @@ public class DozentForm extends Content {
 							tabelleDozent.setText(0, 3, "Funktionen");
 							tabelleDozent.setWidget(1, 3, deleteDozentButton);
 							tabelleDozent.setWidget(1, 4, changeDozentButton);*/
-							
+						
+							/**
+							 * Dozent wird in die Tabelle geladen
+							 */
 							
 							int firstRow = 1;
-							for (int i = 0; i<result.size(); i++) {
+							for (int i = 0; i < result.size(); i++) {
 								tabelleDozent.setText(firstRow, 0, String.valueOf(result.get(i).getNachname()));
-								tabelleDozent.setText(firstRow, 2, String.valueOf(result.get(i).getVorname()));
+								tabelleDozent.setText(firstRow, 1, String.valueOf(result.get(i).getVorname()));
 								tabelleDozent.setWidget(firstRow, 2, changeDozentButton);
 								tabelleDozent.setWidget(firstRow, 3, deleteDozentButton);
 								firstRow++;
 							}	
 							
+							/**
+							 * Definition der Buttons anlegen, löschen und bearbeiten
+							 */
 							createDozentButton.addClickHandler(new ClickHandler() {
 								public void onClick(ClickEvent event) {
 								showCreate();
@@ -171,7 +179,7 @@ public class DozentForm extends Content {
 								}
 							});
 							
-							showWidget();
+							//showWidget();
 							
 					} else {
 						Window.alert("Keine Dozenten in der Datenbank vorhanden");
