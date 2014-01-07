@@ -10,13 +10,23 @@ package de.hdm.itprojekt.client.gui;
 //import java.util.ArrayList;
 
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 
+
+
+
+
+import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.shared.GWT;
 //import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 //import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -37,6 +47,11 @@ import com.google.gwt.user.client.ui.FlexTable;
 
 
 
+import com.google.gwt.view.client.AsyncDataProvider;
+import com.google.gwt.view.client.HasData;
+import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.ProvidesKey;
+import com.google.gwt.view.client.Range;
 
 
 
@@ -57,14 +72,156 @@ import de.hdm.itprojekt.shared.bo.Dozent;
  */
 public class DozentForm extends Content {
 
+
+	public static class ContactInfo implements Comparable<ContactInfo> {
+
+		public static final ProvidesKey<ContactInfo> KEY_PROVIDER = new ProvidesKey<ContactInfo>() {
+			@Override
+			public Object getKey(ContactInfo item) {
+				return item == null ? null : item.getId();
+			}
+		};
+		
+		private String nachname;
+		private String vorname;
+		private int id;
+		
+	
+		@Override
+		public int compareTo(ContactInfo o) {
+			return (o == null || o.vorname == null) ? -1 : -o.vorname.compareTo(vorname);
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (o instanceof ContactInfo) {
+				return id == ((ContactInfo) o).id;
+			}
+			return false;
+		}
+		
+		public String getVorname() {
+			return vorname;
+		}
+		
+		public String getNachname() {
+			return nachname;
+		}
+		
+		public int getId() {
+			return this.id;
+		}
+		
+		@Override
+		public int hashCode() {
+			return id;
+		}
+		
+		public void setVorname(String vorname) {
+			this.vorname = vorname;
+		}
+		
+		public void setNachname(String nachname) {
+			this.nachname = nachname;
+		}	
+	}
+	
+	static interface DatabaseConstants extends Constants {
+		String [] contactDatabaseCategories();
+	}
+	
+	
+	private static DozentForm instance;
+	public static DozentForm get() {
+		if (instance == null) {
+			instance = new DozentForm();
+		}
+		return instance;
+	}
+	
+	
+	private ListDataProvider<ContactInfo> dataProvider = new ListDataProvider<ContactInfo>();
+	public void addContact(ContactInfo contact) {
+		List<ContactInfo> contacts = dataProvider.getList();
+		contacts.remove(contact);
+		contacts.add(contact);
+		}
+	
+
+	public void addDataDisplay(HasData<ContactInfo> display) {
+		dataProvider.addDataDisplay(display);
+	}
+	
+	public void generateContacts(int count) {
+		List<ContactInfo> contacts = dataProvider.getList();
+		for (int i = 0; i < count; i++) {
+			contacts.add(createContactInfo());
+		}
+ 	}
+	
+	public ListDataProvider<ContactInfo> getDataProvider() {
+		return dataProvider;
+	}
+	
+		
+	/*public void refreshDisplays() {
+		dataProvider.refresh();
+	}*/
+		
+	@SuppressWarnings("deprecation")
+	private ContactInfo createContactInfo() {
+		ContactInfo contact = new ContactInfo();
+		contact.setNachname(null);
+		return contact;
+	}
+	
+	
+	
+	
+	
+	
+}
+	
+	
+	
+	
+	/*private static final List<String> DOZENTS = Arrays.asList("");
+	
+	public void onLoad() {
+		TextCell textCell = new TextCell();
+		
+		final CellList<String> cellList = new CellList<String>(textCell);
+		
+		cellList.setRowCount(DOZENTS.size(), true);
+		
+		cellList.setVisibleRange(1, 3);
+		
+		AsyncDataProvider<String> dataProvider = new AsyncDataProvider<String>() {
+
+			@Override
+			protected void onRangeChanged(HasData<String> display) {
+				final Range range = display.getVisibleRange();
+				
+				
+			}
+			
+		}
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	/**
 	 * Aufbau der Seite, um den Dozent anzuzeigen, zu löschen und zu bearbeiten
-	 */
+	
 		
 	private final HTML ueberschrift = new HTML ("<h2>Übersicht der Dozenten<h2>");
-	
-	/*final TextBox nachnameTextBox = new TextBox();
-	final TextBox vornameTextBox = new TextBox();*/
+
 	final FlexTable tabelleDozent = new FlexTable();
 	final Button createDozentButton = new Button ("Dozent anlegen");
 	final Button changeDozentButton = new Button("Dozent bearbeiten");
@@ -80,7 +237,7 @@ public class DozentForm extends Content {
 
 	/**
 	 * Folgende Methode definiert die Widgets beim Laden der Seite
-	 */
+	 
 	public void onLoad() {
 		
 		this.add(ueberschrift);
@@ -89,8 +246,8 @@ public class DozentForm extends Content {
 		tabelleDozent.setCellPadding(10);
 		tabelleDozent.setText(0, 1, "Vorname");
 		tabelleDozent.setText(0, 3, "Funktionen");
-		/*tabelleDozent.setWidget(1, 3, deleteDozentButton);
-		tabelleDozent.setWidget(1, 4, changeDozentButton);
+		//tabelleDozent.setWidget(1, 3, deleteDozentButton);
+		//tabelleDozent.setWidget(1, 4, changeDozentButton);
 		
 		
 		createDozentButton.addClickHandler(new ClickHandler() {
@@ -112,7 +269,7 @@ public class DozentForm extends Content {
 		});*/
 		
 		
-		showWidget();
+		/*showWidget();
 		
 		getData();
 		
@@ -123,7 +280,7 @@ public class DozentForm extends Content {
 	
 	/**
 	 * Daten werden in die Tabelle geladen
-	 */
+	 
 	
 	public void getData() {
 		verwaltungsSvc.getAllDozenten(new AsyncCallback<Vector<Dozent>>() {
@@ -138,11 +295,11 @@ public class DozentForm extends Content {
 							tabelleDozent.setText(0, 1, "Vorname");
 							tabelleDozent.setText(0, 3, "Funktionen");
 							tabelleDozent.setWidget(1, 3, deleteDozentButton);
-							tabelleDozent.setWidget(1, 4, changeDozentButton);*/
+							tabelleDozent.setWidget(1, 4, changeDozentButton);
 						
 							/**
 							 * Dozent wird in die Tabelle geladen
-							 */
+							 
 							
 							int firstRow = 1;
 							for (int i = 0; i < result.size(); i++) {
@@ -155,7 +312,7 @@ public class DozentForm extends Content {
 							
 							/**
 							 * Definition der Buttons anlegen, löschen und bearbeiten
-							 */
+							 
 							createDozentButton.addClickHandler(new ClickHandler() {
 								public void onClick(ClickEvent event) {
 								showCreate();
@@ -193,7 +350,7 @@ public class DozentForm extends Content {
 	
 	/**
 	 * Widgets werden angezeigt
-	 */
+	 
 	public void showWidget() {
 		
 		this.add(tabelleDozent);
@@ -205,7 +362,7 @@ public class DozentForm extends Content {
 	
 	/**
 	 * Zugriff auf die Klasse CreateDozent zum Erstellen eines Dozenten
-	 */
+	 
 	public void showCreate() {
 		this.clear();
 		this.add(createD);
@@ -214,7 +371,7 @@ public class DozentForm extends Content {
 	
 	/**
 	 * Zugriff auf die Klasse ChangeDozent zum Bearbeiten eines Dozenten
-	 */
+	 
 	public void showChange() {
 		this.clear();
 		this.add(changeD);
@@ -222,7 +379,7 @@ public class DozentForm extends Content {
 
 	/**
 	 * Zugriff auf die Klasse DeleteDozent zum Löschen eiens Dozenten
-	 */
+	 
 	public void showDelete() {
 		this.clear();
 		this.add(deleteD);
@@ -233,9 +390,9 @@ public class DozentForm extends Content {
 			tabelleDozent.addItem(getAllDozenten.get(i).getVorname());
 			
 		}
-	}*/
+	}
 
-}
+}*/
 
 
 
@@ -321,6 +478,7 @@ public class DozentForm extends Content {
 		}
 	}
 	
-	
-}
-*/
+	*/
+
+
+
