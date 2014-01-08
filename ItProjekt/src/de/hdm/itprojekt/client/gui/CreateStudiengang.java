@@ -36,6 +36,7 @@ public class CreateStudiengang extends Content {
 	  final Button speichern = new Button ("speichern");
 	  
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+	  private Studiengang sg;
 	  
 	  /**
 	  * Anordnen der Buttons und Labels auf den Panels
@@ -58,10 +59,10 @@ public class CreateStudiengang extends Content {
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 
 				  	else {
-				  		final String bezeichnung = tbbezeichnung.getValue().trim();
+				  		sg.setBezeichnung(tbbezeichnung.getValue().trim());
 				  		tbbezeichnung.setFocus(true);
 				  
-					  verwaltungsSvc.createStudiengang(bezeichnung, new AsyncCallback<Studiengang>() {
+					  verwaltungsSvc.createStudiengang(sg, new AsyncCallback<Studiengang>() {
 
 						  @Override
 						  public void onFailure (Throwable caught) {
