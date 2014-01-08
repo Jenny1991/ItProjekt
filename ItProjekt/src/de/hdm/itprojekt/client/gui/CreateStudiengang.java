@@ -53,15 +53,13 @@ public class CreateStudiengang extends Content {
 			  }
 			  
 			  public void addStudiengang() {
-				  	boolean allFilled = true;
-			  
-				  	if (tbbezeichnung.getValue().isEmpty()) {
-					  allFilled = false;
+		  
+				  	if (!tbbezeichnung.getValue().isEmpty()) {
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); }
-				  					
-					 if (allFilled == true) {
-					  final String bezeichnung = tbbezeichnung.getValue().trim();
-					  tbbezeichnung.setFocus(true);
+
+				  	else {
+				  		final String bezeichnung = tbbezeichnung.getValue().trim();
+				  		tbbezeichnung.setFocus(true);
 				  
 					  verwaltungsSvc.createStudiengang(bezeichnung, new AsyncCallback<Studiengang>() {
 
@@ -72,7 +70,7 @@ public class CreateStudiengang extends Content {
 
 						  @Override
 						  public void onSuccess(Studiengang result) {
-							  tbbezeichnung.setText("");
+							  tbbezeichnung.setValue("");
 							  Window.alert ("Erfolgreich gespeichert.");
 						  } 	
 						});
