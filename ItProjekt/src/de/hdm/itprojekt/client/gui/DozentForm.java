@@ -1,5 +1,6 @@
 /**
 
+
  * 
  */
 package de.hdm.itprojekt.client.gui;
@@ -11,6 +12,7 @@ package de.hdm.itprojekt.client.gui;
 
 
 import java.util.Arrays;
+
 import java.util.List;
 import java.util.Vector;
 
@@ -19,6 +21,13 @@ import java.util.Vector;
 
 
 
+
+
+
+
+
+
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.shared.GWT;
 //import com.google.gwt.dom.client.Style.Unit;
@@ -57,13 +66,24 @@ import com.google.gwt.view.client.Range;
 
 
 
+
+
+import com.google.gwt.view.client.SingleSelectionModel;
+
+
+import com.google.gwt.view.client.TreeViewModel.DefaultNodeInfo;
+import com.google.gwt.view.client.TreeViewModel.NodeInfo;
+
+
 //import de.hdm.itprojekt.client.ClientsideSettings;
 //import de.hdm.itprojekt.client.ClientsideSettings;
 import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.Verwaltungsklasse;
+import de.hdm.itprojekt.shared.bo.BusinessObjekt;
 import de.hdm.itprojekt.shared.bo.Dozent;
 //import de.hdm.itprojekt.client.*;
 //import de.hdm.itprojekt.client.gui.*;
+
 
 
 /**
@@ -73,7 +93,7 @@ import de.hdm.itprojekt.shared.bo.Dozent;
 public class DozentForm extends Content {
 
 
-	public static class ContactInfo implements Comparable<ContactInfo> {
+	/*public static class ContactInfo implements Comparable<ContactInfo> {
 
 		public static final ProvidesKey<ContactInfo> KEY_PROVIDER = new ProvidesKey<ContactInfo>() {
 			@Override
@@ -166,21 +186,21 @@ public class DozentForm extends Content {
 		
 	/*public void refreshDisplays() {
 		dataProvider.refresh();
-	}*/
+	}
 		
 	@SuppressWarnings("deprecation")
 	private ContactInfo createContactInfo() {
 		ContactInfo contact = new ContactInfo();
 		contact.setNachname(null);
 		return contact;
-	}
+	}*/
 	
 	
 	
 	
 	
 	
-}
+
 	
 	
 	
@@ -215,9 +235,7 @@ public class DozentForm extends Content {
 	
 	
 	
-	/*
-	/**
-	 * Aufbau der Seite, um den Dozent anzuzeigen, zu löschen und zu bearbeiten
+	 //Aufbau der Seite, um den Dozent anzuzeigen, zu löschen und zu bearbeiten
 	
 		
 	private final HTML ueberschrift = new HTML ("<h2>Übersicht der Dozenten<h2>");
@@ -232,12 +250,95 @@ public class DozentForm extends Content {
 	final DeleteDozent deleteD = new DeleteDozent();
 	
 	final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
+	
+	private ListDataProvider<Dozent> dozentDataProvider;
+	
+	private ProvidesKey<BusinessObjekt> boKeyProvider = new ProvidesKey<BusinessObjekt>() {
+		public Integer getKey(BusinessObjekt bo) {
+			if (bo == null) {
+				return null;
+			}
+			if (bo instanceof Dozent) {
+				return new Integer(bo.getId());
+			} else {
+				return new Integer(-bo.getId());
+			}
+		}
+	};
+	
+	private SingleSelectionModel<BusinessObjekt> selectionModel = new SingleSelectionModel<BusinessObjekt>(
+			boKeyProvider);
+	
+	
+	/*Dozent getSelectedCustomer() {
+		return selectedDozent;
+	}
+
+	void setSelectedDozent(Dozent d) {
+		selectedDozent = d;
+		tabelleDozent.setSelected(d);
+	}*/
+	
+	void addDozent(Dozent d) {
+		dozentDataProvider.getList().add(d);
+	}
+	
+	
+	
+	public <T> NodeInfo<?> getNodeInfo(T value) {
+
+		if (value instanceof String) {
+			// Erzeugen eines ListDataproviders für Customerdaten
+			dozentDataProvider = new ListDataProvider<Dozent>();
+			verwaltungsSvc
+					.getAllDozenten(new AsyncCallback<Vector<Dozent>>() {
+						public void onFailure(Throwable t) {
+						}
+
+						public void onSuccess(Vector<Dozent> dozenten) {
+							for (Dozent d : dozenten) {
+								dozentDataProvider.getList().add(d);
+							}
+						}
+
+						
+					});
+
+			/*// Return a node info that pairs the data with a cell.
+			return new DefaultNodeInfo<Dozent>(dozentDataProvider,
+					new DozentCell, selectionModel, null);*/
+		}
+		return null;
+
+		/*if (value instanceof Dozent) {
+			// Erzeugen eines ListDataproviders für Account-Daten
+			final ListDataProvider<Account> accountsProvider = new ListDataProvider<Account>();
+			accountDataProviders.put((Customer) value, accountsProvider);
+
+			bankVerwaltung.getAccountsOf((Customer) value,
+					new AsyncCallback<Vector<Account>>() {
+						public void onFailure(Throwable t) {
+						}
+
+						public void onSuccess(Vector<Account> accounts) {
+							for (Account a : accounts) {
+								accountsProvider.getList().add(a);
+							}
+						}
+					});
+
+			// Return a node info that pairs the data with a cell.
+			return new DefaultNodeInfo<Account>(accountsProvider,
+					new AccountCell(), selectionModel, null);
+		}*/
+		//return null;
+	}
 	 
 	
 
 	/**
 	 * Folgende Methode definiert die Widgets beim Laden der Seite
-	 
+	 */
 	public void onLoad() {
 		
 		this.add(ueberschrift);
@@ -266,10 +367,10 @@ public class DozentForm extends Content {
 			public void onClick(ClickEvent event) {
 				showDelete();
 			}
-		});*/
+		});
 		
 		
-		/*showWidget();
+		showWidget();
 		
 		getData();
 		
@@ -280,7 +381,7 @@ public class DozentForm extends Content {
 	
 	/**
 	 * Daten werden in die Tabelle geladen
-	 
+	 */
 	
 	public void getData() {
 		verwaltungsSvc.getAllDozenten(new AsyncCallback<Vector<Dozent>>() {
@@ -299,7 +400,7 @@ public class DozentForm extends Content {
 						
 							/**
 							 * Dozent wird in die Tabelle geladen
-							 
+							 */
 							
 							int firstRow = 1;
 							for (int i = 0; i < result.size(); i++) {
@@ -312,7 +413,7 @@ public class DozentForm extends Content {
 							
 							/**
 							 * Definition der Buttons anlegen, löschen und bearbeiten
-							 
+							 */
 							createDozentButton.addClickHandler(new ClickHandler() {
 								public void onClick(ClickEvent event) {
 								showCreate();
@@ -350,7 +451,7 @@ public class DozentForm extends Content {
 	
 	/**
 	 * Widgets werden angezeigt
-	 
+	 */
 	public void showWidget() {
 		
 		this.add(tabelleDozent);
@@ -362,7 +463,7 @@ public class DozentForm extends Content {
 	
 	/**
 	 * Zugriff auf die Klasse CreateDozent zum Erstellen eines Dozenten
-	 
+	 */
 	public void showCreate() {
 		this.clear();
 		this.add(createD);
@@ -371,7 +472,7 @@ public class DozentForm extends Content {
 	
 	/**
 	 * Zugriff auf die Klasse ChangeDozent zum Bearbeiten eines Dozenten
-	 
+	 */
 	public void showChange() {
 		this.clear();
 		this.add(changeD);
@@ -379,7 +480,7 @@ public class DozentForm extends Content {
 
 	/**
 	 * Zugriff auf die Klasse DeleteDozent zum Löschen eiens Dozenten
-	 
+	 */
 	public void showDelete() {
 		this.clear();
 		this.add(deleteD);
@@ -390,9 +491,9 @@ public class DozentForm extends Content {
 			tabelleDozent.addItem(getAllDozenten.get(i).getVorname());
 			
 		}
-	}
+	}*/
 
-}*/
+}
 
 
 
