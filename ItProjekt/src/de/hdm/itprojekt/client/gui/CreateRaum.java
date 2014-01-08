@@ -61,7 +61,7 @@ import de.hdm.itprojekt.shared.bo.Raum;
 					  public void addRaum(){
 						  boolean allFilled = true;
 						  
-						  if (tbbezeichnung.getText().isEmpty() || tbkapazitaet.getText().isEmpty())
+						  if (!tbbezeichnung.getText().isEmpty() && !tbkapazitaet.getText().isEmpty())
 						  {	allFilled = false;
 						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 						  
