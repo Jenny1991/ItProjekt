@@ -12,9 +12,11 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.view.client.SelectionChangeEvent;
 
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Studiengang;
+import de.hdm.itprojekt.shared.bo.Stundenplaneintrag;
 import de.hdm.itprojekt.client.gui.SelectionModel;
 import de.hdm.itprojekt.client.gui.StudiengangDetails;
 /**
@@ -38,7 +40,7 @@ public class DeleteStudiengang extends Content {
 	  private List<StudiengangDetails> studiengangDetails;
 
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-	//  Studiengang sg = new Studiengang();
+	  // Studiengang sg = new Studiengang();
 
 	  
 	  public void onLoad () {
@@ -54,16 +56,25 @@ public class DeleteStudiengang extends Content {
 			  } 
 		  
 			 private void deleteSelectedStudiengang () {
+				 boolean isSelected = true;
+				 
 				 List<StudiengangDetails> selctedStudiengang = selectionModel.getSelectedItems();
 				 ArrayList<String> stg = new ArrayList<String>();
-				 
+
+				 if (selctedStudiengang instanceof Stundenplaneintrag) {
+					 isSelected = false;
+					 Window.alert("Der gewählte Studiengang kann nicht gelöscht werden, " +
+					 		"da er noch in ein oder mehreren Stundenplaneinträgen eingetragen ist" );
+				 }
+
+				 else if(isSelected == true) {
 				 for (int i=0; i<selctedStudiengang.size(); i++){
 					 stg.add(selctedStudiengang.get(i).getId());
 				 }
 				 verwaltungsSvc.deleteStudiengang(stg, new AysncCallback<ArrayList<StudiengangDetails>>(){
 					  public void onFailure (Throwable caught) {
-						  Window.alert("Der Studiengang konnte nicht gelöscht werden." +
-						  		"Er ist in ein oder mehreren Stundenplaneinträgen eingetragen");
+						//  Window.alert("Der Studiengang konnte nicht gelöscht werden." +
+						 // 		"Er ist in ein oder mehreren Stundenplaneinträgen eingetragen");
 					  }
 					  public void onSuccess(ArrayList<StudiengangDetails> result) {
 						  studiengangDetails = result;
@@ -71,18 +82,10 @@ public class DeleteStudiengang extends Content {
 					  }
 				 });
 			 }
+			 }
 		  });
 	  }
-}
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
+}	 
 				 
 				 
 				 /** ich brauche von Lui und Domi eine Methode die ich aufrufen kann, um zu sehen, ob der Studiengang noch in 
