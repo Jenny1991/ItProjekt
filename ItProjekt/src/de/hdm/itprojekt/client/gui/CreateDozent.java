@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.view.client.SelectionModel;
 
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Dozent;
@@ -58,7 +59,7 @@ public class CreateDozent extends Content {
 				  private void addDozent () {
 					  boolean allFilled = true;
 				  
-					  if (tbnachname.getText().isEmpty() || tbvorname.getText().isEmpty()) {	
+					  if (!tbnachname.getText().isEmpty() && !tbvorname.getText().isEmpty()) {	
 						  allFilled = false;
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); } 
 					  
@@ -77,14 +78,16 @@ public class CreateDozent extends Content {
 
 							  @Override
 							  public void onSuccess(Dozent result) {
-								  tbnachname.setText("");
-								  tbvorname.setText("");
+								  tbnachname.setText(result.getNachname());
+								  tbvorname.setText(result.getVorname());
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							});
 					  }
 				  }
 				  });
+				  
+				  
 	  }
 }    	
 		
