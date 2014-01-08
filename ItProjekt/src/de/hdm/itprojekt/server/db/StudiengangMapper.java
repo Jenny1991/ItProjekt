@@ -203,7 +203,9 @@ public class StudiengangMapper {
     try {
       Statement stmt = con.createStatement();
 
-      stmt.executeUpdate("UPDATE studiengang " + "\" " + "WHERE id=" + s.getId());
+      stmt.executeUpdate("UPDATE studiengang SET " 
+    		  + "bezeichnung=\"" + s.getBezeichnung() + "\", " 
+    		  + "WHERE id=" + s.getId());
 
     }
     catch (SQLException e2) {

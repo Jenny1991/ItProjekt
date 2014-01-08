@@ -203,7 +203,9 @@ public class StundenplanMapper {
     try {
       Statement stmt = con.createStatement();
 
-      stmt.executeUpdate("UPDATE stundenplan " + "\" " + "WHERE id=" + s.getId());
+      stmt.executeUpdate("UPDATE stundenplaneintrag SET " 
+    		  + "studienhalbjahr=\"" + s.getStudienhalbjahr() + "\", " 
+    		  + "WHERE id=" + s.getId());
 
     }
     catch (SQLException e2) {

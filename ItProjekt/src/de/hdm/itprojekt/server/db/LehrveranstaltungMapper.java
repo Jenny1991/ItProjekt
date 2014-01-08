@@ -206,7 +206,11 @@ public class LehrveranstaltungMapper {
     try {
       Statement stmt = con.createStatement();
 
-      stmt.executeUpdate("UPDATE lehrveranstaltung " + "\" " + "WHERE id=" + l.getId());
+      stmt.executeUpdate("UPDATE stundenplaneintrag SET " 
+    		  + "umfang=\"" + l.getUmfang() + "\", " 
+    		  + "semester=\"" + l.getSemester() + "\", " 
+    		  + "bezeichnung=\"" + l.getBezeichnung() + "\", "
+              + "WHERE id=" + l.getId());
 
     }
     catch (SQLException e2) {

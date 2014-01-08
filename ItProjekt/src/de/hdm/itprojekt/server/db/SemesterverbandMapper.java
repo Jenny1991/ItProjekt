@@ -75,7 +75,7 @@ public class SemesterverbandMapper {
       Statement stmt = con.createStatement();
 
       // Statement ausfüllen und als Query an die DB schicken
-      ResultSet rs = stmt.executeQuery("SELECT id, semester, studierenderAnzahl, jahrgang FROM Semesterverband "
+      ResultSet rs = stmt.executeQuery("SELECT id, semester, studierendenAnzahl, jahrgang, stundenplanid, studiengangid FROM Semesterverband "
           + "WHERE id=" + id);
 
       /*
@@ -87,8 +87,10 @@ public class SemesterverbandMapper {
         Semesterverband s = new Semesterverband();
         s.setId(rs.getInt("id"));
         s.setSemester(rs.getInt("semester"));
-        s.setStudierendenAnzahl(rs.getInt("studierenderAnzahl"));
+        s.setStudierendenAnzahl(rs.getInt("studierendenAnzahl"));
         s.setJahrgang(rs.getString("jahrgang"));
+        s.setStundenplanId(rs.getString("stundenplanid"));
+        s.setStudiengangId(rs.getString("studiengangid"));
         
         return s;
       }
@@ -117,7 +119,7 @@ public class SemesterverbandMapper {
     try {
       Statement stmt = con.createStatement();
 
-      ResultSet rs = stmt.executeQuery("SELECT id, semester, studierenderAnzahl, jahrgang FROM semesterverband "
+      ResultSet rs = stmt.executeQuery("SELECT id, semester, studierendenAnzahl, jahrgang, stundenplanid, studiengangid FROM semesterverband "
           + " ORDER BY id");
 
       // Für jeden Eintrag im Suchergebnis wird nun ein Semesterverband-Objekt erstellt.
@@ -125,8 +127,10 @@ public class SemesterverbandMapper {
         Semesterverband s = new Semesterverband();
         s.setId(rs.getInt("id"));
         s.setSemester(rs.getInt("semester"));
-        s.setStudierendenAnzahl(rs.getInt("studierenderAnzahl"));
+        s.setStudierendenAnzahl(rs.getInt("studierendenAnzahl"));
         s.setJahrgang(rs.getString("jahrgang"));
+        s.setStundenplanId(rs.getString("stundenplanid"));
+        s.setStudiengangId(rs.getString("studiengangid"));
 
         // Hinzufügen des neuen Objekts zum Ergebnisvektor
         result.addElement(s);
@@ -174,8 +178,8 @@ public class SemesterverbandMapper {
         stmt = con.createStatement();
 
         // Jetzt erst erfolgt die tatsächliche Einfügeoperation
-        stmt.executeUpdate("INSERT INTO semesterverband (id, semester, studierenderAnzahl, jahrgang) " + "VALUES ("
-            + s.getId() + "," + s.getSemester() + "," + s.getStudierendenAnzahl() + s.getJahrgang() );
+        stmt.executeUpdate("INSERT INTO semesterverband (id, semester, studierendenAnzahl, jahrgang, stundenplanid, studiengangid) " + "VALUES ("
+            + s.getId() + "," + s.getSemester() + "," + s.getStudierendenAnzahl() + "," + s.getJahrgang() + "," + s.getStundenplanId() + "," + s.getStudiengangId() );
       }
     }
     catch (SQLException e2) {
@@ -206,7 +210,13 @@ public class SemesterverbandMapper {
     try {
       Statement stmt = con.createStatement();
 
-      stmt.executeUpdate("UPDATE semesterverband " + "\" " + "WHERE id=" + s.getId());
+      stmt.executeUpdate("UPDATE semesterverband SET " 
+    		  + "semester=\"" + s.getSemester() + "\", " 
+    		  + "jahrgang=\"" + s.getJahrgang() + "\", " 
+    		  + "studierendenanzahl=\"" + s.getStudierendenAnzahl() + "\", "
+    		  + "stundenplanid=\"" +  s.getStundenplanId() + "\", "
+    		  + "studiengangid=\"" + s.getStudiengangId + "\", "
+              + "WHERE id=" + s.getId());
 
     }
     catch (SQLException e2) {

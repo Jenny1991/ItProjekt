@@ -177,7 +177,7 @@ public class ZeitslotMapper {
         // Jetzt erst erfolgt die tatsächliche Einfügeoperation
         stmt.executeUpdate("INSERT INTO zeitslot (id, wochentag, anfangszeit, endzeit"
         		+ " FROM Zeitslot) " 
-        		+ "VALUES (" + z.getId() + "," + z.getWochentag() + z.getAnfangszeit() + z.getEndzeit() );
+        		+ "VALUES (" + z.getId() + "," + z.getWochentag() + "," + z.getAnfangszeit() + "," + z.getEndzeit() );
       }
     }
     catch (SQLException e2) {
@@ -208,7 +208,11 @@ public class ZeitslotMapper {
     try {
       Statement stmt = con.createStatement();
 
-      stmt.executeUpdate("UPDATE zeitslot " + "\" " + "WHERE id=" + z.getId());
+      stmt.executeUpdate("UPDATE zeitslot SET " 
+    		  + "endzeit=\"" + z.getEndzeit() + "\", " 
+    		  + "anfangszeit=\"" + z.getAnfangszeit() + "\", " 
+    		  + "wochentag=\"" + z.getWochentag() + "\", "
+    		  + "WHERE id=" + z.getId());
 
     }
     catch (SQLException e2) {

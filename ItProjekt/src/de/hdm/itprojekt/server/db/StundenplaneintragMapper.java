@@ -76,7 +76,7 @@ public class StundenplaneintragMapper {
 
       // Statement ausfüllen und als Query an die DB schicken
       ResultSet rs = stmt.executeQuery("SELECT id, dozentid, raumid, zeitslotid, "
-    		  + "semesterverbandid, lehrveranstaltungid, stundenplanid FROM Stundenplaneintrag "
+    		  + "lehrveranstaltungid, stundenplanid FROM Stundenplaneintrag "
     		  + "WHERE id=" + id);
 
       /*
@@ -141,7 +141,6 @@ public class StundenplaneintragMapper {
         s.setDozentId(rs.getInt("dozentid"));
         s.setRaumId(rs.getInt("raumid"));
         s.setZeitslotId(rs.getInt("zeitslotid"));
-        s.setSemesterverbandId(rs.getInt("semesterverbandid"));
         s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungid"));
 
         // Hinzufügen des neuen Objekts zum Ergebnisvektor
@@ -174,7 +173,7 @@ public class StundenplaneintragMapper {
       Statement stmt = con.createStatement();
 
       ResultSet rs = stmt.executeQuery("SELECT stundenplaneintrag.id, stundenplaneintrag.dozentid, stundenplaneintrag.raumid, "
-    	+ "stundenplaneintrag.zeitslotid, stundenplaneintrag.semesterverbandid, stundenplaneintrag.lehrveranstaltungid "
+    	+ "stundenplaneintrag.zeitslotid, stundenplaneintrag.lehrveranstaltungid "
     	+ "FROM stundenplaneintrag "
     	+ "INNER JOIN "
     	+ "zeitslot "
@@ -191,8 +190,8 @@ public class StundenplaneintragMapper {
         s.setDozentId(rs.getInt("dozentid"));
         s.setRaumId(rs.getInt("raumid"));
         s.setZeitslotId(rs.getInt("zeitslotid"));
-        s.setSemesterverbandId(rs.getInt("semesterverbandid"));
         s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungid"));
+        s.setStundenplanId(rs.getInt("stundenplanid")));
 
         // Hinzufügen des neuen Objekts zum Ergebnisvektor
         result.addElement(s);
@@ -224,7 +223,7 @@ public class StundenplaneintragMapper {
       Statement stmt = con.createStatement();
 
       ResultSet rs = stmt.executeQuery("SELECT id, dozentid, raumid, zeitslotid, "
-    	+ "semesterverbandid, lehrveranstaltungid "
+    	+ "stundenplanid, lehrveranstaltungid "
     	+ "FROM stundenplaneintrag "
         + " ORDER BY id");
 
@@ -232,11 +231,11 @@ public class StundenplaneintragMapper {
       while (rs.next()) {
         Stundenplaneintrag s = new Stundenplaneintrag();
         s.setId(rs.getInt("id"));
-        s.setDozentId(rs.getInt("dozentId"));
-        s.setRaumId(rs.getInt("raumId"));
-        s.setZeitslotId(rs.getInt("zeitslotId"));
-        s.setSemesterverbandId(rs.getInt("semesterverbandId"));
-        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungId"));
+        s.setDozentId(rs.getInt("dozentid"));
+        s.setRaumId(rs.getInt("raumid"));
+        s.setZeitslotId(rs.getInt("zeitslotid"));
+        s.setStundenplanId(rs.getInt("stundenplanid"));
+        s.setLehrveranstaltungId(rs.getInt("lehrveranstaltungid"));
 
         // Hinzufügen des neuen Objekts zum Ergebnisvektor
         result.addElement(s);
@@ -285,9 +284,9 @@ public class StundenplaneintragMapper {
 
         // Einfügeoperation für die Tabelle stundenplaneintrag
         stmt.executeUpdate("INSERT INTO stundenplaneintrag (id, dozentid, raumid, zeitslotid, "
-    		  + "semesterverbandid, lehrveranstaltungid) " + "VALUES ("
-            + s.getId() + "," + s.getDozentId() + "," + s.getRaumId() + s.getZeitslotId()  
-            + s.getSemesterverbandId() + s.getLehrveranstaltungId() );
+    		  + "stundenplanid, lehrveranstaltungid) " + "VALUES ("
+            + s.getId() + "," + s.getDozentId() + "," + s.getRaumId() + "," + s.getZeitslotId()  
+            + "," + s.getStundenplanId() + "," + s.getLehrveranstaltungId() );
         
       }
     }
@@ -324,7 +323,7 @@ public class StundenplaneintragMapper {
     		  + "raumid=\"" + s.getRaumId() + "\", " 
     		  + "dozentid=\"" + s.getDozentId() + "\", "
     		  + "zeitslotid=\"" +  s.getZeitslotId() + "\", "
-    		  + "semesterverbandid=\"" + s.getSemesterverbandId() + "\", "
+    		  + "stundenplanid=\"" + s.getStundenplanId() + "\", "
               + "WHERE id=" + s.getId());
 
     }
