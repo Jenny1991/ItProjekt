@@ -36,7 +36,7 @@ public class CreateStudiengang extends Content{
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final TextBox tbbezeichnung = new TextBox ();
 	  final Button speichern = new Button ("speichern");
-	  SelectionModel<StudiengangDetails> selectionModel;
+	//  SelectionModel<StudiengangDetails> selectionModel;
 
 	  
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
