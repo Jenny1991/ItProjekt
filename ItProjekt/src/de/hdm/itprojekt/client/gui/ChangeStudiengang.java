@@ -3,20 +3,18 @@ package de.hdm.itprojekt.client.gui;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
 import de.hdm.itprojekt.shared.Verwaltungsklasse;
 import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
 import de.hdm.itprojekt.shared.bo.Studiengang;
 
-public class ChangeStudiengang extends Content implements StudiengangInhalt {
+public class ChangeStudiengang extends Content {
 	
 	  /**
 	   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
@@ -39,7 +37,7 @@ public class ChangeStudiengang extends Content implements StudiengangInhalt {
 		  this.add(tbbezeichnung);
 		  this.add(speichern);
 
-		//  getSelectedData();
+		  getSelectedData();
 		  
 		  speichern.addClickHandler(new ClickHandler() {
 			  public void onClick(ClickEvent event) {
@@ -47,11 +45,13 @@ public class ChangeStudiengang extends Content implements StudiengangInhalt {
 			  }
 			  
 			  private void updateStudiengang () {	
+				  boolean allFilled = true;
 			  
-				  if (!tbbezeichnung.getValue().isEmpty()) {
+				  if (tbbezeichnung.getValue().isEmpty()) {
+					  allFilled = false;
 				  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 				  
-				  else {
+				  if (allFilled == true) {
 					  Studiengang sg = new Studiengang ();
 					  sg.setBezeichnung(tbbezeichnung.getValue().trim());
 					  tbbezeichnung.setFocus(true);
@@ -65,7 +65,7 @@ public class ChangeStudiengang extends Content implements StudiengangInhalt {
 
 						  @Override
 						  public void onSuccess(Studiengang result) {
-							  tbbezeichnung.setValue("");
+							  tbbezeichnung.setText("");
 							  Window.alert ("Erfolgreich gespeichert.");
 						  } 	
 						});
@@ -74,12 +74,7 @@ public class ChangeStudiengang extends Content implements StudiengangInhalt {
 			  });
 	  }
 
-		  public void displayStudiengang(Object model) {
-			  Studiengang sg = (Studiengang) model; 
-			  tbbezeichnung.setText(sg.getBezeichnung());
-		  }
-
-		  public void getSelectedData() {
+		  public void getSelectedData(){
 			  verwaltungsSvc.getStudiengang(new AsyncCallback<Studiengang>() {
 
 				  @Override
@@ -93,41 +88,6 @@ public class ChangeStudiengang extends Content implements StudiengangInhalt {
 					}
 		  		});
 		  	}
-
-		  @Override
-		public HandlerRegistration addSelectionChangeHandler(Handler handler) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public boolean isSelected(Studiengang object) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void setSelected(Studiengang object, boolean selected) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Object getKey(Studiengang item) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public String getBezeichnung() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public String setBezeichnung() {
-			return null;
-		} 
 }
 	  
 	  

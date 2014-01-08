@@ -12,6 +12,8 @@ import com.google.gwt.user.client.ui.Button;
 
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Studiengang;
+import de.hdm.itprojekt.client.gui.SelectionModel;
+import de.hdm.itprojekt.client.gui.StudiengangDetails;
 
 
 /**
@@ -21,7 +23,7 @@ import de.hdm.itprojekt.shared.bo.Studiengang;
  * 
  */
 
-public class CreateStudiengang extends Content {
+public class CreateStudiengang extends Content{
 	
 	  /**
 	   * Jede Klasse enth�t eine �berschrift, die definiert, was der User machen kann.
@@ -34,6 +36,8 @@ public class CreateStudiengang extends Content {
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final TextBox tbbezeichnung = new TextBox ();
 	  final Button speichern = new Button ("speichern");
+	  SelectionModel<StudiengangDetails> selectionModel;
+
 	  
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 	  
@@ -81,8 +85,7 @@ public class CreateStudiengang extends Content {
 		  });
 	  }
 	
-	  public void displayStudiengang(Object model) {
-		  Studiengang sg = (Studiengang) model; 
-		  tbbezeichnung.setText(sg.getBezeichnung());
+	  public void onItemSelected(Studiengang studiengang) {
+		  
 	  }
 }
