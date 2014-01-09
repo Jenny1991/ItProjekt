@@ -175,8 +175,7 @@ public class ZeitslotMapper {
         stmt = con.createStatement();
 
         // Jetzt erst erfolgt die tatsächliche Einfügeoperation
-        stmt.executeUpdate("INSERT INTO zeitslot (id, wochentag, anfangszeit, endzeit"
-        		+ " FROM Zeitslot) " 
+        stmt.executeUpdate("INSERT INTO zeitslot (id, wochentag, anfangszeit, endzeit) " 
         		+ "VALUES (" + z.getId() + "," + z.getWochentag() + "," + z.getAnfangszeit() + "," + z.getEndzeit() );
       }
     }
