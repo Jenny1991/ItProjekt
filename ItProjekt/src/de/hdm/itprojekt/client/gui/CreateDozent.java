@@ -9,7 +9,6 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.view.client.SelectionModel;
 
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Dozent;
@@ -53,10 +52,7 @@ public class CreateDozent extends Content {
 			  
 				  speichern.addClickHandler(new ClickHandler() {
 					public void onClick(ClickEvent event) {
-					  addDozent();
-				  }
-				  
-				  private void addDozent () {
+
 					  boolean allFilled = true;
 				  
 					  if (!tbnachname.getText().isEmpty() && !tbvorname.getText().isEmpty()) {	
@@ -66,8 +62,6 @@ public class CreateDozent extends Content {
 					  if (allFilled == true) {	
 						  String vorname = tbvorname.getValue().trim();
 						  String nachname = tbnachname.getValue().trim();
-						  tbnachname.setFocus(true);
-						  tbvorname.setFocus(true);
 				
 						 verwaltungsSvc.createDozent(vorname, nachname, new AsyncCallback<Dozent>() {
 
@@ -85,9 +79,7 @@ public class CreateDozent extends Content {
 							});
 					  }
 				  }
-				  });
-				  
-				  
+				  });				  
 	  }
 }    	
 		

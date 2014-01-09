@@ -51,47 +51,26 @@ import de.hdm.itprojekt.shared.bo.Lehrveranstaltung;
 				  this.add(tbbezeichnung);
 				  this.add(lbsemester);
 				  this.add(tbsemester);
-			/*	  final ListBox tbsemester = new ListBox();
-				  	tbsemester.addItem("1");
-				    tbsemester.addItem("2");
-				    tbsemester.addItem("3");
-				    tbsemester.addItem("4");
-				    tbsemester.addItem("5");
-				    tbsemester.addItem("6");
-				    tbsemester.addItem("7");
-				    tbsemester.setVisibleItemCount(7);
-				  this.add(tbsemester); */
 				  this.add(lbumfang);
 				  this.add(tbumfang);
-			/*	  final ListBox tbumfang = new ListBox();
-					  	tbumfang.addItem("1 SWS");
-					  	tbumfang.addItem("2 SWS");
-					  	tbumfang.addItem("3 SWS");
-					  	tbumfang.addItem("4 SWS");
-					  	tbumfang.setVisibleItemCount(4);
-					  	this.add(tbumfang); */
 				  this.add(speichern);
 				  
 				  
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
-						  addLehrveranstaltung();
-					  }
-					  
-					  public void addLehrveranstaltung(){
+
 						  boolean allFilled = true;
 						  
-						  if (tbbezeichnung.getValue().isEmpty())
+						  if (tbbezeichnung.getValue().isEmpty()
+								  || tbsemester.getValue().isEmpty()
+								  || tbumfang.getValue().isEmpty())
 						  {	allFilled = false;
 						  Window.alert("Bitte füllen Sie alle Felder aus."); }
 						 
-						  if (allFilled == true) { 
+						  if (allFilled == true) {
 							  final String bezeichnung = tbbezeichnung.getValue().trim();
 							  final int umfang = tbumfang.getVisibleLength();
 							  final int semester = tbsemester.getVisibleLength();
-							  tbbezeichnung.setFocus(true);
-							  tbumfang.setFocus(true);
-							  tbsemester.setFocus(true);
 						
 							  verwaltungsSvc.createLehrveranstaltung(bezeichnung, semester, umfang, new AsyncCallback <Lehrveranstaltung>() {
 

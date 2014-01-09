@@ -55,10 +55,7 @@ import de.hdm.itprojekt.shared.bo.Raum;
 					  
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
-						  addRaum();
-						  }
-					  
-					  public void addRaum(){
+
 						  boolean allFilled = true;
 						  
 						  if (!tbbezeichnung.getText().isEmpty() && !tbkapazitaet.getText().isEmpty())
@@ -68,8 +65,6 @@ import de.hdm.itprojekt.shared.bo.Raum;
 						  if (allFilled == true) { 
 							  final String bezeichnung = tbbezeichnung.getText().trim();
 							  final int kapazitaet = tbkapazitaet.getVisibleLength();
-							  tbbezeichnung.setFocus(true);
-							  tbkapazitaet.setFocus(true);	  
 
 							  verwaltungsSvc.createRaum(bezeichnung, kapazitaet, new AsyncCallback<Raum>() {
 

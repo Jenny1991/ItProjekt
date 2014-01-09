@@ -57,10 +57,7 @@ import de.hdm.itprojekt.shared.bo.Zeitslot;
 				  
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
-						  addZeitslot();
-					  }
-					  
-					  public void addZeitslot(){
+
 						  boolean allFilled = true;
 						  
 						  if (tbwochentag.getText().isEmpty() || tbanfangszeit.getText().isEmpty() || tbendzeit.getText().isEmpty()){

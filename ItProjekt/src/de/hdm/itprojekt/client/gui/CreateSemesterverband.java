@@ -62,10 +62,7 @@ import de.hdm.itprojekt.shared.bo.Semesterverband;
 			  
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
-						  addSemesterverband();
-					  }
-					  
-					  public void addSemesterverband(){
+
 						  boolean allFilled = true;
 						  
 						  if (tbjahrgang.getText().isEmpty() || tbanzahl.getText().isEmpty()
@@ -75,15 +72,11 @@ import de.hdm.itprojekt.shared.bo.Semesterverband;
 						  
 						  if (allFilled == true) { 
 							  final String jahrgang = tbjahrgang.getText().trim();
-							  final String bezeichnung = tbstudiengang.getText().trim();
+							  final Studiengang bezeichnung = tbstudiengang.getText().trim();
 							  final int studierendenAnzahl = tbanzahl.getVisibleLength();
 							  final int semester = tbsemester.getVisibleLength();
-							  tbjahrgang.setFocus(true);
-							  tbstudiengang.setFocus(true);
-							  tbanzahl.setFocus(true);
-							  tbsemester.setFocus(true);
 			
-				/**			  verwaltungsSvc.createSemesterverband(bezeichnung, semester, studierendenAnzahl, jahrgang, new AsyncCallback<Semesterverband>() {
+							  verwaltungsSvc.createSemesterverband(bezeichnung, semester, studierendenAnzahl, jahrgang, new AsyncCallback<Semesterverband>() {
 
 								  @Override
 								  public void onFailure (Throwable caught) {
@@ -99,7 +92,7 @@ import de.hdm.itprojekt.shared.bo.Semesterverband;
 									  tbanzahl.setVisibleLength(studierendenAnzahl);
 									  Window.alert ("Erfolgreich gespeichert.");
 								  } 	
-								}); */
+								}); 
 						  }
 					  }
 					  });

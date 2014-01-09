@@ -12,8 +12,6 @@ import com.google.gwt.user.client.ui.Button;
 
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Studiengang;
-import de.hdm.itprojekt.client.gui.SelectionModel;
-import de.hdm.itprojekt.client.gui.StudiengangDetails;
 
 
 /**
@@ -36,8 +34,6 @@ public class CreateStudiengang extends Content{
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final TextBox tbbezeichnung = new TextBox ();
 	  final Button speichern = new Button ("speichern");
-	//  SelectionModel<StudiengangDetails> selectionModel;
-
 	  
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
 	  
@@ -62,7 +58,6 @@ public class CreateStudiengang extends Content{
 				  	
 				  	if (allFilled == true){
 				  		final String bezeichnung = tbbezeichnung.getValue().trim();
-				  	//	tbbezeichnung.setFocus(true);
 				  
 					  verwaltungsSvc.createStudiengang(bezeichnung, new AsyncCallback<Studiengang>() {
 
@@ -80,9 +75,5 @@ public class CreateStudiengang extends Content{
 				  }
 			  }
 		  });
-	  }
-	
-	  public void onItemSelected(Studiengang studiengang) {
-		  
-	  }
+	  }		  
 }
