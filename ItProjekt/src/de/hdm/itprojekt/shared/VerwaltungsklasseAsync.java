@@ -7,7 +7,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.shared.bo.*;
 
-
+/**
+ * The async counterpart of <code>Verwaltungsklasse</code>.
+ */
 public interface VerwaltungsklasseAsync {
 	
 	void init(AsyncCallback<Void> callback);

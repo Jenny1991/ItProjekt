@@ -6,8 +6,10 @@ import java.util.Vector;
 import de.hdm.itprojekt.shared.bo.*;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 
+@RemoteServiceRelativePath("verwaltung")
 public interface Verwaltungsklasse extends RemoteService {
 	
 	public void init() throws IllegalArgumentException;
