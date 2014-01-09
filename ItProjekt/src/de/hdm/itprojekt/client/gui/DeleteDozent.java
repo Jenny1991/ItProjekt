@@ -35,7 +35,7 @@ public class DeleteDozent extends Content {
 	  final Button loeschen = new Button ("löschen"); 
 	  
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-	  Dozent d = null;
+	 Dozent shownDozent = null;
 		   
 	  /**
 	  * Anordnen der Buttons und Labels auf den Panels
@@ -53,16 +53,9 @@ public class DeleteDozent extends Content {
 
 		  loeschen.addClickHandler(new ClickHandler() {
 				  public void onClick(ClickEvent event) {
-					  deleteDozent();
-				  } 
-			  
-				 private void deleteDozent () {
-					 /** ich brauche von Lui und Domi eine Methode die ich aufrufen kann, um zu sehen, ob der Dozent noch in 
-					  * Stundenplaneinträgen eingetragen ist
-					  */				 
-					 
-					 if (d != null) {
-						  verwaltungsSvc.deleteDozent(d, new AsyncCallback<Void>() {
+				 
+					 if (shownDozent != null) {
+						  verwaltungsSvc.deleteDozent(shownDozent, new AsyncCallback<Void>() {
 							  @Override
 							  public void onFailure (Throwable caught) {
 								  Window.alert("Der Dozent konnte nicht gelöscht werden." +

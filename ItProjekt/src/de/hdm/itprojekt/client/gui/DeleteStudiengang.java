@@ -1,8 +1,5 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -12,13 +9,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.view.client.SelectionChangeEvent;
 
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Studiengang;
-import de.hdm.itprojekt.shared.bo.Stundenplaneintrag;
-import de.hdm.itprojekt.client.gui.SelectionModel;
-import de.hdm.itprojekt.client.gui.StudiengangDetails;
 /**
  * Hier wird ein bereits angelegter Studiengang gelöscht.
  * 
@@ -36,11 +29,9 @@ public class DeleteStudiengang extends Content {
 	  final Label lbbezeichnung = new Label ("Bezeichnung"); 
 	  final TextBox tbbezeichnung = new TextBox ();
 	  final Button loeschen = new Button ("löschen");
-	  SelectionModel<StudiengangDetails> selectionModel;
-	  private List<StudiengangDetails> studiengangDetails;
 
 	  final VerwaltungsklasseAsync verwaltungsSvc = GWT.create(Verwaltungsklasse.class);
-	  // Studiengang sg = new Studiengang();
+	  Studiengang shownSg = null;
 
 	  
 	  public void onLoad () {
@@ -49,51 +40,14 @@ public class DeleteStudiengang extends Content {
 		  this.add(lbbezeichnung);
 		  this.add(tbbezeichnung);
 		  this.add(loeschen);
+		  
+		  getSelectedData();
 		  		  
 		  loeschen.addClickHandler(new ClickHandler() {
 			  public void onClick(ClickEvent event) {
-				  deleteSelectedStudiengang();
-			  } 
-		  
-			 private void deleteSelectedStudiengang () {
-				 boolean isSelected = true;
-				 
-				 List<StudiengangDetails> selctedStudiengang = selectionModel.getSelectedItems();
-				 ArrayList<String> stg = new ArrayList<String>();
-
-				 if (selctedStudiengang instanceof Stundenplaneintrag) {
-					 isSelected = false;
-					 Window.alert("Der gewählte Studiengang kann nicht gelöscht werden, " +
-					 		"da er noch in ein oder mehreren Stundenplaneinträgen eingetragen ist" );
-				 }
-
-				 else if(isSelected == true) {
-				 for (int i=0; i<selctedStudiengang.size(); i++){
-					 stg.add(selctedStudiengang.get(i).getId());
-				 }
-				 verwaltungsSvc.deleteStudiengang(stg, new AysncCallback<ArrayList<StudiengangDetails>>(){
-					  public void onFailure (Throwable caught) {
-						//  Window.alert("Der Studiengang konnte nicht gelöscht werden." +
-						 // 		"Er ist in ein oder mehreren Stundenplaneinträgen eingetragen");
-					  }
-					  public void onSuccess(ArrayList<StudiengangDetails> result) {
-						  studiengangDetails = result;
-						  Window.alert ("Erfolgreich gelöscht.");
-					  }
-				 });
-			 }
-			 }
-		  });
-	  }
-}	 
-				 
-				 
-				 /** ich brauche von Lui und Domi eine Methode die ich aufrufen kann, um zu sehen, ob der Studiengang noch in 
-				  * Stundenplaneinträgen eingetragen ist
-				 				 
-				 
-				 if (sg != null) {
-					  verwaltungsSvc.deleteStudiengang(sg, new AsyncCallback<Void>() {
+				  
+				 if (shownSg != null) {
+					  verwaltungsSvc.deleteStudiengang(shownSg, new AsyncCallback<Void>() {
 						  @Override
 						  public void onFailure (Throwable caught) {
 							  Window.alert("Der Studiengang konnte nicht gelöscht werden." +
@@ -124,5 +78,6 @@ public class DeleteStudiengang extends Content {
 				  tbbezeichnung.setText(result.getBezeichnung().trim());
 				}
 	  		});
-	  	} */
+	  	}
+}
 
