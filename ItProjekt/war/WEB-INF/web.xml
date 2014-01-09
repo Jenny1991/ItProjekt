@@ -13,7 +13,7 @@
   
   <servlet-mapping>
     <servlet-name>stundenplanverwaltungServlet</servlet-name>
-    <url-pattern>/itprojekt/stundenplanverwaltung</url-pattern>
+    <url-pattern>/ItProjekt/stundenplanverwaltung</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

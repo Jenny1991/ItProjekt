@@ -171,7 +171,7 @@ public class StudiengangMapper {
         stmt = con.createStatement();
 
         // Jetzt erst erfolgt die tatsächliche Einfügeoperation
-        stmt.executeUpdate("INSERT INTO studiengang (id, bezeichnung FROM studiengang) " + "VALUES ("
+        stmt.executeUpdate("INSERT INTO studiengang (id, bezeichnung)" + "VALUES ("
             + s.getId() + "," + s.getBezeichnung() );
       }
     }

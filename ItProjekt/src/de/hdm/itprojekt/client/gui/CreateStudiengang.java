@@ -53,10 +53,7 @@ public class CreateStudiengang extends Content{
 		  	
 		  speichern.addClickHandler(new ClickHandler() {
 			  public void onClick(ClickEvent event) {
-				  addStudiengang();
-			  }
-			  
-			  public void addStudiengang() {
+
 				  boolean allFilled = true;
 				  
 				  	if (tbbezeichnung.getValue().isEmpty())  

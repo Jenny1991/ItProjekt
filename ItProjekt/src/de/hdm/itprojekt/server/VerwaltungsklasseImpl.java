@@ -15,7 +15,7 @@ import de.hdm.itprojekt.shared.bo.*;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-
+@SuppressWarnings("serial")
 public class VerwaltungsklasseImpl extends RemoteServiceServlet 
 
 
