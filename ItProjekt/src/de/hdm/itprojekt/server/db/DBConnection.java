@@ -37,8 +37,12 @@ public class DBConnection {
 	 * Konfigurationsdatei eingelesen oder über einen Parameter von außen 
 	 * mitgegeben, um bei einer Veränderung dieser URL nicht die gesamte 
 	 * Software neu komilieren zu müssen.
+	 * url = "jdbc:google:mysql://your-project-id:your-instance-name/guestbook?user=root";
 	 */
-	private static String url = "jdbc:mysql://173.194.109.58:3306/itprojekt?user=root";
+	
+
+	//private static String url = "jdbc:mysql://173.194.109.58:3306/itprojekt?user=root";
+	private static String url = "jdbc:google:mysql://stundenplansystem:sql/itprojekt?user=root";
 	
 	/**
 	 * Diese statische Methode kann aufgrufen werden durch 
