@@ -55,7 +55,8 @@ public class CreateDozent extends Content {
 
 					  boolean allFilled = true;
 				  
-					  if (!tbnachname.getText().isEmpty() && !tbvorname.getText().isEmpty()) {	
+					  if (tbnachname.getValue().isEmpty() 
+							  ||tbvorname.getValue().isEmpty()) {	
 						  allFilled = false;
 					  Window.alert ("Bitte füllen Sie alle Felder aus."); } 
 					  
@@ -72,8 +73,8 @@ public class CreateDozent extends Content {
 
 							  @Override
 							  public void onSuccess(Dozent result) {
-								  tbnachname.setText(result.getNachname());
-								  tbvorname.setText(result.getVorname());
+								  tbnachname.setText("");
+								  tbvorname.setText("");
 								  Window.alert ("Erfolgreich gespeichert.");
 							  } 	
 							});

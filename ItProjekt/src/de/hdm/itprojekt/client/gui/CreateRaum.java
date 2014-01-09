@@ -58,12 +58,13 @@ import de.hdm.itprojekt.shared.bo.Raum;
 
 						  boolean allFilled = true;
 						  
-						  if (!tbbezeichnung.getText().isEmpty() && !tbkapazitaet.getText().isEmpty())
+						  if (tbbezeichnung.getValue().isEmpty() 
+								  || tbkapazitaet.getValue().isEmpty())
 						  {	allFilled = false;
 						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 						  
 						  if (allFilled == true) { 
-							  final String bezeichnung = tbbezeichnung.getText().trim();
+							  final String bezeichnung = tbbezeichnung.getValue().trim();
 							  final int kapazitaet = tbkapazitaet.getVisibleLength();
 
 							  verwaltungsSvc.createRaum(bezeichnung, kapazitaet, new AsyncCallback<Raum>() {
