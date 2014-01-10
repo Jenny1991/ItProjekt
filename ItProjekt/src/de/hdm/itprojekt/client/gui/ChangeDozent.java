@@ -19,7 +19,7 @@ import de.hdm.itprojekt.shared.bo.Dozent;
 	 * @author Thies, Espich
 	 * 
 	 */
-
+/*blub*/
 	public class ChangeDozent extends Content {
 
 		  /**
@@ -54,16 +54,13 @@ import de.hdm.itprojekt.shared.bo.Dozent;
 			
 				  speichern.addClickHandler(new ClickHandler() {
 					  public void onClick(ClickEvent event) {
-						  updateDozent();
-					  }
-					  
-					  private void updateDozent () {	
+
 						  boolean allFilled = true;
 					  
-						  if (tbnachname.getText().isEmpty());
-						  if (tbvorname.getText().isEmpty()); {	
+						  if (tbnachname.getValue().isEmpty() 
+								  ||tbvorname.getValue().isEmpty()) {	
 							  allFilled = false;
-						  Window.alert ("Bitte füllen Sie alle Felder aus."); }
+						  Window.alert ("Bitte füllen Sie alle Felder aus."); } 
 						  
 						  if (allFilled == true) {
 							  Dozent d = new Dozent ();
