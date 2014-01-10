@@ -41,10 +41,7 @@ public class ChangeStudiengang extends Content {
 		  
 		  speichern.addClickHandler(new ClickHandler() {
 			  public void onClick(ClickEvent event) {
-				  updateStudiengang();
-			  }
-			  
-			  private void updateStudiengang () {	
+	
 				  boolean allFilled = true;
 			  
 				  if (tbbezeichnung.getValue().isEmpty()) {
@@ -52,11 +49,11 @@ public class ChangeStudiengang extends Content {
 				  Window.alert ("Bitte füllen Sie alle Felder aus."); }
 				  
 				  if (allFilled == true) {
-					  Studiengang sg = new Studiengang ();
-					  sg.setBezeichnung(tbbezeichnung.getValue().trim());
+					  Studiengang s = new Studiengang ();
+					  s.setBezeichnung(tbbezeichnung.getValue().trim());
 					  tbbezeichnung.setFocus(true);
 				  
-					  verwaltungsSvc.changeStudiengang(sg, new AsyncCallback<Studiengang> () {
+					  verwaltungsSvc.changeStudiengang(s, new AsyncCallback<Studiengang> () {
 
 						  @Override
 						  public void onFailure (Throwable caught) {
