@@ -19,7 +19,7 @@ import de.hdm.itprojekt.shared.bo.Dozent;
 	 * @author Thies, Espich
 	 * 
 	 */
-
+/*blub*/
 	public class ChangeDozent extends Content {
 
 		  /**
