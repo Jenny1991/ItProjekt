@@ -32,6 +32,7 @@
 	import com.google.gwt.user.client.ui.Panel;
 	import com.google.gwt.user.client.ui.RootPanel;
 	import com.google.gwt.user.client.ui.VerticalPanel;
+	import com.google.gwt.user.client.ui.ListBox;
 
 	import de.hdm.itprojekt.client.ClientsideSettings;
 	import de.hdm.itprojekt.shared.VerwaltungsklasseAsync;
@@ -48,7 +49,7 @@ public class StundenplanForm extends Content {
 
 
 			/**
-			 * Aufbau der Seite, um den Raum anzuzeigen, zu lÃ¶schen und zu bearbeiten
+			 * Aufbau der Seite, um den Raum anzuzeigen, zu löschen und zu bearbeiten
 			 */
 			
 			//final Label flexTable = new Label();
@@ -56,6 +57,12 @@ public class StundenplanForm extends Content {
 			
 			//final TextBox nachnameTextBox = new TextBox();
 			//final TextBox vornameTextBox = new TextBox();
+			final Label lstudiengang = new Label("Studiengang");
+			final ListBox lbstudiengang = new ListBox();
+			final Label lsemester = new Label("Semester");
+			final ListBox lbsemester = new ListBox();
+			final Label lstudienhalbjahr = new Label("Studienhalbjahr");
+			final ListBox lbstudienhalbjahr = new ListBox();
 			final FlexTable tabelleSp = new FlexTable();
 			
 			//final CreateStundenplan createSp = new CreateStundenplan();
@@ -72,6 +79,7 @@ public class StundenplanForm extends Content {
 			
 			public void onLoad() {
 				
+						
 				showWidget();
 			
 				
